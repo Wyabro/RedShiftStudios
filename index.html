@@ -113,6 +113,14 @@
         text-transform: uppercase;
       }
 
+      .logo-rss {
+        flex-shrink: 0;
+        width: 36px;
+        height: auto;
+        display: block;
+        color: var(--text);
+      }
+
       .logo-text {
         font-weight: 650;
         letter-spacing: 0.22em;
@@ -563,29 +571,41 @@
       }
 
       .logos-grid {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 24px 20px;
         max-width: 1000px;
         margin: 0 auto;
+        padding: 4px 0 8px;
       }
 
-      .logo-box {
-        height: 66px;
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background: rgba(255, 255, 255, 0.02);
-        display: grid;
-        place-items: center;
-        color: rgba(255, 255, 255, 0.62);
+      .client-logo {
+        flex: 1 1 100px;
+        min-width: 92px;
+        max-width: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-align: center;
+      }
+
+      .client-logo__mark {
+        width: 100%;
+        max-width: 72px;
+        height: 40px;
+        color: rgba(255, 255, 255, 0.18);
+        flex-shrink: 0;
+      }
+
+      .client-logo__name {
+        font-size: 10px;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
-        letter-spacing: 0.22em;
-        font-size: 11px;
-        opacity: 0.7;
-      }
-
-      .logo-box span {
-        opacity: 0.95;
+        color: rgba(255, 255, 255, 0.55);
+        line-height: 1.3;
       }
 
       .turnaround-banner {
@@ -967,6 +987,76 @@
         font-weight: 650;
       }
 
+      .project-placeholder {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        background: #242424;
+        border-radius: var(--radius);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        display: grid;
+        place-items: center;
+        text-align: center;
+        transition: transform 280ms ease, border-color 280ms ease;
+        overflow: hidden;
+      }
+
+      .project-placeholder::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 0;
+        background: #c0392b;
+        transition: height 280ms ease;
+      }
+
+      .project-placeholder:hover,
+      .project-placeholder:focus-visible {
+        transform: scale(1.02);
+      }
+
+      .project-placeholder:hover::after,
+      .project-placeholder:focus-visible::after {
+        height: 3px;
+      }
+
+      .project-placeholder__hint {
+        color: #555;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        padding: 0 14px;
+        transition: opacity 280ms ease;
+      }
+
+      .project-placeholder__hint--solo {
+        text-transform: none;
+      }
+
+      .project-placeholder__meta {
+        position: absolute;
+        bottom: 14px;
+        left: 10px;
+        right: 10px;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.52);
+        opacity: 0;
+        transition: opacity 280ms ease;
+        pointer-events: none;
+      }
+
+      .project-placeholder--detail:hover .project-placeholder__hint,
+      .project-placeholder--detail:focus-visible .project-placeholder__hint {
+        opacity: 0;
+      }
+
+      .project-placeholder--detail:hover .project-placeholder__meta,
+      .project-placeholder--detail:focus-visible .project-placeholder__meta {
+        opacity: 1;
+      }
+
       .testimonials-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -1165,7 +1255,7 @@
           grid-template-columns: 1fr;
         }
         .logos-grid {
-          grid-template-columns: repeat(3, 1fr);
+          justify-content: center;
         }
       }
 
@@ -1192,7 +1282,20 @@
           grid-template-columns: 1fr;
         }
         .logos-grid {
-          grid-template-columns: repeat(2, 1fr);
+          flex-wrap: nowrap;
+          justify-content: flex-start;
+          overflow-x: auto;
+          overflow-y: hidden;
+          padding-bottom: 10px;
+          gap: 22px;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: thin;
+        }
+
+        .client-logo {
+          flex: 0 0 auto;
+          min-width: 80px;
+          max-width: none;
         }
       }
 
@@ -1239,6 +1342,21 @@
           opacity: 1;
           transform: none;
         }
+        .project-placeholder,
+        .project-placeholder:hover,
+        .project-placeholder:focus-visible {
+          transform: none !important;
+          transition: none !important;
+        }
+        .project-placeholder::after {
+          transition: none !important;
+        }
+        .project-placeholder--detail .project-placeholder__hint {
+          opacity: 1 !important;
+        }
+        .project-placeholder--detail .project-placeholder__meta {
+          opacity: 0 !important;
+        }
       }
     </style>
   </head>
@@ -1248,7 +1366,28 @@
       <div class="container">
         <div class="nav-inner">
           <a class="logo" href="#top" aria-label="Home">
-            <span class="logo-text">RSS RED SHIFT STUDIOS</span>
+            <svg
+              class="logo-rss"
+              viewBox="0 0 36 11"
+              width="36"
+              height="11"
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <text
+                x="0"
+                y="9"
+                font-family="system-ui, -apple-system, Segoe UI, Arial, sans-serif"
+                font-size="10"
+                font-weight="800"
+                letter-spacing="-0.1em"
+                fill="currentColor"
+              >
+                RSS
+              </text>
+            </svg>
+            <span class="logo-text">RED SHIFT STUDIOS</span>
           </a>
           <nav class="nav-links" aria-label="Primary navigation">
             <a href="#reel">REEL</a>
@@ -1268,7 +1407,7 @@
     <main id="top" class="hero" role="main">
       <div class="hero-bg-video" aria-hidden="true">
         <iframe
-          src="https://www.youtube.com/embed/kEbHvnY3yj8?autoplay=1&mute=1&loop=1&playlist=kEbHvnY3yj8&controls=0&modestbranding=1&playsinline=1&rel=0&start=1&iv_load_policy=3&disablekb=1"
+          src="https://www.youtube.com/embed/kEbHvnY3yj8?autoplay=1&mute=1&loop=1&playlist=kEbHvnY3yj8&controls=0&modestbranding=1&playsinline=1&rel=0&start=10&iv_load_policy=3&disablekb=1"
           title="Decorative background video"
           tabindex="-1"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1362,12 +1501,56 @@
         </div>
 
         <div class="logos-grid reveal" data-reveal="card">
-          <div class="logo-box"><span>Desert Bloom</span></div>
-          <div class="logo-box"><span>Mesa Realty</span></div>
-          <div class="logo-box"><span>Sunrise Coffee</span></div>
-          <div class="logo-box"><span>Borderland Expo</span></div>
-          <div class="logo-box"><span>Río Records</span></div>
-          <div class="logo-box"><span>Westside Gym</span></div>
+          <div class="client-logo">
+            <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="24" cy="16" r="12" stroke="currentColor" stroke-width="2" />
+              <circle cx="24" cy="16" r="4" fill="currentColor" />
+            </svg>
+            <span class="client-logo__name">Desert Bloom</span>
+          </div>
+          <div class="client-logo">
+            <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="10" y="8" width="28" height="18" rx="3" stroke="currentColor" stroke-width="2" />
+              <text
+                x="24"
+                y="20"
+                text-anchor="middle"
+                fill="currentColor"
+                font-size="9"
+                font-weight="700"
+                font-family="system-ui, Segoe UI, sans-serif"
+              >
+                MR
+              </text>
+            </svg>
+            <span class="client-logo__name">Mesa Realty</span>
+          </div>
+          <div class="client-logo">
+            <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="24" cy="18" r="10" stroke="currentColor" stroke-width="1.8" />
+              <path d="M24 8v6M18 11l4 3M30 11l-4 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg>
+            <span class="client-logo__name">Sunrise Coffee</span>
+          </div>
+          <div class="client-logo">
+            <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M24 7L40 25H8L24 7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+            </svg>
+            <span class="client-logo__name">Borderland Expo</span>
+          </div>
+          <div class="client-logo">
+            <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="24" cy="16" r="11" stroke="currentColor" stroke-width="2" />
+              <circle cx="24" cy="16" r="3.5" fill="currentColor" />
+            </svg>
+            <span class="client-logo__name">Río Records</span>
+          </div>
+          <div class="client-logo">
+            <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M10 9l5 14 4-9 4 9 5-14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="client-logo__name">Westside Gym</span>
+          </div>
         </div>
       </div>
     </section>
@@ -1480,7 +1663,42 @@
         </div>
 
         <div class="projects-grid" id="projectsList" role="list">
-          <!-- Populated from @RedBoltProductions via RSS in JS (see script). -->
+          <div
+            class="project-placeholder project-placeholder--detail reveal"
+            data-reveal="project"
+            role="listitem"
+            tabindex="0"
+          >
+            <span class="project-placeholder__hint">Project Coming Soon</span>
+            <span class="project-placeholder__meta">Restaurant Promo · 2024</span>
+          </div>
+          <div
+            class="project-placeholder project-placeholder--detail reveal"
+            data-reveal="project"
+            role="listitem"
+            tabindex="0"
+          >
+            <span class="project-placeholder__hint">Project Coming Soon</span>
+            <span class="project-placeholder__meta">Event Recap · 2024</span>
+          </div>
+          <div
+            class="project-placeholder project-placeholder--detail reveal"
+            data-reveal="project"
+            role="listitem"
+            tabindex="0"
+          >
+            <span class="project-placeholder__hint">Project Coming Soon</span>
+            <span class="project-placeholder__meta">Brand Spot · 2025</span>
+          </div>
+          <div class="project-placeholder reveal" data-reveal="project" role="listitem" tabindex="0">
+            <span class="project-placeholder__hint project-placeholder__hint--solo">Coming Soon</span>
+          </div>
+          <div class="project-placeholder reveal" data-reveal="project" role="listitem" tabindex="0">
+            <span class="project-placeholder__hint project-placeholder__hint--solo">Coming Soon</span>
+          </div>
+          <div class="project-placeholder reveal" data-reveal="project" role="listitem" tabindex="0">
+            <span class="project-placeholder__hint project-placeholder__hint--solo">Coming Soon</span>
+          </div>
         </div>
       </div>
     </section>
@@ -1848,17 +2066,6 @@
         }
 
         if (!xml) {
-          list.className = "projects-grid projects-grid--fallback";
-          list.innerHTML = `
-            <div class="card">
-              <div class="label">PROJECTS</div>
-              <p class="muted muted--after-label">
-                Couldn’t auto-load projects. You can set <span class="inline-code">YOUTUBE_CHANNEL_ID</span> in the script for the
-                official YouTube RSS feed, or add projects manually. Channel:
-                <a class="inline-link" href="${PROJECTS_CHANNEL_HANDLE_URL}" target="_blank" rel="noreferrer">@RedBoltProductions</a>.
-              </p>
-            </div>
-          `;
           return;
         }
 
@@ -1900,6 +2107,10 @@
           return { title, url, thumbnail, tag, year };
         });
 
+        if (!items.length) {
+          return;
+        }
+
         list.className = "projects-grid";
         list.innerHTML = items
           .map((it, idx) => projectItemTemplate({ ...it, delayMs: 60 * idx }))
@@ -1910,20 +2121,7 @@
         observeRevealsIn(list);
       }
 
-      loadProjectsFromYouTubeRss().catch(() => {
-        const list = document.getElementById("projectsList");
-        if (!list) return;
-        list.className = "projects-grid projects-grid--fallback";
-        list.innerHTML = `
-          <div class="card">
-            <div class="label">PROJECTS</div>
-            <p class="muted muted--after-label">
-              Couldn’t load YouTube projects automatically in this browser session. You can still link projects
-              manually, or set the channel ID and try again.
-            </p>
-          </div>
-        `;
-      });
+      loadProjectsFromYouTubeRss().catch(() => {});
 
       // Init animations
       setupHeroTitle();
