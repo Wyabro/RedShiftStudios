@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -62,10 +62,11 @@
         --accent-2: rgba(224, 64, 160, 0.25);
         --border: rgba(140, 100, 255, 0.15);
         --shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
-        --font-heading: "Rajdhani", ui-sans-serif, system-ui, sans-serif;
         --font-sans: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
         --max: 1100px;
+        --section-max: 900px;
         --radius: 18px;
+        --radius-tight: 2px;
         --nav-h: 74px;
       }
 
@@ -125,6 +126,11 @@
         margin: 0 auto;
       }
 
+      section .container,
+      footer .container {
+        width: min(var(--section-max), calc(100% - 48px));
+      }
+
       .nav {
         position: sticky;
         top: 0;
@@ -149,6 +155,29 @@
         gap: 18px;
       }
 
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+        color: #fff;
+      }
+
+      .logo__icon {
+        display: block;
+        flex-shrink: 0;
+      }
+
+      .logo-text {
+        font-family: var(--font-sans);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 0.1em;
+        line-height: 1;
+        text-transform: uppercase;
+        color: #fff;
+      }
+
       .nav-links {
         display: flex;
         align-items: center;
@@ -156,8 +185,8 @@
       }
 
       .nav-links a {
-        font-family: var(--font-heading);
-        font-weight: 600;
+        font-family: var(--font-sans);
+        font-weight: 500;
         text-transform: uppercase;
         letter-spacing: 0.12em;
         font-size: 13px;
@@ -218,8 +247,8 @@
         text-transform: uppercase;
         letter-spacing: 0.2em;
         font-size: 11px;
-        font-weight: 600;
-        font-family: var(--font-heading);
+        font-weight: 700;
+        font-family: var(--font-sans);
         cursor: pointer;
         transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease,
           color 180ms ease;
@@ -396,14 +425,14 @@
 
       .hero h1 {
         margin: 0;
-        font-family: var(--font-heading);
-        font-weight: 300;
+        font-family: var(--font-sans);
+        font-weight: 700;
         font-size: clamp(2.5rem, 6vw, 5rem);
-        letter-spacing: 0.2em;
+        letter-spacing: 0.15em;
         line-height: 1.05;
         text-transform: uppercase;
         color: #fff;
-        text-shadow: 0 0 40px rgba(0, 229, 255, 0.08);
+        text-shadow: 0 0 40px rgba(0, 229, 255, 0.1);
       }
 
       .subtitle {
@@ -564,25 +593,36 @@
         --floatDelay: -12s;
       }
 
-      /* Scroll reveal system */
-      .reveal {
+      /* Below-hero: one reveal per section */
+      .section-chapter.reveal {
         opacity: 0;
-        transform: translateY(14px);
-        transition: opacity 650ms ease, transform 650ms ease;
-        transition-delay: var(--delay, 0ms);
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
       }
-      .reveal.in-view {
+
+      .section-chapter.reveal.in-view {
         opacity: 1;
         transform: translateY(0);
       }
 
-      .divider {
-        transform: scaleX(0);
-        transform-origin: center;
-        transition: transform 650ms ease;
+      .section-divider {
+        display: block;
+        width: 120px;
+        height: 1px;
+        margin: 0 auto;
+        border: none;
+        padding: 0;
+        background: linear-gradient(90deg, rgba(224, 64, 160, 1), rgba(0, 229, 255, 1));
+        opacity: 0.4;
       }
-      .divider.in-view {
-        transform: scaleX(1);
+
+      .section-divider--muted {
+        opacity: 0.3;
+        margin: 30px auto;
+      }
+
+      .footer__rule {
+        margin-bottom: 28px;
       }
 
       .icon path,
@@ -646,25 +686,12 @@
       }
 
       section {
-        padding: 108px 0;
-      }
-
-      #reel,
-      #services,
-      #projects,
-      #testimonials,
-      #contact {
-        padding-top: 140px;
-        padding-bottom: 140px;
-      }
-
-      #testimonials {
-        padding-bottom: 180px;
+        padding: 140px 0;
+        background: transparent;
       }
 
       #clients {
-        padding-top: 100px;
-        padding-bottom: 100px;
+        padding: 80px 0;
       }
 
       .logos-grid {
@@ -672,28 +699,29 @@
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: flex-end;
-        gap: 24px 20px;
-        max-width: var(--max);
+        gap: 28px 16px;
+        max-width: var(--section-max);
         margin: 0 auto;
-        padding: 4px 0 8px;
+        padding: 0;
       }
 
       .client-logo {
-        flex: 1 1 100px;
-        min-width: 92px;
-        max-width: 150px;
+        flex: 1 1 auto;
+        min-width: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 10px;
         text-align: center;
+        color: #fff;
       }
 
       .client-logo__mark {
         width: 100%;
         max-width: 72px;
         height: 40px;
-        color: rgba(224, 220, 232, 0.15);
+        color: #fff;
+        opacity: 0.15;
         flex-shrink: 0;
       }
 
@@ -703,49 +731,55 @@
         text-transform: uppercase;
         font-family: var(--font-sans);
         font-weight: 500;
-        color: var(--muted);
+        color: #fff;
+        opacity: 0.4;
         line-height: 1.3;
       }
 
-      .section-head {
-        display: grid;
-        gap: 12px;
-        margin-bottom: 60px;
+      section .section-chapter {
         text-align: center;
-        justify-items: center;
       }
 
-      .section-head--label-only {
-        margin-bottom: 60px;
-        gap: 0;
+      section .section-chapter > .label {
+        display: block;
+        margin: 0 auto 16px;
+      }
+
+      section .section-chapter > .heading-row {
+        margin: 0 auto 60px;
       }
 
       .contact-lead {
         max-width: 42ch;
-        margin: 0;
-        font-size: 16px;
+        margin: 0 auto 12px;
+        font-size: 15px;
         line-height: 1.7;
-        color: var(--muted);
+        color: #8a829e;
+        text-align: center;
       }
 
-      #contact .section-head > .contact-lead {
-        margin-bottom: 4px;
+      .contact-sub {
+        margin: 0 auto 60px;
+        max-width: 48ch;
+        font-size: 14px;
+        line-height: 1.7;
+        color: #e0dde8;
+        text-align: center;
       }
 
       .label {
         font-family: var(--font-sans);
         font-weight: 500;
         text-transform: uppercase;
-        letter-spacing: 0.2em;
+        letter-spacing: 0.25em;
         font-size: 11px;
-        color: #9e94b8;
-        opacity: 1;
+        color: #8a829e;
       }
 
       .heading-row {
-        display: grid;
-        gap: 14px;
-        justify-items: center;
+        display: block;
+        margin: 0;
+        text-align: center;
       }
 
       h1,
@@ -762,25 +796,17 @@
         letter-spacing: 0.04em;
       }
 
-      h2.heading-display {
-        font-family: var(--font-heading);
-        font-weight: 300;
-        font-size: clamp(1.8rem, 4vw, 2.8rem);
+      section h2.heading-display {
+        font-family: var(--font-sans);
+        font-weight: 700;
+        font-size: clamp(1.6rem, 3.5vw, 2.4rem);
         letter-spacing: 0.08em;
         line-height: 1.2;
         text-transform: uppercase;
         font-style: normal;
-        text-shadow: 0 0 36px rgba(0, 229, 255, 0.1);
-      }
-
-      .divider {
-        width: min(60%, 560px);
-        margin: 0 auto;
-        height: 1px;
-        background: linear-gradient(90deg, rgba(224, 64, 160, 0.5), rgba(0, 229, 255, 0.5));
-        box-shadow: none;
-        border: none;
-        border-radius: 0;
+        color: #fff;
+        margin: 0;
+        text-shadow: none;
       }
 
       .muted {
@@ -800,19 +826,6 @@
         font-weight: 400;
       }
 
-      .link-title {
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        font-weight: 700;
-        font-family: var(--font-sans);
-      }
-
-      .contact-side .link .link-title {
-        text-transform: none;
-        letter-spacing: 0.02em;
-        font-weight: 600;
-      }
-
       .inline-link {
         color: var(--text);
         text-decoration: underline;
@@ -826,48 +839,31 @@
         font-weight: 400;
       }
 
-      #reel .container {
-        width: min(var(--max), calc(100% - 48px));
-      }
-
-      .reel-accent-wrap {
-        width: 100%;
-        max-width: var(--max);
-        margin: 0 auto 28px;
-        padding: 10px 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .reel-accent-line {
-        width: min(60%, 560px);
+      .reel-stage {
+        max-width: var(--section-max);
         margin: 0 auto;
-        height: 1px;
-        background: linear-gradient(90deg, rgba(224, 64, 160, 0.5), rgba(0, 229, 255, 0.5));
-        box-shadow: none;
-        border-radius: 0;
-      }
-
-      .reel-layout {
-        margin: 0 auto;
-        width: 100%;
-        max-width: 100%;
+        text-align: center;
       }
 
       .reel-poster {
         position: relative;
         isolation: isolate;
         aspect-ratio: 16 / 9;
-        max-height: 500px;
-        width: min(100%, calc(500px * 16 / 9));
-        max-width: 100%;
+        width: 100%;
+        max-width: var(--section-max);
         margin: 0 auto;
-        background: rgba(20, 15, 40, 0.4);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        overflow: visible;
+        background: rgba(20, 15, 40, 0.5);
+        border: 1px solid rgba(140, 100, 255, 0.1);
+        border-radius: var(--radius-tight);
+        box-shadow: none;
+        overflow: hidden;
+        cursor: pointer;
+        transition: border-color 0.3s ease;
+      }
+
+      .reel-poster:hover,
+      .reel-poster:focus-within {
+        border-color: rgba(224, 64, 160, 0.3);
       }
 
       .reel-poster__inner {
@@ -878,56 +874,57 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 22px;
+        gap: 16px;
         padding: 24px 20px;
         box-sizing: border-box;
-        pointer-events: auto;
-      }
-
-      .reel-poster__title {
-        margin: 0;
-        font-family: var(--font-sans);
-        font-weight: 700;
-        font-size: 12px;
-        letter-spacing: 0.28em;
-        color: rgba(184, 174, 208, 0.95);
-        text-transform: uppercase;
-        font-variant: small-caps;
-        text-align: center;
+        pointer-events: none;
       }
 
       .reel-poster__play {
         position: relative;
         z-index: 3;
         flex-shrink: 0;
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
-        border: 2px solid var(--accent);
+        border: 1px solid var(--accent);
         background: transparent;
         color: var(--accent);
         padding: 0;
         cursor: pointer;
         display: grid;
         place-items: center;
-        transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease, color 220ms ease;
+        transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         -webkit-tap-highlight-color: transparent;
+        pointer-events: auto;
       }
 
+      .reel-poster:hover .reel-poster__play,
+      .reel-poster:focus-within .reel-poster__play,
       .reel-poster__play:hover,
       .reel-poster__play:focus-visible {
         background: var(--accent);
         border-color: var(--accent);
         color: #fff;
-        box-shadow: 0 0 28px rgba(224, 64, 160, 0.45);
         outline: none;
+      }
+
+      .reel-poster__cta {
+        margin: 0;
+        font-family: var(--font-sans);
+        font-weight: 500;
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #8a829e;
+        pointer-events: none;
       }
 
       .reel-poster__play-icon {
         display: block;
-        width: 22px;
-        height: 26px;
-        margin-left: 4px;
+        width: 18px;
+        height: 22px;
+        margin-left: 3px;
       }
 
       .reel-poster__play-icon svg {
@@ -1082,76 +1079,40 @@
         letter-spacing: 0.12em;
       }
 
-      .services-editorial {
-        max-width: var(--max);
+      .services-stack {
+        max-width: var(--section-max);
         margin: 0 auto;
+        text-align: left;
       }
 
-      .service-block {
+      .service-item {
         position: relative;
-        padding: 40px 0;
         margin: 0;
-      }
-
-      #services .service-block {
+        padding: 0 0 0 22px;
         border-left: 2px solid transparent;
-        transition: border-left-color 360ms ease, box-shadow 360ms ease;
+        transition: border-left-color 0.3s ease;
       }
 
-      .services-editorial > .service-block:first-child {
-        padding-top: 0;
+      #services .service-item:hover,
+      #services .service-item:focus-within {
+        border-left-color: var(--accent);
       }
 
-      .services-editorial > .service-block:last-child {
-        padding-bottom: 0;
-      }
-
-      .services-editorial > .service-block:only-child {
-        padding-top: 0;
-        padding-bottom: 0;
-      }
-
-      .services-editorial > .service-block:not(:last-child)::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        transform: translateX(-50%);
-        width: min(60%, 560px);
-        height: 1px;
-        background: linear-gradient(to right, rgba(224, 64, 160, 0.5), rgba(0, 229, 255, 0.5));
-      }
-
-      .services-editorial > .service-block:last-child::after {
-        display: none;
-      }
-
-      #services .service-block:hover,
-      #services .service-block:focus-within {
-        border-left-color: rgba(224, 64, 160, 0.85);
-        box-shadow: inset 4px 0 18px -4px rgba(224, 64, 160, 0.25);
-      }
-
-      .service-block__row {
+      .service-item__row {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 28px 56px;
+        grid-template-columns: 3fr 2fr;
+        gap: 28px 40px;
         align-items: start;
       }
 
-      .service-block__row--single {
-        grid-template-columns: 1fr;
+      .service-item__main {
+        min-width: 0;
       }
 
-      .service-block__row--contact {
-        grid-template-columns: 1fr 0.55fr;
-        gap: 28px 40px;
-      }
-
-      .service-block__title {
-        margin: 0 0 14px;
-        font-family: var(--font-heading);
-        font-size: 20px;
+      .service-item__title {
+        margin: 0 0 12px;
+        font-family: var(--font-sans);
+        font-size: 18px;
         font-weight: 600;
         line-height: 1.25;
         color: #fff;
@@ -1159,55 +1120,80 @@
         letter-spacing: 0.02em;
       }
 
-      .service-block__desc {
+      .service-item__desc {
         margin: 0;
-        font-size: 16px;
+        font-size: 15px;
         line-height: 1.7;
-        color: var(--text);
+        color: #e0dde8;
         font-weight: 400;
         font-family: var(--font-sans);
         text-transform: none;
         letter-spacing: 0.02em;
       }
 
-      .service-block__aside {
+      .service-item__aside {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        align-items: flex-end;
+        text-align: right;
+        gap: 0;
       }
 
-      .service-block__price {
-        margin: 0;
-        font-size: 14px;
+      .service-item__price {
+        margin: 0 0 8px;
+        font-size: 13px;
         font-weight: 400;
         font-family: var(--font-sans);
-        color: var(--muted);
-        letter-spacing: 0.03em;
+        color: #8a829e;
+        letter-spacing: 0.02em;
       }
 
-      .service-block__deliverables {
+      .service-item__deliverables {
         margin: 0;
-        font-size: 13px;
-        line-height: 1.7;
-        color: #5c5470;
+        font-size: 12px;
+        line-height: 1.6;
+        color: #5a5470;
         font-weight: 400;
         font-family: var(--font-sans);
         letter-spacing: 0.02em;
       }
 
+      .contact-layout {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 28px 40px;
+        max-width: var(--section-max);
+        margin: 0 auto;
+        text-align: left;
+        align-items: start;
+      }
+
+      .contact-layout__form {
+        min-width: 0;
+      }
+
       @media (max-width: 768px) {
-        .service-block__row,
-        .service-block__row--contact {
+        .service-item__row {
           grid-template-columns: 1fr;
-          gap: 22px;
+          gap: 20px;
+        }
+
+        .service-item__aside {
+          align-items: flex-start;
+          text-align: left;
+        }
+
+        .contact-layout {
+          grid-template-columns: 1fr;
+          gap: 32px;
         }
       }
 
       .projects-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 22px;
-        max-width: var(--max);
+        gap: 24px;
+        max-width: var(--section-max);
         margin: 0 auto;
         padding: 0;
         list-style: none;
@@ -1227,15 +1213,15 @@
         position: relative;
         display: block;
         aspect-ratio: 16 / 9;
-        border-radius: var(--radius);
+        border-radius: var(--radius-tight);
         overflow: hidden;
-        border: 1px solid var(--border);
-        background: var(--surface-soft);
-        box-shadow: var(--shadow);
+        border: 1px solid rgba(140, 100, 255, 0.08);
+        background: rgba(20, 15, 40, 0.4);
+        box-shadow: none;
         text-decoration: none;
         color: inherit;
         transform: translateZ(0);
-        transition: transform 420ms ease, box-shadow 420ms ease, border-color 420ms ease;
+        transition: transform 0.3s ease, border-color 0.3s ease;
       }
 
       @supports (backdrop-filter: blur(10px)) {
@@ -1252,9 +1238,8 @@
 
       .project-tile:hover,
       .project-tile:focus-visible {
-        transform: scale(1.03);
-        border-color: rgba(0, 229, 255, 0.35);
-        box-shadow: 0 0 32px rgba(0, 229, 255, 0.2), var(--shadow);
+        transform: translateY(-3px);
+        border-color: rgba(0, 229, 255, 0.15);
       }
 
       .project-tile__img,
@@ -1357,13 +1342,13 @@
       .project-placeholder {
         position: relative;
         aspect-ratio: 16 / 9;
-        background: var(--surface-soft);
-        border-radius: var(--radius);
-        border: 1px solid var(--border);
+        background: rgba(20, 15, 40, 0.4);
+        border-radius: var(--radius-tight);
+        border: 1px solid rgba(140, 100, 255, 0.08);
         display: block;
-        transition: transform 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
+        transition: transform 0.3s ease, border-color 0.3s ease;
         overflow: hidden;
-        box-shadow: var(--shadow);
+        box-shadow: none;
       }
 
       @supports (backdrop-filter: blur(10px)) {
@@ -1375,9 +1360,8 @@
 
       .project-placeholder:hover,
       .project-placeholder:focus-visible {
-        transform: translateY(-4px);
-        border-color: rgba(0, 229, 255, 0.35);
-        box-shadow: 0 0 24px rgba(0, 229, 255, 0.18), var(--shadow);
+        transform: translateY(-3px);
+        border-color: rgba(0, 229, 255, 0.15);
       }
 
       .project-placeholder__label-wrap {
@@ -1385,11 +1369,12 @@
         left: 0;
         right: 0;
         bottom: 0;
-        padding: 16px 18px;
-        transform: translateY(10px);
+        padding: 20px;
+        transform: translateY(8px);
         opacity: 0;
         pointer-events: none;
-        transition: transform 320ms ease, opacity 320ms ease;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        text-align: left;
       }
 
       .project-placeholder--detail:hover .project-placeholder__label-wrap,
@@ -1401,45 +1386,84 @@
       .project-placeholder__dash {
         display: block;
         width: 20px;
-        height: 1px;
+        height: 2px;
         background: var(--accent);
-        margin-bottom: 8px;
+        margin-bottom: 10px;
       }
 
       .project-placeholder__label {
         display: block;
-        font-size: 11px;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 0.04em;
+        text-transform: none;
         font-family: var(--font-sans);
-        font-weight: 700;
-        color: var(--text);
+        font-weight: 500;
+        color: #fff;
         text-align: left;
       }
 
-      #testimonials .service-block__main blockquote {
+      .testimonials-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        max-width: var(--section-max);
+        margin: 0 auto;
+        text-align: left;
+      }
+
+      .testimonial-card {
+        background: rgba(20, 15, 40, 0.4);
+        border: 1px solid rgba(140, 100, 255, 0.08);
+        border-radius: var(--radius-tight);
+        padding: 40px 32px;
+      }
+
+      @supports (backdrop-filter: blur(10px)) {
+        .testimonial-card {
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+        }
+      }
+
+      .testimonial-card__quote-mark {
+        margin: 0 0 16px;
+        font-size: 48px;
+        font-weight: 300;
+        line-height: 1;
+        color: #e040a0;
+        font-family: var(--font-sans);
+      }
+
+      .testimonial-card__text {
         margin: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.7;
+        color: #e0dde8;
+        font-style: italic;
+        font-family: var(--font-sans);
       }
 
-      #testimonials .services-editorial > .service-block {
-        padding-top: 20px;
-        padding-bottom: 20px;
-      }
-
-      #testimonials .services-editorial > .service-block:first-child {
-        padding-top: 0;
-      }
-
-      #testimonials .services-editorial > .service-block:last-child {
-        padding-bottom: 0;
-      }
-
-      .quote-footer--stack {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-        margin-top: 18px;
+      .testimonial-card__attr {
+        margin-top: 24px;
         padding-top: 16px;
+        border-top: 1px solid rgba(140, 100, 255, 0.08);
+      }
+
+      .testimonial-card__name {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        font-family: var(--font-sans);
+      }
+
+      .testimonial-card__company {
+        margin: 4px 0 0;
+        font-size: 12px;
+        font-weight: 400;
+        color: #8a829e;
+        font-family: var(--font-sans);
       }
 
       blockquote {
@@ -1451,124 +1475,62 @@
         line-height: 1.7;
       }
 
-      .quote-mark {
-        width: auto;
-        height: auto;
-        border-radius: 0;
-        display: block;
-        border: none;
-        background: none;
-        color: var(--accent);
-        font-weight: 300;
-        font-family: var(--font-heading);
-        font-size: clamp(2.5rem, 5vw, 3.25rem);
-        line-height: 0.85;
-        text-shadow: 0 0 24px rgba(224, 64, 160, 0.35);
-        margin-bottom: 8px;
-      }
-
-      .quote-footer {
-        margin-top: 16px;
-        padding-top: 14px;
-        border-top: none;
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        align-items: baseline;
-        color: var(--muted);
-        font-size: 11px;
-        font-weight: 400;
-        letter-spacing: 0.02em;
-      }
-
-      .quote-footer::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: min(60%, 360px);
-        height: 1px;
-        background: linear-gradient(90deg, rgba(224, 64, 160, 0.5), rgba(0, 229, 255, 0.5));
-        opacity: 1;
-      }
-
-      .quote-footer strong {
-        color: var(--text);
-        font-weight: 700;
-        font-family: var(--font-sans);
-        letter-spacing: 0.04em;
-        text-transform: none;
-      }
-
-      .quote-footer .quote-company {
-        text-transform: uppercase;
-        letter-spacing: 0.16em;
-        color: var(--muted);
-        font-family: var(--font-sans);
-      }
-
-      #contact .service-block__main form {
-        margin: 0;
-      }
-
-      form {
+      #bookingForm {
         display: grid;
-        gap: 12px;
+        gap: 14px;
       }
 
       .form-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        gap: 14px;
       }
 
-      label {
+      #bookingForm label {
         display: grid;
-        gap: 8px;
-        color: var(--muted);
+        gap: 6px;
+        color: #8a829e;
         text-transform: uppercase;
-        letter-spacing: 0.22em;
+        letter-spacing: 0.15em;
         font-size: 11px;
         font-family: var(--font-sans);
-        font-weight: 700;
+        font-weight: 500;
       }
 
-      input,
-      select,
-      textarea {
+      #bookingForm input,
+      #bookingForm select,
+      #bookingForm textarea {
         width: 100%;
-        padding: 12px 12px;
-        border-radius: 14px;
-        border: 1px solid var(--border);
-        background: var(--surface-soft);
-        color: var(--text);
+        padding: 12px 16px;
+        border-radius: var(--radius-tight);
+        border: 1px solid rgba(140, 100, 255, 0.1);
+        background: rgba(20, 15, 40, 0.4);
+        color: #e0dde8;
         font-family: var(--font-sans);
-        font-size: 15px;
+        font-size: 14px;
         outline: none;
-        transition: border-color 180ms ease, box-shadow 180ms ease;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
       }
 
       @supports (backdrop-filter: blur(8px)) {
-        input,
-        select,
-        textarea {
+        #bookingForm input,
+        #bookingForm select,
+        #bookingForm textarea {
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
         }
       }
 
-      textarea {
+      #bookingForm textarea {
         resize: vertical;
         min-height: 140px;
       }
 
-      input:focus,
-      select:focus,
-      textarea:focus {
-        border-color: rgba(0, 229, 255, 0.45);
-        box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.12), 0 0 20px rgba(0, 229, 255, 0.15);
+      #bookingForm input:focus,
+      #bookingForm select:focus,
+      #bookingForm textarea:focus {
+        border-color: rgba(0, 229, 255, 0.3);
+        box-shadow: 0 0 12px rgba(0, 229, 255, 0.08);
       }
 
       .form-actions {
@@ -1579,77 +1541,97 @@
         margin-top: 6px;
       }
 
+      #bookingForm .form-actions .cta.red {
+        margin: 0;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 14px 32px;
+        border-radius: var(--radius-tight);
+        border: none;
+        cursor: pointer;
+        transform: none;
+        box-shadow: none;
+        transition: background 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      #bookingForm .form-actions .cta.red:hover,
+      #bookingForm .form-actions .cta.red:focus-visible {
+        background: #f06bb8;
+        box-shadow: 0 0 20px rgba(224, 64, 160, 0.3);
+        outline: none;
+        transform: none;
+        border: none;
+      }
+
       .form-note {
         color: var(--muted);
         font-size: 13px;
         font-family: var(--font-sans);
       }
 
-      .contact-side {
-        display: grid;
-        gap: 12px;
+      .contact-info-card {
+        background: rgba(20, 15, 40, 0.4);
+        border: 1px solid rgba(140, 100, 255, 0.08);
+        border-radius: var(--radius-tight);
+        padding: 40px 32px;
       }
 
-      .contact-side .card {
-        padding: 18px;
-      }
-
-      .links {
-        display: grid;
-        gap: 10px;
-        margin-top: 10px;
-      }
-
-      .link {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 12px 12px;
-        border-radius: 14px;
-        border: 1px solid var(--border);
-        background: var(--surface-soft);
-        color: var(--accent-cyan);
-        transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-      }
-
-      @supports (backdrop-filter: blur(8px)) {
-        .link {
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
+      @supports (backdrop-filter: blur(10px)) {
+        .contact-info-card {
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
         }
       }
 
-      .link:hover {
-        transform: translateY(-1px);
-        border-color: rgba(0, 229, 255, 0.45);
-        box-shadow: 0 0 22px rgba(0, 229, 255, 0.18);
+      .contact-info-card a {
+        color: var(--accent-cyan);
+        text-decoration: none;
+        transition: opacity 0.2s ease;
       }
 
-      .link small {
-        color: var(--muted);
+      .contact-info-card a:hover,
+      .contact-info-card a:focus-visible {
+        opacity: 0.85;
+        outline: none;
+      }
+
+      .contact-info-card__block {
+        margin: 0 0 20px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: #e0dde8;
+      }
+
+      .contact-info-card__block:last-child {
+        margin-bottom: 0;
+      }
+
+      .contact-info-card__label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.15em;
         text-transform: uppercase;
-        letter-spacing: 0.18em;
-        font-size: 10px;
+        color: #8a829e;
+      }
+
+      .contact-info-card__note {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.65;
+        color: #8a829e;
       }
 
       footer {
-        padding: 34px 0 44px;
+        padding: 60px 0 40px;
         border-top: none;
         position: relative;
-        color: var(--muted);
-      }
-
-      footer::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: min(60%, 560px);
-        height: 1px;
-        background: linear-gradient(90deg, rgba(224, 64, 160, 0.5), rgba(0, 229, 255, 0.5));
-        opacity: 1;
+        background: transparent;
       }
 
       .footer-inner {
@@ -1657,74 +1639,32 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 10px;
         text-align: center;
       }
 
-      .footer-inner span {
-        text-transform: uppercase;
-        letter-spacing: 0.18em;
-        font-size: 11px;
-        font-family: var(--font-sans);
-        font-weight: 500;
-      }
-
-      .footer-tagline {
+      .footer-copy {
         margin: 0;
         font-family: var(--font-sans);
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 400;
-        letter-spacing: 0.06em;
-        color: var(--muted-2);
-        opacity: 0.55;
-        text-transform: none;
+        color: #5a5470;
         line-height: 1.5;
       }
 
-      [data-parallax-heading] {
-        will-change: transform;
-      }
-
-      .reel-accent-wrap.reveal .reel-accent-line {
-        transform: scaleX(0.25);
-        opacity: 0;
-        transition: opacity 650ms ease, transform 650ms ease;
-        transition-delay: var(--delay, 0ms);
-        transform-origin: center;
-      }
-
-      .reel-accent-wrap.reveal.in-view .reel-accent-line {
-        opacity: 1;
-        transform: scaleX(1);
+      .footer-tagline {
+        margin: 8px 0 0;
+        font-family: var(--font-sans);
+        font-size: 11px;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        color: #3d3555;
+        line-height: 1.5;
       }
 
       /* Responsive */
-      @media (max-width: 1024px) {
-        #reel,
-        #services,
-        #projects,
-        #testimonials,
-        #contact {
-          padding-top: 120px;
-          padding-bottom: 120px;
-        }
-
-        #testimonials {
-          padding-bottom: 160px;
-        }
-
-        #clients {
-          padding-top: 80px;
-          padding-bottom: 80px;
-        }
-      }
-
       @media (max-width: 980px) {
         .hero-grid {
           grid-template-columns: 1fr;
-        }
-        .logos-grid {
-          justify-content: center;
         }
       }
 
@@ -1742,41 +1682,29 @@
           padding: 56px 0 42px;
         }
         section {
-          padding: 76px 0;
-        }
-        #reel,
-        #services,
-        #projects,
-        #testimonials,
-        #contact {
-          padding-top: 80px;
-          padding-bottom: 80px;
-        }
-        #testimonials {
-          padding-bottom: 120px;
+          padding: 80px 0;
         }
         #clients {
-          padding-top: 80px;
-          padding-bottom: 80px;
+          padding: 80px 0;
         }
         .form-grid {
           grid-template-columns: 1fr;
         }
         .logos-grid {
-          flex-wrap: nowrap;
-          justify-content: flex-start;
-          overflow-x: auto;
-          overflow-y: hidden;
-          padding-bottom: 10px;
-          gap: 22px;
-          -webkit-overflow-scrolling: touch;
-          scrollbar-width: thin;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 28px 12px;
+          justify-items: center;
+          width: 100%;
         }
 
         .client-logo {
-          flex: 0 0 auto;
-          min-width: 80px;
           max-width: none;
+        }
+
+        .testimonials-row {
+          grid-template-columns: 1fr;
+          gap: 24px;
         }
       }
 
@@ -1787,8 +1715,10 @@
         body::after {
           background: none !important;
         }
-        [data-parallax-heading] {
+        .section-chapter.reveal {
+          opacity: 1 !important;
           transform: none !important;
+          transition: none !important;
         }
         .icon-drift,
         .scroll-indicator .line::after {
@@ -1834,7 +1764,6 @@
         .project-placeholder:focus-visible {
           transform: none !important;
           transition: none !important;
-          box-shadow: var(--shadow) !important;
         }
         .project-placeholder--detail .project-placeholder__label-wrap {
           transform: none !important;
@@ -1848,6 +1777,22 @@
     <header class="nav" role="banner">
       <div class="container">
         <div class="nav-inner">
+          <a class="logo" href="#top" aria-label="Red Shift Studios — home">
+            <svg
+              class="logo__icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.75" />
+              <path d="M8 7V5a1 1 0 011-1h6a1 1 0 011 1v2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+              <circle cx="12" cy="13.5" r="3.25" stroke="currentColor" stroke-width="1.75" />
+            </svg>
+            <span class="logo-text">RED SHIFT STUDIOS</span>
+          </a>
           <nav class="nav-links" aria-label="Primary navigation">
             <a href="#reel">REEL</a>
             <a href="#projects">PROJECTS</a>
@@ -1950,420 +1895,342 @@
       </a>
     </main>
 
+    <div class="section-divider" aria-hidden="true"></div>
+
     <!-- Client Logos -->
     <section id="clients" aria-labelledby="clients-label">
       <div class="container">
-        <div class="section-head section-head--label-only reveal" data-reveal="heading">
+        <div class="section-chapter reveal">
           <div class="label" id="clients-label">PARTNERS</div>
-        </div>
-
-        <div class="services-editorial">
-          <article class="service-block reveal" data-reveal="card" aria-label="Partner logos">
-            <div class="service-block__row service-block__row--single">
-              <div class="service-block__main">
-                <div class="logos-grid">
-          <div class="client-logo">
-            <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="24" cy="16" r="12" stroke="currentColor" stroke-width="2" />
-              <circle cx="24" cy="16" r="4" fill="currentColor" />
-            </svg>
-            <span class="client-logo__name">Desert Bloom</span>
-          </div>
-          <div class="client-logo">
-            <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path
-                d="M24 6l10.4 6v12L24 30 13.6 24V12L24 6z"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linejoin="round"
-              />
-            </svg>
-            <span class="client-logo__name">Mesa Realty</span>
-          </div>
-          <div class="client-logo">
-            <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="24" cy="18" r="10" stroke="currentColor" stroke-width="1.8" />
-              <path d="M24 8v6M18 11l4 3M30 11l-4 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-            </svg>
-            <span class="client-logo__name">Sunrise Coffee</span>
-          </div>
-          <div class="client-logo">
-            <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M24 7L40 25H8L24 7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-            </svg>
-            <span class="client-logo__name">Borderland Expo</span>
-          </div>
-          <div class="client-logo">
-            <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="24" cy="16" r="11" stroke="currentColor" stroke-width="2" />
-              <circle cx="24" cy="16" r="3.5" fill="currentColor" />
-            </svg>
-            <span class="client-logo__name">Río Records</span>
-          </div>
-          <div class="client-logo">
-            <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M10 9l5 14 4-9 4 9 5-14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <span class="client-logo__name">Westside Gym</span>
-          </div>
-                </div>
-              </div>
+          <div class="logos-grid">
+            <div class="client-logo">
+              <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="24" cy="16" r="12" stroke="currentColor" stroke-width="2" />
+                <circle cx="24" cy="16" r="4" fill="currentColor" />
+              </svg>
+              <span class="client-logo__name">Desert Bloom</span>
             </div>
-          </article>
+            <div class="client-logo">
+              <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path
+                  d="M24 6l10.4 6v12L24 30 13.6 24V12L24 6z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span class="client-logo__name">Mesa Realty</span>
+            </div>
+            <div class="client-logo">
+              <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="24" cy="18" r="10" stroke="currentColor" stroke-width="1.8" />
+                <path d="M24 8v6M18 11l4 3M30 11l-4 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              </svg>
+              <span class="client-logo__name">Sunrise Coffee</span>
+            </div>
+            <div class="client-logo">
+              <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M24 7L40 25H8L24 7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+              </svg>
+              <span class="client-logo__name">Borderland Expo</span>
+            </div>
+            <div class="client-logo">
+              <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="24" cy="16" r="11" stroke="currentColor" stroke-width="2" />
+                <circle cx="24" cy="16" r="3.5" fill="currentColor" />
+              </svg>
+              <span class="client-logo__name">Río Records</span>
+            </div>
+            <div class="client-logo">
+              <svg class="client-logo__mark" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M10 9l5 14 4-9 4 9 5-14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span class="client-logo__name">Westside Gym</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
 
     <!-- Reel -->
     <section id="reel" aria-labelledby="reel-title">
       <div class="container">
-        <div class="section-head reveal" data-reveal="heading">
+        <div class="section-chapter reveal">
           <div class="label">REEL</div>
           <div class="heading-row">
-            <h2 id="reel-title" class="heading-display" data-parallax-heading>Demo Reel</h2>
-            <div class="divider" aria-hidden="true" data-reveal="divider"></div>
+            <h2 id="reel-title" class="heading-display">DEMO REEL</h2>
           </div>
-        </div>
-
-        <div class="reel-accent-wrap reveal" data-reveal="card" aria-hidden="true">
-          <div class="reel-accent-line"></div>
-        </div>
-
-        <div class="services-editorial">
-          <article class="service-block">
-            <div class="service-block__row service-block__row--single">
-              <div class="service-block__main">
-                <div class="reel-layout">
-                  <div class="reel-poster">
-                    <div class="reel-poster__inner">
-                      <button
-                        type="button"
-                        class="reel-poster__play"
-                        id="reel-open"
-                        aria-haspopup="dialog"
-                        aria-controls="reel-lightbox"
-                        aria-label="Play demo reel"
-                      >
-                        <span class="reel-poster__play-icon" aria-hidden="true">
-                          <svg viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M2 2L22 14L2 26V2Z" fill="currentColor" />
-                          </svg>
-                        </span>
-                      </button>
-                      <p class="reel-poster__title">DEMO REEL 2024</p>
-                    </div>
-                  </div>
-                </div>
+          <div class="reel-stage">
+            <div class="reel-poster">
+              <div class="reel-poster__inner">
+                <button
+                  type="button"
+                  class="reel-poster__play"
+                  id="reel-open"
+                  aria-haspopup="dialog"
+                  aria-controls="reel-lightbox"
+                  aria-label="Play demo reel"
+                >
+                  <span class="reel-poster__play-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M2 2L22 14L2 26V2Z" fill="currentColor" />
+                    </svg>
+                  </span>
+                </button>
+                <p class="reel-poster__cta">WATCH REEL</p>
               </div>
             </div>
-          </article>
+          </div>
         </div>
       </div>
     </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
 
     <!-- Services -->
     <section id="services" aria-labelledby="services-title">
       <div class="container">
-        <div class="section-head reveal" data-reveal="heading">
+        <div class="section-chapter reveal">
           <div class="label">SERVICES</div>
           <div class="heading-row">
-            <h2 id="services-title" class="heading-display" data-parallax-heading>What We Do</h2>
+            <h2 id="services-title" class="heading-display">WHAT WE DO</h2>
           </div>
-        </div>
-
-        <div class="services-editorial" data-reveal-group="services">
-          <article class="service-block reveal" data-reveal="service">
-            <div class="service-block__row">
-              <div class="service-block__main">
-                <h3 class="service-block__title">Social Content</h3>
-                <p class="service-block__desc">
-                  Short-form video that makes your business look the way it deserves to on social. Hooks, Reels, promos
-                  — built to stop the scroll and fill your feed.
-                </p>
+          <div class="services-stack">
+            <article class="service-item">
+              <div class="service-item__row">
+                <div class="service-item__main">
+                  <h3 class="service-item__title">Social Content</h3>
+                  <p class="service-item__desc">
+                    Short-form video that makes your business look the way it deserves to on social. Hooks, Reels, promos
+                    — built to stop the scroll and fill your feed.
+                  </p>
+                </div>
+                <div class="service-item__aside">
+                  <p class="service-item__price">Starting at $300</p>
+                  <p class="service-item__deliverables">
+                    Half-day shoot or edit from your footage · Up to 3 deliverables · Delivered in 3–5 days
+                  </p>
+                </div>
               </div>
-              <div class="service-block__aside">
-                <p class="service-block__price">Starting at $300</p>
-                <p class="service-block__deliverables">
-                  Half-day shoot or edit from your footage · Up to 3 deliverables · Delivered in 3–5 days
-                </p>
+            </article>
+            <div class="section-divider section-divider--muted" aria-hidden="true"></div>
+            <article class="service-item">
+              <div class="service-item__row">
+                <div class="service-item__main">
+                  <h3 class="service-item__title">Commercial</h3>
+                  <p class="service-item__desc">
+                    One polished video that tells your story — for your website, your ads, or your lobby screen. Planned,
+                    shot, and edited as a single piece.
+                  </p>
+                </div>
+                <div class="service-item__aside">
+                  <p class="service-item__price">Starting at $800</p>
+                  <p class="service-item__deliverables">
+                    Pre-production + shoot day · Professional edit, color, and sound · One revision round · Delivered in
+                    5–7 days
+                  </p>
+                </div>
               </div>
-            </div>
-          </article>
-
-          <article class="service-block reveal" data-reveal="service">
-            <div class="service-block__row">
-              <div class="service-block__main">
-                <h3 class="service-block__title">Commercial</h3>
-                <p class="service-block__desc">
-                  One polished video that tells your story — for your website, your ads, or your lobby screen. Planned,
-                  shot, and edited as a single piece.
-                </p>
+            </article>
+            <div class="section-divider section-divider--muted" aria-hidden="true"></div>
+            <article class="service-item">
+              <div class="service-item__row">
+                <div class="service-item__main">
+                  <h3 class="service-item__title">Full Production</h3>
+                  <p class="service-item__desc">
+                    The big stuff. Brand campaigns, events, music videos, multi-video packages — whatever the project needs,
+                    built from the ground up.
+                  </p>
+                </div>
+                <div class="service-item__aside">
+                  <p class="service-item__price">Starting at $2,000</p>
+                  <p class="service-item__deliverables">
+                    Multi-day or multi-location · Color grade, sound design, multiple exports · Format variants as needed ·
+                    Delivered in 7–10 days
+                  </p>
+                </div>
               </div>
-              <div class="service-block__aside">
-                <p class="service-block__price">Starting at $800</p>
-                <p class="service-block__deliverables">
-                  Pre-production + shoot day · Professional edit, color, and sound · One revision round · Delivered in
-                  5–7 days
-                </p>
-              </div>
-            </div>
-          </article>
-
-          <article class="service-block reveal" data-reveal="service">
-            <div class="service-block__row">
-              <div class="service-block__main">
-                <h3 class="service-block__title">Full Production</h3>
-                <p class="service-block__desc">
-                  The big stuff. Brand campaigns, events, music videos, multi-video packages — whatever the project needs,
-                  built from the ground up.
-                </p>
-              </div>
-              <div class="service-block__aside">
-                <p class="service-block__price">Starting at $2,000</p>
-                <p class="service-block__deliverables">
-                  Multi-day or multi-location · Color grade, sound design, multiple exports · Format variants as needed ·
-                  Delivered in 7–10 days
-                </p>
-              </div>
-            </div>
-          </article>
+            </article>
+          </div>
         </div>
       </div>
     </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
 
     <!-- Projects -->
     <section id="projects" aria-labelledby="projects-title">
       <div class="container">
-        <div class="section-head reveal" data-reveal="heading">
+        <div class="section-chapter reveal">
           <div class="label">PORTFOLIO</div>
           <div class="heading-row">
-            <h2 id="projects-title" class="heading-display" data-parallax-heading>The Work</h2>
-            <div class="divider" aria-hidden="true" data-reveal="divider"></div>
+            <h2 id="projects-title" class="heading-display">THE WORK</h2>
           </div>
-        </div>
-
-        <div class="services-editorial">
-          <article class="service-block reveal" data-reveal="card">
-            <div class="service-block__row service-block__row--single">
-              <div class="service-block__main">
-                <div class="projects-grid" id="projectsList" role="list">
-          <div
-            class="project-placeholder project-placeholder--detail reveal"
-            data-reveal="project"
-            role="listitem"
-            tabindex="0"
-          >
-            <div class="project-placeholder__label-wrap">
-              <span class="project-placeholder__dash" aria-hidden="true"></span>
-              <span class="project-placeholder__label">Restaurant Promo · 2024</span>
-            </div>
-          </div>
-          <div
-            class="project-placeholder project-placeholder--detail reveal"
-            data-reveal="project"
-            role="listitem"
-            tabindex="0"
-          >
-            <div class="project-placeholder__label-wrap">
-              <span class="project-placeholder__dash" aria-hidden="true"></span>
-              <span class="project-placeholder__label">Event Recap · 2024</span>
-            </div>
-          </div>
-          <div
-            class="project-placeholder project-placeholder--detail reveal"
-            data-reveal="project"
-            role="listitem"
-            tabindex="0"
-          >
-            <div class="project-placeholder__label-wrap">
-              <span class="project-placeholder__dash" aria-hidden="true"></span>
-              <span class="project-placeholder__label">Brand Spot · 2025</span>
-            </div>
-          </div>
-          <div class="project-placeholder reveal" data-reveal="project" role="listitem" tabindex="0"></div>
-          <div class="project-placeholder reveal" data-reveal="project" role="listitem" tabindex="0"></div>
-          <div class="project-placeholder reveal" data-reveal="project" role="listitem" tabindex="0"></div>
-                </div>
+          <div class="projects-grid" id="projectsList" role="list">
+            <div class="project-placeholder project-placeholder--detail" role="listitem" tabindex="0">
+              <div class="project-placeholder__label-wrap">
+                <span class="project-placeholder__dash" aria-hidden="true"></span>
+                <span class="project-placeholder__label">Restaurant Promo · 2024</span>
               </div>
             </div>
-          </article>
+            <div class="project-placeholder project-placeholder--detail" role="listitem" tabindex="0">
+              <div class="project-placeholder__label-wrap">
+                <span class="project-placeholder__dash" aria-hidden="true"></span>
+                <span class="project-placeholder__label">Event Recap · 2024</span>
+              </div>
+            </div>
+            <div class="project-placeholder project-placeholder--detail" role="listitem" tabindex="0">
+              <div class="project-placeholder__label-wrap">
+                <span class="project-placeholder__dash" aria-hidden="true"></span>
+                <span class="project-placeholder__label">Brand Spot · 2025</span>
+              </div>
+            </div>
+            <div class="project-placeholder" role="listitem" tabindex="0"></div>
+            <div class="project-placeholder" role="listitem" tabindex="0"></div>
+            <div class="project-placeholder" role="listitem" tabindex="0"></div>
+          </div>
         </div>
       </div>
     </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
 
     <!-- Testimonials -->
     <section id="testimonials" aria-labelledby="testimonials-title">
       <div class="container">
-        <div class="section-head reveal" data-reveal="heading">
+        <div class="section-chapter reveal">
           <div class="label">KIND WORDS</div>
           <div class="heading-row">
-            <h2 id="testimonials-title" class="heading-display" data-parallax-heading>Kind Words</h2>
+            <h2 id="testimonials-title" class="heading-display">KIND WORDS</h2>
           </div>
-        </div>
-
-        <div class="services-editorial" data-reveal-group="testimonials">
-          <article class="service-block reveal" data-reveal="testimonial">
-            <div class="service-block__row">
-              <div class="service-block__main">
-                <div class="quote-mark" aria-hidden="true">“</div>
-                <blockquote>
-                  “We needed content that looked expensive without being expensive. The pacing, color, and sound were
-                  nailed—and the turnaround was quick.”
-                </blockquote>
+          <div class="testimonials-row">
+            <article class="testimonial-card">
+              <div class="testimonial-card__quote-mark" aria-hidden="true">“</div>
+              <p class="testimonial-card__text">
+                We needed content that looked expensive without being expensive. The pacing, color, and sound were
+                nailed—and the turnaround was quick.
+              </p>
+              <div class="testimonial-card__attr">
+                <p class="testimonial-card__name">Maya</p>
+                <p class="testimonial-card__company">Desert Bloom Skincare</p>
               </div>
-              <div class="service-block__aside">
-                <div class="quote-footer quote-footer--stack">
-                  <strong>Maya</strong>
-                  <span class="quote-company">Desert Bloom Skincare</span>
-                </div>
+            </article>
+            <article class="testimonial-card">
+              <div class="testimonial-card__quote-mark" aria-hidden="true">“</div>
+              <p class="testimonial-card__text">
+                The event recap actually felt like a short film. Clean audio, great shots, and edits that matched the
+                vibe of the night.
+              </p>
+              <div class="testimonial-card__attr">
+                <p class="testimonial-card__name">Chris</p>
+                <p class="testimonial-card__company">Borderland Fitness Expo</p>
               </div>
-            </div>
-          </article>
-
-          <article class="service-block reveal" data-reveal="testimonial">
-            <div class="service-block__row">
-              <div class="service-block__main">
-                <div class="quote-mark" aria-hidden="true">“</div>
-                <blockquote>
-                  “The event recap actually felt like a short film. Clean audio, great shots, and edits that matched the
-                  vibe of the night.”
-                </blockquote>
+            </article>
+            <article class="testimonial-card">
+              <div class="testimonial-card__quote-mark" aria-hidden="true">“</div>
+              <p class="testimonial-card__text">
+                They listened, brought ideas, and kept the set moving. The final cut was exactly what we pitched to our
+                clients—and they loved it.
+              </p>
+              <div class="testimonial-card__attr">
+                <p class="testimonial-card__name">Elena</p>
+                <p class="testimonial-card__company">Mesa Street Realty</p>
               </div>
-              <div class="service-block__aside">
-                <div class="quote-footer quote-footer--stack">
-                  <strong>Chris</strong>
-                  <span class="quote-company">Borderland Fitness Expo</span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="service-block reveal" data-reveal="testimonial">
-            <div class="service-block__row">
-              <div class="service-block__main">
-                <div class="quote-mark" aria-hidden="true">“</div>
-                <blockquote>
-                  “They listened, brought ideas, and kept the set moving. The final cut was exactly what we pitched to our
-                  clients—and they loved it.”
-                </blockquote>
-              </div>
-              <div class="service-block__aside">
-                <div class="quote-footer quote-footer--stack">
-                  <strong>Elena</strong>
-                  <span class="quote-company">Mesa Street Realty</span>
-                </div>
-              </div>
-            </div>
-          </article>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
+    <div class="section-divider" aria-hidden="true"></div>
+
     <!-- Contact / Booking -->
     <section id="contact" aria-labelledby="contact-title">
       <div class="container">
-        <div class="section-head reveal" data-reveal="heading">
+        <div class="section-chapter reveal">
           <div class="label">CONTACT</div>
-          <p class="contact-lead">Got a project in mind? Let’s make something worth watching.</p>
+          <p class="contact-lead">Got a project in mind? Let's make something worth watching.</p>
           <div class="heading-row">
-            <h2 id="contact-title" class="heading-display" data-parallax-heading>Let’s Work Together</h2>
-            <div class="divider" aria-hidden="true" data-reveal="divider"></div>
+            <h2 id="contact-title" class="heading-display">LET'S WORK TOGETHER</h2>
           </div>
-          <p class="muted muted--flush">
-            Available for commercial work, events, social content, and film projects.
-          </p>
-        </div>
-
-        <div class="services-editorial">
-          <article class="service-block reveal" data-reveal="card">
-            <div class="service-block__row service-block__row--contact">
-              <div class="service-block__main">
-            <!-- Formspree endpoint placeholder -->
-            <form id="bookingForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-              <div class="form-grid">
-                <label>
-                  Name
-                  <input name="name" autocomplete="name" required />
-                </label>
-                <label>
-                  Email
-                  <input name="email" type="email" autocomplete="email" required />
-                </label>
-                <label>
-                  Company
-                  <input name="company" autocomplete="organization" />
-                </label>
-                <label>
-                  Project Type
-                  <select name="projectType" required>
-                    <option value="" selected disabled>Select one</option>
-                    <option>Commercial</option>
-                    <option>Event</option>
-                    <option>Music Video</option>
-                    <option>Short Film</option>
-                    <option>Other</option>
-                  </select>
-                </label>
-                <label>
-                  Budget Range
-                  <select name="budget" required>
-                    <option value="" selected disabled>Select one</option>
-                    <option>$500–$1,000</option>
-                    <option>$1,000–$2,500</option>
-                    <option>$2,500–$5,000</option>
-                    <option>$5,000–$10,000</option>
-                    <option>$10,000+</option>
-                  </select>
-                </label>
-                <label>
-                  Timeline
-                  <input name="timeline" placeholder="e.g., 2 weeks / By May 20" />
-                </label>
-              </div>
-
-              <label>
-                Message
-                <textarea name="message" required placeholder="What are you making, for who, and what’s success?"></textarea>
-              </label>
-
-              <div class="form-actions">
-                <button class="cta red" type="submit">Send Inquiry</button>
-                <span class="form-note" id="formStatus" role="status" aria-live="polite"></span>
-              </div>
-            </form>
-              </div>
-
-              <aside class="service-block__aside contact-side">
-                <div class="card reveal" data-reveal="card">
-                  <div class="label">Direct</div>
-                  <div class="links">
-                    <a class="link" href="mailto:wyabro@gmail.com">
-                      <div>
-                        <div class="link-title">wyabro@gmail.com</div>
-                        <small>Email • 435-459-2916</small>
-                      </div>
-                      <span aria-hidden="true">↗</span>
-                    </a>
-                    <a class="link" href="https://instagram.com/wyrtbrun" target="_blank" rel="noreferrer">
-                      <div>
-                        <div class="link-title">@wyrtbrun</div>
-                        <small>Social</small>
-                      </div>
-                      <span aria-hidden="true">↗</span>
-                    </a>
-                  </div>
+          <p class="contact-sub">Available for commercial work, events, social content, and film projects.</p>
+          <div class="contact-layout">
+            <div class="contact-layout__form">
+              <!-- Formspree endpoint placeholder -->
+              <form id="bookingForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-grid">
+                  <label>
+                    Name
+                    <input name="name" autocomplete="name" required />
+                  </label>
+                  <label>
+                    Email
+                    <input name="email" type="email" autocomplete="email" required />
+                  </label>
+                  <label>
+                    Company
+                    <input name="company" autocomplete="organization" />
+                  </label>
+                  <label>
+                    Project Type
+                    <select name="projectType" required>
+                      <option value="" selected disabled>Select one</option>
+                      <option>Commercial</option>
+                      <option>Event</option>
+                      <option>Music Video</option>
+                      <option>Short Film</option>
+                      <option>Other</option>
+                    </select>
+                  </label>
+                  <label>
+                    Budget Range
+                    <select name="budget" required>
+                      <option value="" selected disabled>Select one</option>
+                      <option>$500–$1,000</option>
+                      <option>$1,000–$2,500</option>
+                      <option>$2,500–$5,000</option>
+                      <option>$5,000–$10,000</option>
+                      <option>$10,000+</option>
+                    </select>
+                  </label>
+                  <label>
+                    Timeline
+                    <input name="timeline" placeholder="e.g., 2 weeks / By May 20" />
+                  </label>
                 </div>
 
-                <div class="card reveal" data-reveal="card">
-                  <div class="label">Availability</div>
-                  <p class="muted muted--after-label">
-                    Currently booking: <span class="text-body">next 2–4 weeks</span>. If you’re on a tight deadline,
-                    include the date and I’ll confirm options.
-                  </p>
+                <label>
+                  Message
+                  <textarea name="message" required placeholder="What are you making, for who, and what's success?"></textarea>
+                </label>
+
+                <div class="form-actions">
+                  <button class="cta red" type="submit">Send Inquiry</button>
+                  <span class="form-note" id="formStatus" role="status" aria-live="polite"></span>
                 </div>
-              </aside>
+              </form>
             </div>
-          </article>
+
+            <aside class="contact-info-card" aria-label="Contact details">
+              <div class="contact-info-card__block">
+                <span class="contact-info-card__label">Email</span>
+                <a href="mailto:wyabro@gmail.com">wyabro@gmail.com</a>
+              </div>
+              <div class="contact-info-card__block">
+                <span class="contact-info-card__label">Phone</span>
+                <a href="tel:+14354592916">435-459-2916</a>
+              </div>
+              <div class="contact-info-card__block">
+                <span class="contact-info-card__label">Instagram</span>
+                <a href="https://instagram.com/wyrtbrun" target="_blank" rel="noreferrer">@wyrtbrun</a>
+              </div>
+              <p class="contact-info-card__note">
+                Currently booking next 2–4 weeks. If you're on a tight deadline, include the date and I'll confirm options.
+              </p>
+            </aside>
+          </div>
         </div>
       </div>
     </section>
@@ -2371,8 +2238,9 @@
     <!-- Footer -->
     <footer role="contentinfo">
       <div class="container">
+        <div class="section-divider footer__rule" aria-hidden="true"></div>
         <div class="footer-inner">
-          <span>© 2025 Red Shift Studios. All rights reserved. / Crafted with passion for cinema / 435-459-2916</span>
+          <p class="footer-copy">© 2026 Red Shift Studios. All rights reserved.</p>
           <p class="footer-tagline">Video Production · El Paso, TX · Est. 2025</p>
         </div>
       </div>
@@ -2415,38 +2283,6 @@
 
       let revealObserver = null;
 
-      // Subtle heading parallax (section titles only)
-      function setupHeadingParallax() {
-        if (prefersReducedMotion) return;
-        const heads = document.querySelectorAll("[data-parallax-heading]");
-        if (!heads.length) return;
-
-        let ticking = false;
-        function update() {
-          ticking = false;
-          const vh = window.innerHeight;
-          const y = window.scrollY;
-          heads.forEach((el) => {
-            const rect = el.getBoundingClientRect();
-            const center = rect.top + rect.height / 2;
-            const dist = (center - vh * 0.5) / vh;
-            const offset = Math.max(-16, Math.min(16, -dist * 14 + y * 0.012));
-            el.style.transform = `translateY(${offset}px)`;
-          });
-        }
-
-        function onScroll() {
-          if (!ticking) {
-            ticking = true;
-            requestAnimationFrame(update);
-          }
-        }
-
-        window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", onScroll, { passive: true });
-        update();
-      }
-
       // Hero: simple fade-up + staggered content
       function setupHeroTitle() {
         const hero = document.querySelector(".hero");
@@ -2461,17 +2297,10 @@
         });
       }
 
-      // Scroll reveal: headings, dividers, cards (staggered)
+      // Scroll reveal: one fade-up per section (below hero)
       function setupScrollReveal() {
-        const revealEls = Array.from(document.querySelectorAll(".reveal"));
-        const dividerEls = Array.from(document.querySelectorAll('[data-reveal="divider"]'));
-
-        // Apply tasteful staggering for groups we control in HTML
-        const services = Array.from(document.querySelectorAll('[data-reveal="service"]'));
-        services.forEach((el, idx) => el.style.setProperty("--delay", `${idx * 90}ms`));
-
-        const testimonials = Array.from(document.querySelectorAll('[data-reveal="testimonial"]'));
-        testimonials.forEach((el, idx) => el.style.setProperty("--delay", `${idx * 90}ms`));
+        const chapters = Array.from(document.querySelectorAll("section .section-chapter.reveal"));
+        if (!chapters.length) return;
 
         revealObserver = new IntersectionObserver(
           (entries) => {
@@ -2481,16 +2310,10 @@
               revealObserver.unobserve(entry.target);
             }
           },
-          { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+          { threshold: 0.1, rootMargin: "0px" }
         );
 
-        for (const el of revealEls) revealObserver.observe(el);
-        for (const el of dividerEls) revealObserver.observe(el);
-      }
-
-      function observeRevealsIn(root) {
-        if (!revealObserver || !root) return;
-        root.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+        for (const el of chapters) revealObserver.observe(el);
       }
 
       // Hero depth: subtle parallax for floating icons
@@ -2566,7 +2389,7 @@
           .replaceAll("'", "&#039;");
       }
 
-      function projectItemTemplate({ title, url, thumbnail, tag, year, delayMs = 0 }) {
+      function projectItemTemplate({ title, url, thumbnail, tag, year }) {
         const safeTitle = escapeHtml(title);
         const safeUrl = escapeHtml(url);
         const safeThumb = escapeHtml(thumbnail);
@@ -2578,10 +2401,8 @@
         const yearBlock = safeYear ? `<span class="project-tile__year">${safeYear}</span>` : "";
         return `
           <a
-            class="project-tile reveal"
-            data-reveal="project"
+            class="project-tile"
             role="listitem"
-            data-delay-ms="${delayMs}"
             href="${safeUrl}"
             target="_blank"
             rel="noreferrer"
@@ -2684,13 +2505,7 @@
         }
 
         list.className = "projects-grid";
-        list.innerHTML = items
-          .map((it, idx) => projectItemTemplate({ ...it, delayMs: 60 * idx }))
-          .join("");
-        list.querySelectorAll(".project-tile[data-delay-ms]").forEach((el) => {
-          el.style.setProperty("--delay", `${el.getAttribute("data-delay-ms")}ms`);
-        });
-        observeRevealsIn(list);
+        list.innerHTML = items.map((it) => projectItemTemplate(it)).join("");
       }
 
       loadProjectsFromYouTubeRss().catch(() => {});
@@ -2731,9 +2546,10 @@
         }
 
         document.body.addEventListener("click", (ev) => {
-          const trigger = ev.target && ev.target.closest && ev.target.closest("#reel-open");
-          if (!trigger || isOpen()) return;
-          open(ev);
+          if (isOpen()) return;
+          const t = ev.target;
+          if (!t || !t.closest) return;
+          if (t.closest("#reel-open") || t.closest(".reel-poster")) open(ev);
         });
         content?.addEventListener("click", (ev) => ev.stopPropagation());
         closeBtn?.addEventListener("click", (e) => {
@@ -2752,7 +2568,6 @@
       setupHeroTitle();
       setupScrollReveal();
       setupHeroDepth();
-      setupHeadingParallax();
 
       // Optional: async submit status (still works if you remove this)
       const form = document.getElementById("bookingForm");
