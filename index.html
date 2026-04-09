@@ -1,0 +1,1447 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Red Shift Studios — cinematic video production in El Paso, TX." />
+    <title>Red Shift Studios — Video Production</title>
+
+    <!-- Local business schema (El Paso, TX) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Shift Studios",
+        "image": "https://example.com/placeholder-og-image.jpg",
+        "url": "https://example.com",
+        "telephone": "+1-915-555-0123",
+        "email": "wyabro@gmail.com",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1234 Mesa St",
+          "addressLocality": "El Paso",
+          "addressRegion": "TX",
+          "postalCode": "79901",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 31.7619,
+          "longitude": -106.485
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "El Paso"
+          }
+        ],
+        "sameAs": ["https://www.instagram.com/wyrtbrun", "https://www.youtube.com/@RedBoltProductions"],
+        "knowsAbout": ["Video Production", "Cinematography", "Editing", "Commercial Production", "Event Coverage"]
+      }
+    </script>
+
+    <style>
+      :root {
+        --bg: #1a1a1a;
+        --panel: rgba(255, 255, 255, 0.04);
+        --panel-2: rgba(255, 255, 255, 0.06);
+        --text: rgba(255, 255, 255, 0.9);
+        --muted: rgba(255, 255, 255, 0.68);
+        --muted-2: rgba(255, 255, 255, 0.55);
+        --accent: #c0392b;
+        --accent-2: rgba(192, 57, 43, 0.25);
+        --border: rgba(255, 255, 255, 0.12);
+        --shadow: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --max: 1120px;
+        --radius: 18px;
+        --nav-h: 74px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+          "Apple Color Emoji", "Segoe UI Emoji";
+        background: radial-gradient(1200px 700px at 70% 0%, rgba(192, 57, 43, 0.14), transparent 55%),
+          radial-gradient(1000px 700px at 0% 20%, rgba(255, 255, 255, 0.06), transparent 60%),
+          var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(var(--max), calc(100% - 48px));
+        margin: 0 auto;
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: linear-gradient(to bottom, rgba(26, 26, 26, 0.94), rgba(26, 26, 26, 0.7));
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .nav-inner {
+        height: var(--nav-h);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        letter-spacing: 0.2em;
+        font-weight: 650;
+        text-transform: uppercase;
+      }
+
+      .logo-badge {
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+      }
+
+      .logo-badge span {
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        margin-left: 0.18em;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .nav-links a {
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        font-size: 12px;
+        color: var(--muted);
+        padding: 10px 10px;
+        border-radius: 999px;
+        transition: color 160ms ease, background 160ms ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: transparent;
+        color: var(--text);
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        font-size: 12px;
+        font-weight: 650;
+        cursor: pointer;
+        transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+        white-space: nowrap;
+      }
+
+      .cta:hover {
+        transform: translateY(-1px);
+        border-color: rgba(255, 255, 255, 0.22);
+      }
+
+      .cta.red {
+        background: linear-gradient(180deg, rgba(192, 57, 43, 0.95), rgba(192, 57, 43, 0.82));
+        border-color: rgba(192, 57, 43, 0.75);
+        box-shadow: 0 16px 45px rgba(192, 57, 43, 0.18);
+      }
+
+      .cta.red:hover {
+        border-color: rgba(192, 57, 43, 0.95);
+        background: linear-gradient(180deg, rgba(192, 57, 43, 1), rgba(192, 57, 43, 0.86));
+      }
+
+      .cta-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 22px;
+      }
+
+      .hero {
+        position: relative;
+        padding: 74px 0 52px;
+        min-height: calc(100vh - var(--nav-h));
+        display: grid;
+        place-items: center;
+        overflow: clip;
+      }
+
+      .hero-grid {
+        position: relative;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 28px;
+        align-items: center;
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-size: clamp(44px, 6vw, 78px);
+        letter-spacing: -0.02em;
+        line-height: 1.02;
+      }
+
+      .subtitle {
+        margin-top: 14px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        font-size: 12px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .dot {
+        color: rgba(255, 255, 255, 0.28);
+      }
+
+      .bio {
+        max-width: 58ch;
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      .hero-card {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius);
+        padding: 22px;
+        box-shadow: var(--shadow);
+      }
+
+      .hero-card h3 {
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.24em;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .hero-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 14px 0 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .hero-card li {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-bottom: 10px;
+      }
+
+      .hero-card li:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .hero-card strong {
+        font-weight: 650;
+      }
+
+      .hero-card span {
+        color: var(--muted-2);
+        font-size: 13px;
+      }
+
+      .floating-icons {
+        pointer-events: none;
+        position: absolute;
+        inset: 0;
+        opacity: 0.55;
+      }
+
+      .icon {
+        position: absolute;
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
+        display: grid;
+        place-items: center;
+        filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.65));
+        transform: translate3d(0, 0, 0);
+        animation: drift var(--dur, 8s) ease-in-out infinite;
+      }
+
+      .icon svg {
+        width: 26px;
+        height: 26px;
+        opacity: 0.92;
+      }
+
+      .icon path,
+      .icon circle,
+      .icon rect,
+      .icon line,
+      .icon polyline {
+        stroke: rgba(255, 255, 255, 0.82);
+      }
+
+      .icon .fill {
+        fill: rgba(255, 255, 255, 0.82);
+        stroke: none;
+      }
+
+      .icon .accent {
+        stroke: rgba(192, 57, 43, 0.95);
+      }
+
+      @keyframes drift {
+        0% {
+          transform: translate3d(0, 0, 0) rotate(0deg);
+        }
+        50% {
+          transform: translate3d(var(--dx, 10px), var(--dy, -14px), 0) rotate(var(--rot, 6deg));
+        }
+        100% {
+          transform: translate3d(0, 0, 0) rotate(0deg);
+        }
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: rgba(255, 255, 255, 0.55);
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        font-size: 11px;
+      }
+
+      .scroll-indicator .line {
+        width: 44px;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.24);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .scroll-indicator .line::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(192, 57, 43, 0.9), transparent);
+        transform: translateX(-100%);
+        animation: scan 1.6s ease-in-out infinite;
+      }
+
+      @keyframes scan {
+        0% {
+          transform: translateX(-120%);
+        }
+        100% {
+          transform: translateX(120%);
+        }
+      }
+
+      section {
+        padding: 84px 0;
+      }
+
+      .section-head {
+        display: grid;
+        gap: 12px;
+        margin-bottom: 26px;
+      }
+
+      .label {
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .heading-row {
+        display: grid;
+        gap: 14px;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(26px, 3.2vw, 42px);
+        letter-spacing: -0.01em;
+      }
+
+      .divider {
+        width: 92px;
+        height: 2px;
+        background: var(--accent);
+        box-shadow: 0 0 0 6px rgba(192, 57, 43, 0.08);
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .reel-grid {
+        display: grid;
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: 22px;
+        align-items: start;
+      }
+
+      .embed {
+        position: relative;
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: var(--shadow);
+        aspect-ratio: 16 / 9;
+      }
+
+      .embed iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .embed-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        z-index: 3;
+        padding: 8px 10px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        color: rgba(255, 255, 255, 0.86);
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        font-size: 10px;
+        backdrop-filter: blur(8px);
+      }
+
+      .card {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.03));
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius);
+        padding: 18px;
+        box-shadow: 0 16px 50px rgba(0, 0, 0, 0.55);
+      }
+
+      .card h3 {
+        margin: 0 0 8px;
+        font-size: 15px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .price {
+        margin-top: 12px;
+        color: rgba(255, 255, 255, 0.78);
+        display: inline-flex;
+        align-items: baseline;
+        gap: 10px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .price strong {
+        color: var(--accent);
+        letter-spacing: 0.08em;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      .projects {
+        display: grid;
+        gap: 14px;
+      }
+
+      .project {
+        display: grid;
+        grid-template-columns: 180px 1fr auto;
+        gap: 16px;
+        align-items: center;
+        padding: 14px;
+      }
+
+      .thumb {
+        border-radius: 14px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        height: 110px;
+        display: grid;
+        place-items: center;
+        color: rgba(255, 255, 255, 0.55);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-size: 11px;
+        position: relative;
+      }
+
+      .thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        position: relative;
+        z-index: 1;
+      }
+
+      .thumb::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(400px 180px at 60% 20%, rgba(192, 57, 43, 0.2), transparent 50%);
+        opacity: 0.9;
+      }
+
+      .project-main {
+        display: grid;
+        gap: 6px;
+        min-width: 0;
+      }
+
+      .project-title {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .project-title h3 {
+        margin: 0;
+        font-size: 16px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+        color: rgba(255, 255, 255, 0.72);
+        letter-spacing: 0.18em;
+        font-size: 10px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .year {
+        color: var(--accent);
+        font-weight: 700;
+        letter-spacing: 0.12em;
+      }
+
+      .project-desc {
+        color: var(--muted);
+        font-size: 14px;
+        max-width: 72ch;
+      }
+
+      .ext {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+      }
+
+      .ext:hover {
+        transform: translateY(-1px);
+        border-color: rgba(192, 57, 43, 0.65);
+        background: rgba(192, 57, 43, 0.12);
+      }
+
+      .ext svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      blockquote {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 14px;
+      }
+
+      .quote-mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--accent);
+        font-weight: 800;
+      }
+
+      .quote-footer {
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: baseline;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-size: 11px;
+      }
+
+      .quote-footer strong {
+        color: rgba(255, 255, 255, 0.86);
+        letter-spacing: 0.08em;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 0.55fr;
+        gap: 18px;
+        align-items: start;
+      }
+
+      form {
+        display: grid;
+        gap: 12px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      label {
+        display: grid;
+        gap: 8px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        font-size: 11px;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(0, 0, 0, 0.25);
+        color: rgba(255, 255, 255, 0.92);
+        outline: none;
+        transition: border-color 160ms ease, box-shadow 160ms ease;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 140px;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: rgba(192, 57, 43, 0.85);
+        box-shadow: 0 0 0 5px rgba(192, 57, 43, 0.14);
+      }
+
+      .form-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 6px;
+      }
+
+      .form-note {
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 13px;
+      }
+
+      .contact-side {
+        display: grid;
+        gap: 12px;
+      }
+
+      .contact-side .card {
+        padding: 16px;
+      }
+
+      .links {
+        display: grid;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.035);
+        color: rgba(255, 255, 255, 0.86);
+        transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+      }
+
+      .link:hover {
+        transform: translateY(-1px);
+        border-color: rgba(192, 57, 43, 0.55);
+        background: rgba(192, 57, 43, 0.08);
+      }
+
+      .link small {
+        color: rgba(255, 255, 255, 0.55);
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 10px;
+      }
+
+      footer {
+        padding: 34px 0 44px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .footer-inner span {
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 11px;
+      }
+
+      /* Responsive */
+      @media (max-width: 980px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .reel-grid {
+          grid-template-columns: 1fr;
+        }
+        .services-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .testimonials-grid {
+          grid-template-columns: 1fr;
+        }
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+        .project {
+          grid-template-columns: 140px 1fr;
+        }
+        .ext {
+          justify-self: start;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav-links {
+          display: none;
+        }
+        .hero {
+          padding: 56px 0 42px;
+        }
+        section {
+          padding: 64px 0;
+        }
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .icon,
+        .scroll-indicator .line::after {
+          animation: none !important;
+        }
+        .cta {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sticky Nav -->
+    <header class="nav" role="banner">
+      <div class="container">
+        <div class="nav-inner">
+          <a class="logo" href="#top" aria-label="Home">
+            <div class="logo-badge" aria-hidden="true"><span>RSS</span></div>
+            <span>Red Shift Studios</span>
+          </a>
+          <nav class="nav-links" aria-label="Primary navigation">
+            <a href="#reel">REEL</a>
+            <a href="#projects">PROJECTS</a>
+            <a href="#services">SERVICES</a>
+            <a href="#contact">CONTACT</a>
+          </nav>
+          <a class="cta red" href="#contact" data-scroll-to="contact">Book a Project</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <main id="top" class="hero" role="main">
+      <div class="floating-icons" aria-hidden="true">
+        <!-- Film reel -->
+        <div
+          class="icon"
+          style="top: 14%; left: 8%; --dx: 12px; --dy: -18px; --rot: -7deg; --dur: 9.5s"
+        >
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle class="accent" cx="12" cy="12" r="8" stroke-width="1.7" />
+            <circle cx="12" cy="12" r="2.1" stroke-width="1.7" />
+            <circle cx="12" cy="6.7" r="1.1" stroke-width="1.7" />
+            <circle cx="16.8" cy="12" r="1.1" stroke-width="1.7" />
+            <circle cx="12" cy="17.3" r="1.1" stroke-width="1.7" />
+            <circle cx="7.2" cy="12" r="1.1" stroke-width="1.7" />
+          </svg>
+        </div>
+
+        <!-- Camera -->
+        <div
+          class="icon"
+          style="top: 22%; right: 11%; --dx: -10px; --dy: 12px; --rot: 6deg; --dur: 8.6s"
+        >
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="4" y="7" width="16" height="12" rx="3" stroke-width="1.7" />
+            <circle class="accent" cx="12" cy="13" r="3.3" stroke-width="1.7" />
+            <path d="M8 7l1.7-2H14l2 2" stroke-width="1.7" />
+          </svg>
+        </div>
+
+        <!-- Clapperboard -->
+        <div
+          class="icon"
+          style="bottom: 24%; left: 12%; --dx: 14px; --dy: 14px; --rot: 10deg; --dur: 10.2s"
+        >
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="5" y="9" width="14" height="10" rx="2.5" stroke-width="1.7" />
+            <path d="M6.5 9l2.8-4.2M11 9l2.8-4.2M15.5 9l2.1-3.2" stroke-width="1.7" />
+            <path d="M6.3 14h11.4" stroke-width="1.7" />
+          </svg>
+        </div>
+
+        <!-- Microphone -->
+        <div
+          class="icon"
+          style="top: 58%; right: 8%; --dx: -14px; --dy: -10px; --rot: -9deg; --dur: 9.2s"
+        >
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="9" y="4" width="6" height="10" rx="3" stroke-width="1.7" />
+            <path d="M7 11v1a5 5 0 0010 0v-1" stroke-width="1.7" />
+            <path d="M12 17v3" stroke-width="1.7" />
+            <path d="M9.2 20h5.6" stroke-width="1.7" />
+          </svg>
+        </div>
+
+        <!-- Headphones -->
+        <div
+          class="icon"
+          style="bottom: 18%; right: 18%; --dx: -12px; --dy: 16px; --rot: 7deg; --dur: 10.8s"
+        >
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M5 13a7 7 0 0114 0" stroke-width="1.7" />
+            <rect x="4" y="13" width="4" height="7" rx="2" stroke-width="1.7" />
+            <rect x="16" y="13" width="4" height="7" rx="2" stroke-width="1.7" />
+          </svg>
+        </div>
+
+        <!-- Video camera -->
+        <div
+          class="icon"
+          style="top: 38%; left: 34%; --dx: 10px; --dy: 10px; --rot: -5deg; --dur: 8.9s"
+        >
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="4" y="9" width="10" height="8" rx="2.2" stroke-width="1.7" />
+            <path d="M14 11l6-3v8l-6-3v-2z" stroke-width="1.7" />
+            <circle class="fill" cx="8" cy="13" r="1.1" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <h1>RED SHIFT STUDIOS</h1>
+            <div class="subtitle" aria-label="Roles">
+              <span>DIRECTOR</span><span class="dot">·</span><span>DP</span><span class="dot">·</span
+              ><span>EDITOR</span><span class="dot">·</span><span>PA</span>
+            </div>
+            <p class="bio">
+              We tell stories that move people — from commercial work to short films. No Hollywood budgets required,
+              just honest work and a camera.
+            </p>
+            <div class="cta-row">
+              <a class="cta" href="#reel">Watch Reel</a>
+              <a class="cta red" href="#contact" data-scroll-to="contact">Book a Project</a>
+            </div>
+          </div>
+
+          <aside class="hero-card" aria-label="Quick stats">
+            <h3>Production Snapshot</h3>
+            <ul>
+              <li><strong>El Paso, TX</strong> <span>On-site & remote</span></li>
+              <li><strong>Turnaround</strong> <span>2–10 days typical</span></li>
+              <li><strong>Deliverables</strong> <span>Social • Web • Broadcast</span></li>
+              <li><strong>Style</strong> <span>Moody • Clean • Cinematic</span></li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+
+      <a class="scroll-indicator" href="#reel" aria-label="Scroll to reel">
+        <span>Scroll</span>
+        <span class="line" aria-hidden="true"></span>
+        <span>Down</span>
+      </a>
+    </main>
+
+    <!-- Reel -->
+    <section id="reel" aria-labelledby="reel-title">
+      <div class="container">
+        <div class="section-head">
+          <div class="label">FEATURED WORK</div>
+          <div class="heading-row">
+            <h2 id="reel-title">FILM REEL</h2>
+            <div class="divider" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="reel-grid">
+          <div class="embed" aria-label="Embedded reel video">
+            <div class="embed-badge">DEMO REEL 2024</div>
+            <iframe
+              src="https://www.youtube.com/embed/kEbHvnY3yj8?start=1"
+              title="DEMO REEL 2024"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="card">
+            <h3>Reel Notes</h3>
+            <p class="muted" style="margin: 0">
+              A tight cut of recent work across commercial, event, and music video projects. Built to showcase
+              pacing, lighting, camera movement, and clean post.
+            </p>
+            <div class="price" aria-label="Starting range">
+              <span>Typical projects</span> <strong>$1.5k–$8k</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-head">
+          <div class="label">WHAT I OFFER</div>
+          <div class="heading-row">
+            <h2 id="services-title">SERVICES</h2>
+          </div>
+        </div>
+
+        <div class="services-grid">
+          <div class="card">
+            <h3>Social Content Package</h3>
+            <p class="muted" style="margin: 0">
+              Short-form videos optimized for Instagram, TikTok, and Facebook.
+            </p>
+            <div class="price"><span>Starting at</span> <strong>$300</strong></div>
+          </div>
+
+          <div class="card">
+            <h3>Business Commercial</h3>
+            <p class="muted" style="margin: 0">
+              Full promotional video including pre-production, filming, and professional edit.
+            </p>
+            <div class="price"><span>Starting at</span> <strong>$800</strong></div>
+          </div>
+
+          <div class="card">
+            <h3>Full Production</h3>
+            <p class="muted" style="margin: 0">
+              Multi-day shoot, professional gear, color grade, sound mix, delivery in all formats.
+            </p>
+            <div class="price"><span>Starting at</span> <strong>$2,000</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-head">
+          <div class="label">PORTFOLIO</div>
+          <div class="heading-row">
+            <h2 id="projects-title">PAST PROJECTS</h2>
+            <div class="divider" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="projects" id="projectsList" role="list">
+          <!-- Populated from @RedBoltProductions via RSS in JS (see script). -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" aria-labelledby="testimonials-title">
+      <div class="container">
+        <div class="section-head">
+          <div class="label">KIND WORDS</div>
+          <div class="heading-row">
+            <h2 id="testimonials-title">Testimonials</h2>
+          </div>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="card">
+            <div class="quote-mark" aria-hidden="true">“</div>
+            <blockquote>
+              “We needed content that looked expensive without being expensive. The pacing, color, and sound were
+              nailed—and the turnaround was quick.”
+            </blockquote>
+            <div class="quote-footer">
+              <strong>Maya</strong>
+              <span>Desert Bloom Skincare</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="quote-mark" aria-hidden="true">“</div>
+            <blockquote>
+              “The event recap actually felt like a short film. Clean audio, great shots, and edits that matched the
+              vibe of the night.”
+            </blockquote>
+            <div class="quote-footer">
+              <strong>Chris</strong>
+              <span>Borderland Fitness Expo</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="quote-mark" aria-hidden="true">“</div>
+            <blockquote>
+              “They listened, brought ideas, and kept the set moving. The final cut was exactly what we pitched to our
+              clients—and they loved it.”
+            </blockquote>
+            <div class="quote-footer">
+              <strong>Elena</strong>
+              <span>Mesa Street Realty</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / Booking -->
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-head">
+          <div class="heading-row">
+            <h2 id="contact-title">Let’s Work Together</h2>
+            <div class="divider" aria-hidden="true"></div>
+          </div>
+          <p class="muted" style="margin: 0">
+            Available for commercial work, events, social content, and film projects.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="card">
+            <!-- Formspree endpoint placeholder -->
+            <form id="bookingForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+              <div class="form-grid">
+                <label>
+                  Name
+                  <input name="name" autocomplete="name" required />
+                </label>
+                <label>
+                  Email
+                  <input name="email" type="email" autocomplete="email" required />
+                </label>
+                <label>
+                  Company
+                  <input name="company" autocomplete="organization" />
+                </label>
+                <label>
+                  Project Type
+                  <select name="projectType" required>
+                    <option value="" selected disabled>Select one</option>
+                    <option>Commercial</option>
+                    <option>Event</option>
+                    <option>Music Video</option>
+                    <option>Short Film</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+                <label>
+                  Budget Range
+                  <select name="budget" required>
+                    <option value="" selected disabled>Select one</option>
+                    <option>$500–$1,000</option>
+                    <option>$1,000–$2,500</option>
+                    <option>$2,500–$5,000</option>
+                    <option>$5,000–$10,000</option>
+                    <option>$10,000+</option>
+                  </select>
+                </label>
+                <label>
+                  Timeline
+                  <input name="timeline" placeholder="e.g., 2 weeks / By May 20" />
+                </label>
+              </div>
+
+              <label>
+                Message
+                <textarea name="message" required placeholder="What are you making, for who, and what’s success?"></textarea>
+              </label>
+
+              <div class="form-actions">
+                <button class="cta red" type="submit">Send Inquiry</button>
+                <span class="form-note" id="formStatus" role="status" aria-live="polite"></span>
+              </div>
+            </form>
+          </div>
+
+          <aside class="contact-side">
+            <div class="card">
+              <div class="label">Direct</div>
+              <div class="links">
+                <a class="link" href="mailto:wyabro@gmail.com">
+                  <div>
+                    <div style="text-transform: uppercase; letter-spacing: 0.12em; font-weight: 650">
+                      wyabro@gmail.com
+                    </div>
+                    <small>Email</small>
+                  </div>
+                  <span aria-hidden="true">↗</span>
+                </a>
+                <a class="link" href="https://instagram.com/wyrtbrun" target="_blank" rel="noreferrer">
+                  <div>
+                    <div style="text-transform: uppercase; letter-spacing: 0.12em; font-weight: 650">@wyrtbrun</div>
+                    <small>Social</small>
+                  </div>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="label">Availability</div>
+              <p class="muted" style="margin: 10px 0 0">
+                Currently booking: <span style="color: rgba(255, 255, 255, 0.9)">next 2–4 weeks</span>.
+                If you’re on a tight deadline, include the date and I’ll confirm options.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+      <div class="container">
+        <div class="footer-inner">
+          <span>© 2025 Red Shift Studios. All rights reserved. / Crafted with passion for cinema</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const PROJECTS_CHANNEL_HANDLE_URL = "https://www.youtube.com/@RedBoltProductions";
+      // If you know the channel_id (starts with UC...), set it here for reliable RSS loading:
+      // Example: const YOUTUBE_CHANNEL_ID = "UCxxxxxxxxxxxxxxxxxxxxxx";
+      const YOUTUBE_CHANNEL_ID = "";
+
+      // Ensure "Book a Project" always targets the contact form
+      for (const el of document.querySelectorAll('[data-scroll-to="contact"]')) {
+        el.addEventListener("click", (e) => {
+          // let normal anchor behavior happen, but also focus first field for UX
+          const contact = document.getElementById("contact");
+          if (!contact) return;
+          setTimeout(() => {
+            const first = document.querySelector('#bookingForm input[name="name"]');
+            if (first) first.focus({ preventScroll: true });
+          }, 250);
+        });
+      }
+
+      function categorizeTitle(title) {
+        const t = String(title || "").toLowerCase();
+        if (t.includes("commercial") || t.includes("promo") || t.includes("ad") || t.includes("brand")) return "Commercial";
+        if (t.includes("music") || t.includes("mv") || t.includes("music video")) return "Music Video";
+        if (t.includes("short film") || t.includes("shortfilm") || t.includes("short-film") || t.includes("film"))
+          return "Short Film";
+        if (t.includes("event") || t.includes("conference") || t.includes("wedding") || t.includes("recap"))
+          return "Event";
+        return "Project";
+      }
+
+      function yearFromPublished(published) {
+        const d = new Date(published);
+        return Number.isFinite(d.getTime()) ? String(d.getFullYear()) : "";
+      }
+
+      function escapeHtml(s) {
+        return String(s)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function projectItemTemplate({ title, url, thumbnail, tag, year }) {
+        const safeTitle = escapeHtml(title);
+        const safeUrl = escapeHtml(url);
+        const safeThumb = escapeHtml(thumbnail);
+        const safeTag = escapeHtml(tag);
+        const safeYear = escapeHtml(year);
+        return `
+          <article class="card project" role="listitem">
+            <div class="thumb" aria-label="Project thumbnail">
+              ${safeThumb ? `<img src="${safeThumb}" alt="" loading="lazy" />` : "Thumbnail"}
+            </div>
+            <div class="project-main">
+              <div class="project-title">
+                <h3>${safeTitle}</h3>
+                <span class="tag">${safeTag}</span>
+                ${safeYear ? `<span class="year">${safeYear}</span>` : ""}
+              </div>
+            </div>
+            <a class="ext" href="${safeUrl}" target="_blank" rel="noreferrer" aria-label="Open project link">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M14 5h5v5" stroke-width="1.8" />
+                <path d="M10 14L19 5" stroke-width="1.8" />
+                <path d="M19 14v5H5V5h5" stroke-width="1.8" />
+              </svg>
+            </a>
+          </article>
+        `;
+      }
+
+      async function loadProjectsFromYouTubeRss() {
+        const list = document.getElementById("projectsList");
+        if (!list) return;
+
+        function videoIdFromUrl(url) {
+          try {
+            const u = new URL(url);
+            const v = u.searchParams.get("v");
+            if (v) return v;
+            const parts = u.pathname.split("/").filter(Boolean);
+            const idx = parts.indexOf("shorts");
+            if (idx >= 0 && parts[idx + 1]) return parts[idx + 1];
+            return "";
+          } catch {
+            return "";
+          }
+        }
+
+        async function tryFetchXml(url) {
+          const res = await fetch(url, { cache: "no-store" });
+          if (!res.ok) return "";
+          return await res.text();
+        }
+
+        // 1) Prefer official YouTube RSS if channel_id is provided.
+        let xml = "";
+        if (YOUTUBE_CHANNEL_ID) {
+          const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${encodeURIComponent(YOUTUBE_CHANNEL_ID)}`;
+          xml = await tryFetchXml(feedUrl);
+        }
+
+        // 2) Fallback: RSSHub (often works from a handle/user). This is best-effort.
+        if (!xml) {
+          const rssHubUrl = "https://rsshub.app/youtube/user/RedBoltProductions";
+          xml = await tryFetchXml(rssHubUrl);
+        }
+
+        if (!xml) {
+          list.innerHTML = `
+            <div class="card">
+              <div class="label">PROJECTS</div>
+              <p class="muted" style="margin: 10px 0 0">
+                Couldn’t auto-load projects. You can set <strong>YOUTUBE_CHANNEL_ID</strong> in the script for the
+                official YouTube RSS feed, or add projects manually. Channel:
+                <a href="${PROJECTS_CHANNEL_HANDLE_URL}" target="_blank" rel="noreferrer" style="color: var(--text); text-decoration: underline;">@RedBoltProductions</a>.
+              </p>
+            </div>
+          `;
+          return;
+        }
+
+        const doc = new DOMParser().parseFromString(xml, "text/xml");
+
+        // YouTube official: <entry>. RSSHub/others: <item>.
+        const entries = Array.from(doc.getElementsByTagName("entry"));
+        const rssItems = Array.from(doc.getElementsByTagName("item"));
+
+        const items = (entries.length ? entries : rssItems).slice(0, 10).map((node) => {
+          const isEntry = node.nodeName.toLowerCase() === "entry";
+
+          const title = (node.getElementsByTagName("title")[0]?.textContent || "Untitled").trim();
+          const linkEl = node.getElementsByTagName("link")[0];
+          const url =
+            (isEntry ? linkEl?.getAttribute("href") : linkEl?.textContent) ||
+            node.getElementsByTagName("guid")[0]?.textContent ||
+            "https://www.youtube.com/";
+
+          const published =
+            (isEntry
+              ? node.getElementsByTagName("published")[0]?.textContent
+              : node.getElementsByTagName("pubDate")[0]?.textContent) || "";
+
+          const mediaThumb =
+            node.getElementsByTagName("media:thumbnail")[0]?.getAttribute("url") ||
+            node.getElementsByTagName("thumbnail")[0]?.textContent ||
+            "";
+
+          const year = yearFromPublished(published);
+          const tag = categorizeTitle(title);
+
+          let thumbnail = mediaThumb;
+          if (!thumbnail) {
+            const id = videoIdFromUrl(url);
+            if (id) thumbnail = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+          }
+
+          return { title, url, thumbnail, tag, year };
+        });
+
+        list.innerHTML = items.map(projectItemTemplate).join("");
+      }
+
+      loadProjectsFromYouTubeRss().catch(() => {
+        const list = document.getElementById("projectsList");
+        if (!list) return;
+        list.innerHTML = `
+          <div class="card">
+            <div class="label">PROJECTS</div>
+            <p class="muted" style="margin: 10px 0 0">
+              Couldn’t load YouTube projects automatically in this browser session. You can still link projects
+              manually, or set the channel ID and try again.
+            </p>
+          </div>
+        `;
+      });
+
+      // Optional: async submit status (still works if you remove this)
+      const form = document.getElementById("bookingForm");
+      const statusEl = document.getElementById("formStatus");
+      form.addEventListener("submit", async (e) => {
+        // If endpoint is still placeholder, don't actually submit.
+        if (form.action.includes("YOUR_FORM_ID")) {
+          e.preventDefault();
+          statusEl.textContent = "Replace the Formspree endpoint to enable submissions.";
+          return;
+        }
+
+        e.preventDefault();
+        statusEl.textContent = "Sending…";
+        const data = new FormData(form);
+        try {
+          const res = await fetch(form.action, {
+            method: "POST",
+            body: data,
+            headers: { Accept: "application/json" }
+          });
+          if (res.ok) {
+            statusEl.textContent = "Sent. I’ll get back to you shortly.";
+            form.reset();
+          } else {
+            statusEl.textContent = "Something went wrong—please email me directly.";
+          }
+        } catch {
+          statusEl.textContent = "Network error—please email me directly.";
+        }
+      });
+    </script>
+  </body>
+</html>
