@@ -14,7 +14,7 @@
         "name": "Red Shift Studios",
         "image": "https://example.com/placeholder-og-image.jpg",
         "url": "https://example.com",
-        "telephone": "+1-915-555-0123",
+        "telephone": "+1-435-459-2916",
         "email": "wyabro@gmail.com",
         "priceRange": "$$",
         "address": {
@@ -70,11 +70,22 @@
         margin: 0;
         font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
           "Apple Color Emoji", "Segoe UI Emoji";
-        background: radial-gradient(1200px 700px at 70% 0%, rgba(192, 57, 43, 0.14), transparent 55%),
-          radial-gradient(1000px 700px at 0% 20%, rgba(255, 255, 255, 0.06), transparent 60%),
-          var(--bg);
+        font-weight: 400;
+        background: radial-gradient(1200px 700px at 70% 0%, rgba(255, 255, 255, 0.045), transparent 55%),
+          radial-gradient(1000px 700px at 0% 20%, rgba(255, 255, 255, 0.055), transparent 60%), var(--bg);
         color: var(--text);
         line-height: 1.55;
+      }
+
+      /* Subtle neutral vignette around page edges */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 999;
+        background: radial-gradient(1200px 900px at 50% 30%, transparent 58%, rgba(0, 0, 0, 0.55) 100%);
+        opacity: 0.35;
       }
 
       a {
@@ -113,21 +124,10 @@
         text-transform: uppercase;
       }
 
-      .logo-badge {
-        width: 42px;
-        height: 42px;
-        border-radius: 999px;
-        display: grid;
-        place-items: center;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
-      }
-
-      .logo-badge span {
-        font-weight: 800;
-        letter-spacing: 0.18em;
-        margin-left: 0.18em;
+      .logo-text {
+        font-weight: 650;
+        letter-spacing: 0.22em;
+        color: var(--text);
       }
 
       .nav-links {
@@ -144,11 +144,44 @@
         padding: 10px 10px;
         border-radius: 999px;
         transition: color 160ms ease, background 160ms ease;
+        position: relative;
       }
 
       .nav-links a:hover {
         color: var(--text);
         background: rgba(255, 255, 255, 0.06);
+      }
+
+      /* Nav underline slide-in */
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        bottom: 6px;
+        height: 2px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transform-origin: left;
+        opacity: 0.85;
+        transition: transform 220ms ease;
+      }
+      .nav-links a:hover::after {
+        transform: scaleX(1);
+      }
+
+      .nav-right {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .nav-phone {
+        color: rgba(255, 255, 255, 0.62);
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        white-space: nowrap;
       }
 
       .cta {
@@ -183,6 +216,24 @@
       .cta.red:hover {
         border-color: rgba(192, 57, 43, 0.95);
         background: linear-gradient(180deg, rgba(192, 57, 43, 1), rgba(192, 57, 43, 0.86));
+        box-shadow: 0 20px 60px rgba(192, 57, 43, 0.28), 0 0 0 6px rgba(192, 57, 43, 0.12);
+      }
+
+      /* Subtle pulse for the nav CTA */
+      .nav .cta.red {
+        animation: ctaPulse 3.8s ease-in-out infinite;
+      }
+      .nav .cta.red:hover {
+        animation: none;
+      }
+      @keyframes ctaPulse {
+        0%,
+        100% {
+          box-shadow: 0 16px 45px rgba(192, 57, 43, 0.16);
+        }
+        50% {
+          box-shadow: 0 18px 58px rgba(192, 57, 43, 0.26);
+        }
       }
 
       .cta-row {
@@ -190,6 +241,7 @@
         gap: 12px;
         flex-wrap: wrap;
         margin-top: 22px;
+        justify-content: center;
       }
 
       .hero {
@@ -201,19 +253,95 @@
         overflow: clip;
       }
 
+      /* Subtle static hero glow behind text (neutral) */
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: -30%;
+        background: radial-gradient(600px 300px at 50% 40%, rgba(255, 255, 255, 0.08), transparent 65%);
+        filter: blur(2px);
+        opacity: 0.16;
+        transform: translateZ(0);
+        pointer-events: none;
+      }
+
+      /* Faint scanlines over hero (very subtle) */
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 3;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.022) 0px,
+          rgba(255, 255, 255, 0.022) 1px,
+          rgba(0, 0, 0, 0) 3px,
+          rgba(0, 0, 0, 0) 7px
+        );
+        opacity: 0.1;
+        mix-blend-mode: overlay;
+      }
+
+      .hero-grid {
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Ember particles canvas */
+      #embers {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        opacity: 0.65;
+      }
+
+      /* Hero load-in */
+      .hero .hero-title,
+      .hero .subtitle,
+      .hero .bio,
+      .hero .cta-row {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 600ms ease, transform 600ms ease;
+      }
+      .hero.is-loaded .hero-title,
+      .hero.is-loaded .subtitle,
+      .hero.is-loaded .bio,
+      .hero.is-loaded .cta-row {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .hero.is-loaded .subtitle {
+        transition-delay: 140ms;
+      }
+      .hero.is-loaded .bio {
+        transition-delay: 220ms;
+      }
+      .hero.is-loaded .cta-row {
+        transition-delay: 300ms;
+      }
+
+      /* Hero heading (dialed back) */
+      .hero-title {
+        display: inline-block;
+        position: relative;
+      }
+
       .hero-grid {
         position: relative;
         width: 100%;
         display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 28px;
-        align-items: center;
+        place-items: center;
+        text-align: center;
       }
 
       .hero h1 {
         margin: 0;
         font-size: clamp(44px, 6vw, 78px);
-        letter-spacing: -0.02em;
+        letter-spacing: 0.06em;
         line-height: 1.02;
       }
 
@@ -226,6 +354,7 @@
         display: flex;
         gap: 10px;
         flex-wrap: wrap;
+        justify-content: center;
       }
 
       .dot {
@@ -235,6 +364,8 @@
       .bio {
         max-width: 58ch;
         margin-top: 18px;
+        margin-left: auto;
+        margin-right: auto;
         color: var(--muted);
         font-size: 15px;
       }
@@ -291,26 +422,136 @@
         position: absolute;
         inset: 0;
         opacity: 0.55;
+        z-index: 1;
+      }
+
+      .icon-pos-1 {
+        top: 16%;
+        left: 16%;
+      }
+      .icon-pos-2 {
+        top: 16%;
+        right: 16%;
+      }
+      .icon-pos-3 {
+        top: 42%;
+        left: 10%;
+      }
+      .icon-pos-4 {
+        top: 42%;
+        right: 10%;
+      }
+      .icon-pos-5 {
+        bottom: 20%;
+        left: 18%;
+      }
+      .icon-pos-6 {
+        bottom: 20%;
+        right: 18%;
       }
 
       .icon {
         position: absolute;
-        width: 56px;
-        height: 56px;
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: rgba(255, 255, 255, 0.04);
         display: grid;
         place-items: center;
-        filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.65));
         transform: translate3d(0, 0, 0);
-        animation: drift var(--dur, 8s) ease-in-out infinite;
+        animation: none;
+        will-change: transform, opacity;
       }
 
       .icon svg {
-        width: 26px;
-        height: 26px;
-        opacity: 0.92;
+        width: 34px;
+        height: 34px;
+        opacity: 0.5;
+        filter: drop-shadow(0 12px 26px rgba(0, 0, 0, 0.8));
+      }
+
+      /* Per-icon glow */
+      .icon::before {
+        content: "";
+        position: absolute;
+        width: 84px;
+        height: 84px;
+        border-radius: 999px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 62%);
+        filter: blur(2px);
+        opacity: 0.6;
+        transform: translateZ(0);
+      }
+
+      /* Gentle ambient icon drift (calm) */
+      .icon-1 {
+        --fx: 10px;
+        --fy: -12px;
+        --floatDur: 16s;
+        --floatDelay: -2s;
+      }
+      .icon-2 {
+        --fx: -12px;
+        --fy: -10px;
+        --floatDur: 18s;
+        --floatDelay: -6s;
+      }
+      .icon-3 {
+        --fx: 12px;
+        --fy: 10px;
+        --floatDur: 20s;
+        --floatDelay: -10s;
+      }
+      .icon-4 {
+        --fx: -10px;
+        --fy: 12px;
+        --floatDur: 17s;
+        --floatDelay: -4s;
+      }
+      .icon-5 {
+        --fx: 9px;
+        --fy: 11px;
+        --floatDur: 22s;
+        --floatDelay: -8s;
+      }
+      .icon-6 {
+        --fx: -9px;
+        --fy: 10px;
+        --floatDur: 19s;
+        --floatDelay: -12s;
+      }
+
+      .icon::before {
+        animation: iconGlowPulse 8.5s ease-in-out infinite;
+      }
+
+      @keyframes iconGlowPulse {
+        0%,
+        100% {
+          opacity: 0.35;
+          transform: scale(0.94);
+        }
+        50% {
+          opacity: 0.55;
+          transform: scale(1.06);
+        }
+      }
+
+      /* Scroll reveal system */
+      .reveal {
+        opacity: 0;
+        transform: translateY(14px);
+        transition: opacity 650ms ease, transform 650ms ease;
+        transition-delay: var(--delay, 0ms);
+      }
+      .reveal.in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .divider {
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 650ms ease;
+      }
+      .divider.in-view {
+        transform: scaleX(1);
       }
 
       .icon path,
@@ -327,20 +568,10 @@
       }
 
       .icon .accent {
-        stroke: rgba(192, 57, 43, 0.95);
+        stroke: rgba(255, 255, 255, 0.82);
       }
 
-      @keyframes drift {
-        0% {
-          transform: translate3d(0, 0, 0) rotate(0deg);
-        }
-        50% {
-          transform: translate3d(var(--dx, 10px), var(--dy, -14px), 0) rotate(var(--rot, 6deg));
-        }
-        100% {
-          transform: translate3d(0, 0, 0) rotate(0deg);
-        }
-      }
+      /* (Removed) old floating icon drift keyframes */
 
       .scroll-indicator {
         position: absolute;
@@ -368,7 +599,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(90deg, transparent, rgba(192, 57, 43, 0.9), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
         transform: translateX(-100%);
         animation: scan 1.6s ease-in-out infinite;
       }
@@ -386,10 +617,112 @@
         padding: 84px 0;
       }
 
+      .logos-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 12px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .logo-box {
+        height: 66px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.02);
+        display: grid;
+        place-items: center;
+        color: rgba(255, 255, 255, 0.62);
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        font-size: 11px;
+        opacity: 0.7;
+      }
+
+      .logo-box span {
+        opacity: 0.95;
+      }
+
+      .turnaround-banner {
+        max-width: 1000px;
+        margin: 0 auto 14px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.035);
+        color: var(--muted);
+        padding: 14px 18px;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        justify-content: center;
+        text-transform: none;
+        letter-spacing: 0.02em;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        box-shadow: 0 16px 50px rgba(0, 0, 0, 0.55);
+      }
+
+      .turnaround-banner__text {
+        max-width: 52ch;
+        text-align: center;
+      }
+
+      .turnaround-banner svg {
+        width: 16px;
+        height: 16px;
+        opacity: 0.75;
+        flex: 0 0 auto;
+        margin-top: 3px;
+      }
+
+      .service-note {
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        line-height: 1.45;
+      }
+
+      .service-includes {
+        margin: 14px 0 0;
+        padding: 12px 0 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        list-style: none;
+        padding-left: 0;
+        display: grid;
+        gap: 8px;
+      }
+
+      .service-includes li {
+        position: relative;
+        padding-left: 14px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1.45;
+      }
+
+      .service-includes li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.55em;
+        width: 4px;
+        height: 4px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.35);
+      }
+
       .section-head {
         display: grid;
         gap: 12px;
         margin-bottom: 26px;
+        text-align: center;
+        justify-items: center;
       }
 
       .label {
@@ -402,12 +735,20 @@
       .heading-row {
         display: grid;
         gap: 14px;
+        justify-items: center;
+      }
+
+      h1,
+      h2,
+      h3 {
+        text-transform: uppercase;
+        font-weight: 650;
       }
 
       h2 {
         margin: 0;
         font-size: clamp(26px, 3.2vw, 42px);
-        letter-spacing: -0.01em;
+        letter-spacing: 0.04em;
       }
 
       .divider {
@@ -421,11 +762,53 @@
         color: var(--muted);
       }
 
-      .reel-grid {
-        display: grid;
-        grid-template-columns: 1.25fr 0.75fr;
-        gap: 22px;
-        align-items: start;
+      .muted--flush {
+        margin: 0;
+      }
+
+      .muted--after-label {
+        margin: 10px 0 0;
+      }
+
+      .text-body {
+        color: var(--text);
+        font-weight: 400;
+      }
+
+      .link-title {
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-weight: 650;
+      }
+
+      .inline-link {
+        color: var(--text);
+        text-decoration: underline;
+        font-weight: 400;
+      }
+
+      .inline-code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 0.95em;
+        color: var(--muted);
+        font-weight: 400;
+      }
+
+      #reel .container {
+        width: min(1280px, calc(100% - 48px));
+      }
+
+      .reel-layout {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .reel-layout .embed {
+        width: 100%;
+        max-width: 100%;
+        border-radius: calc(var(--radius) + 4px);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.65);
       }
 
       .embed {
@@ -474,7 +857,6 @@
         margin: 0 0 8px;
         font-size: 15px;
         letter-spacing: 0.12em;
-        text-transform: uppercase;
       }
 
       .price {
@@ -488,7 +870,7 @@
       }
 
       .price strong {
-        color: var(--accent);
+        color: rgba(255, 255, 255, 0.86);
         letter-spacing: 0.08em;
       }
 
@@ -496,11 +878,14 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 14px;
+        max-width: 1000px;
+        margin: 0 auto;
       }
 
       .projects {
         display: grid;
         gap: 14px;
+        justify-items: center;
       }
 
       .project {
@@ -508,7 +893,8 @@
         grid-template-columns: 180px 1fr auto;
         gap: 16px;
         align-items: center;
-        padding: 14px;
+        width: 100%;
+        max-width: 1000px;
       }
 
       .thumb {
@@ -539,7 +925,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: radial-gradient(400px 180px at 60% 20%, rgba(192, 57, 43, 0.2), transparent 50%);
+        background: radial-gradient(400px 180px at 60% 20%, rgba(255, 255, 255, 0.14), transparent 55%);
         opacity: 0.9;
       }
 
@@ -558,9 +944,6 @@
 
       .project-title h3 {
         margin: 0;
-        font-size: 16px;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
       }
 
       .tag {
@@ -580,7 +963,7 @@
 
       .year {
         color: var(--accent);
-        font-weight: 700;
+        font-weight: 650;
         letter-spacing: 0.12em;
       }
 
@@ -617,12 +1000,16 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 14px;
+        max-width: 1000px;
+        margin: 0 auto;
       }
 
       blockquote {
         margin: 0;
-        color: rgba(255, 255, 255, 0.85);
+        color: var(--muted);
         font-size: 14px;
+        font-weight: 400;
+        line-height: 1.55;
       }
 
       .quote-mark {
@@ -633,8 +1020,8 @@
         place-items: center;
         border: 1px solid rgba(255, 255, 255, 0.12);
         background: rgba(255, 255, 255, 0.04);
-        color: var(--accent);
-        font-weight: 800;
+        color: var(--muted);
+        font-weight: 650;
       }
 
       .quote-footer {
@@ -646,14 +1033,22 @@
         gap: 12px;
         align-items: baseline;
         color: var(--muted);
-        text-transform: uppercase;
-        letter-spacing: 0.16em;
         font-size: 11px;
+        font-weight: 400;
+        letter-spacing: 0.02em;
       }
 
       .quote-footer strong {
-        color: rgba(255, 255, 255, 0.86);
-        letter-spacing: 0.08em;
+        color: var(--text);
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        text-transform: none;
+      }
+
+      .quote-footer .quote-company {
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--muted);
       }
 
       .contact-grid {
@@ -661,6 +1056,8 @@
         grid-template-columns: 1fr 0.55fr;
         gap: 18px;
         align-items: start;
+        max-width: 1000px;
+        margin: 0 auto;
       }
 
       form {
@@ -704,8 +1101,8 @@
       input:focus,
       select:focus,
       textarea:focus {
-        border-color: rgba(192, 57, 43, 0.85);
-        box-shadow: 0 0 0 5px rgba(192, 57, 43, 0.14);
+        border-color: rgba(255, 255, 255, 0.22);
+        box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.08);
       }
 
       .form-actions {
@@ -727,7 +1124,7 @@
       }
 
       .contact-side .card {
-        padding: 16px;
+        padding: 18px;
       }
 
       .links {
@@ -787,9 +1184,6 @@
         .hero-grid {
           grid-template-columns: 1fr;
         }
-        .reel-grid {
-          grid-template-columns: 1fr;
-        }
         .services-grid {
           grid-template-columns: repeat(2, 1fr);
         }
@@ -804,6 +1198,9 @@
         }
         .ext {
           justify-self: start;
+        }
+        .logos-grid {
+          grid-template-columns: repeat(3, 1fr);
         }
       }
 
@@ -823,6 +1220,9 @@
         .services-grid {
           grid-template-columns: 1fr;
         }
+        .logos-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -836,6 +1236,28 @@
         .cta {
           transition: none !important;
         }
+        .nav .cta.red {
+          animation: none !important;
+        }
+        .hero::before {
+          animation: none !important;
+        }
+        .hero .hero-title,
+        .hero .subtitle,
+        .hero .bio,
+        .hero .cta-row {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+        .icon {
+          animation: none !important;
+          translate: 0 0 !important;
+          rotate: 0deg !important;
+        }
+        body::before {
+          opacity: 0 !important;
+        }
       }
     </style>
   </head>
@@ -845,8 +1267,7 @@
       <div class="container">
         <div class="nav-inner">
           <a class="logo" href="#top" aria-label="Home">
-            <div class="logo-badge" aria-hidden="true"><span>RSS</span></div>
-            <span>Red Shift Studios</span>
+            <span class="logo-text">RSS RED SHIFT STUDIOS</span>
           </a>
           <nav class="nav-links" aria-label="Primary navigation">
             <a href="#reel">REEL</a>
@@ -854,19 +1275,20 @@
             <a href="#services">SERVICES</a>
             <a href="#contact">CONTACT</a>
           </nav>
-          <a class="cta red" href="#contact" data-scroll-to="contact">Book a Project</a>
+          <div class="nav-right">
+            <span class="nav-phone">435-459-2916</span>
+            <a class="cta red" href="#contact" data-scroll-to="contact">Book a Project</a>
+          </div>
         </div>
       </div>
     </header>
 
     <!-- Hero -->
     <main id="top" class="hero" role="main">
+      <canvas id="embers" aria-hidden="true"></canvas>
       <div class="floating-icons" aria-hidden="true">
         <!-- Film reel -->
-        <div
-          class="icon"
-          style="top: 14%; left: 8%; --dx: 12px; --dy: -18px; --rot: -7deg; --dur: 9.5s"
-        >
+        <div class="icon icon-1 icon-pos-1">
           <svg viewBox="0 0 24 24" fill="none">
             <circle class="accent" cx="12" cy="12" r="8" stroke-width="1.7" />
             <circle cx="12" cy="12" r="2.1" stroke-width="1.7" />
@@ -878,10 +1300,7 @@
         </div>
 
         <!-- Camera -->
-        <div
-          class="icon"
-          style="top: 22%; right: 11%; --dx: -10px; --dy: 12px; --rot: 6deg; --dur: 8.6s"
-        >
+        <div class="icon icon-2 icon-pos-2">
           <svg viewBox="0 0 24 24" fill="none">
             <rect x="4" y="7" width="16" height="12" rx="3" stroke-width="1.7" />
             <circle class="accent" cx="12" cy="13" r="3.3" stroke-width="1.7" />
@@ -890,10 +1309,7 @@
         </div>
 
         <!-- Clapperboard -->
-        <div
-          class="icon"
-          style="bottom: 24%; left: 12%; --dx: 14px; --dy: 14px; --rot: 10deg; --dur: 10.2s"
-        >
+        <div class="icon icon-3 icon-pos-3">
           <svg viewBox="0 0 24 24" fill="none">
             <rect x="5" y="9" width="14" height="10" rx="2.5" stroke-width="1.7" />
             <path d="M6.5 9l2.8-4.2M11 9l2.8-4.2M15.5 9l2.1-3.2" stroke-width="1.7" />
@@ -902,10 +1318,7 @@
         </div>
 
         <!-- Microphone -->
-        <div
-          class="icon"
-          style="top: 58%; right: 8%; --dx: -14px; --dy: -10px; --rot: -9deg; --dur: 9.2s"
-        >
+        <div class="icon icon-4 icon-pos-4">
           <svg viewBox="0 0 24 24" fill="none">
             <rect x="9" y="4" width="6" height="10" rx="3" stroke-width="1.7" />
             <path d="M7 11v1a5 5 0 0010 0v-1" stroke-width="1.7" />
@@ -915,10 +1328,7 @@
         </div>
 
         <!-- Headphones -->
-        <div
-          class="icon"
-          style="bottom: 18%; right: 18%; --dx: -12px; --dy: 16px; --rot: 7deg; --dur: 10.8s"
-        >
+        <div class="icon icon-5 icon-pos-5">
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M5 13a7 7 0 0114 0" stroke-width="1.7" />
             <rect x="4" y="13" width="4" height="7" rx="2" stroke-width="1.7" />
@@ -927,10 +1337,7 @@
         </div>
 
         <!-- Video camera -->
-        <div
-          class="icon"
-          style="top: 38%; left: 34%; --dx: 10px; --dy: 10px; --rot: -5deg; --dur: 8.9s"
-        >
+        <div class="icon icon-6 icon-pos-6">
           <svg viewBox="0 0 24 24" fill="none">
             <rect x="4" y="9" width="10" height="8" rx="2.2" stroke-width="1.7" />
             <path d="M14 11l6-3v8l-6-3v-2z" stroke-width="1.7" />
@@ -942,14 +1349,13 @@
       <div class="container">
         <div class="hero-grid">
           <div>
-            <h1>RED SHIFT STUDIOS</h1>
+            <h1 class="hero-title" data-hero-title>RED SHIFT STUDIOS</h1>
             <div class="subtitle" aria-label="Roles">
-              <span>DIRECTOR</span><span class="dot">·</span><span>DP</span><span class="dot">·</span
-              ><span>EDITOR</span><span class="dot">·</span><span>PA</span>
+              <span>VIDEO PRODUCTION</span><span class="dot">·</span><span>POST PRODUCTION</span><span class="dot">·</span
+              ><span>CONTENT CREATION</span>
             </div>
             <p class="bio">
-              We tell stories that move people — from commercial work to short films. No Hollywood budgets required,
-              just honest work and a camera.
+              Big results. Real prices. Fast delivery.
             </p>
             <div class="cta-row">
               <a class="cta" href="#reel">Watch Reel</a>
@@ -957,15 +1363,7 @@
             </div>
           </div>
 
-          <aside class="hero-card" aria-label="Quick stats">
-            <h3>Production Snapshot</h3>
-            <ul>
-              <li><strong>El Paso, TX</strong> <span>On-site & remote</span></li>
-              <li><strong>Turnaround</strong> <span>2–10 days typical</span></li>
-              <li><strong>Deliverables</strong> <span>Social • Web • Broadcast</span></li>
-              <li><strong>Style</strong> <span>Moody • Clean • Cinematic</span></li>
-            </ul>
-          </aside>
+          <!-- Removed: Production Snapshot card -->
         </div>
       </div>
 
@@ -976,18 +1374,39 @@
       </a>
     </main>
 
-    <!-- Reel -->
-    <section id="reel" aria-labelledby="reel-title">
+    <!-- Client Logos -->
+    <section id="clients" aria-labelledby="clients-title">
       <div class="container">
-        <div class="section-head">
-          <div class="label">FEATURED WORK</div>
+        <div class="section-head reveal" data-reveal="heading">
+          <div class="label">TRUSTED BY LOCAL BUSINESSES</div>
           <div class="heading-row">
-            <h2 id="reel-title">FILM REEL</h2>
-            <div class="divider" aria-hidden="true"></div>
+            <h2 id="clients-title">Clients</h2>
           </div>
         </div>
 
-        <div class="reel-grid">
+        <div class="logos-grid reveal" data-reveal="card">
+          <div class="logo-box"><span>Desert Bloom</span></div>
+          <div class="logo-box"><span>Mesa Realty</span></div>
+          <div class="logo-box"><span>Sunrise Coffee</span></div>
+          <div class="logo-box"><span>Borderland Expo</span></div>
+          <div class="logo-box"><span>Río Records</span></div>
+          <div class="logo-box"><span>Westside Gym</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reel -->
+    <section id="reel" aria-labelledby="reel-title">
+      <div class="container">
+        <div class="section-head reveal" data-reveal="heading">
+          <div class="label">FEATURED WORK</div>
+          <div class="heading-row">
+            <h2 id="reel-title">FILM REEL</h2>
+            <div class="divider" aria-hidden="true" data-reveal="divider"></div>
+          </div>
+        </div>
+
+        <div class="reel-layout">
           <div class="embed" aria-label="Embedded reel video">
             <div class="embed-badge">DEMO REEL 2024</div>
             <iframe
@@ -999,17 +1418,6 @@
               allowfullscreen
             ></iframe>
           </div>
-
-          <div class="card">
-            <h3>Reel Notes</h3>
-            <p class="muted" style="margin: 0">
-              A tight cut of recent work across commercial, event, and music video projects. Built to showcase
-              pacing, lighting, camera movement, and clean post.
-            </p>
-            <div class="price" aria-label="Starting range">
-              <span>Typical projects</span> <strong>$1.5k–$8k</strong>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -1017,35 +1425,66 @@
     <!-- Services -->
     <section id="services" aria-labelledby="services-title">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal" data-reveal="heading">
           <div class="label">WHAT I OFFER</div>
           <div class="heading-row">
             <h2 id="services-title">SERVICES</h2>
           </div>
         </div>
 
-        <div class="services-grid">
-          <div class="card">
-            <h3>Social Content Package</h3>
-            <p class="muted" style="margin: 0">
-              Short-form videos optimized for Instagram, TikTok, and Facebook.
+        <div class="turnaround-banner reveal" data-reveal="card" aria-label="Delivery timing note">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="8" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" />
+            <path d="M12 7v5l3 2" stroke="rgba(255,255,255,0.85)" stroke-width="1.8" stroke-linecap="round" />
+          </svg>
+          <span class="turnaround-banner__text"
+            >Project delivery times vary depending on the scope of the project. The timelines on each package are
+            typical edit windows after footage is captured—rush jobs and larger scopes are quoted separately.</span>
+        </div>
+
+        <div class="services-grid" data-reveal-group="services">
+          <div class="card reveal" data-reveal="service">
+            <h3>Social &amp; short-form</h3>
+            <p class="muted muted--flush">
+              Fast-turn content for feeds: hooks, Reels, vertical cuts, and simple promos when you need volume without a
+              full commercial workflow.
             </p>
+            <ul class="service-includes" aria-label="Includes">
+              <li>Half-day shoot or edit-only from your footage</li>
+              <li>Up to 3 short deliverables (e.g. 9:16 + 1:1 + 16:9)</li>
+              <li>Basic sound mix and captions on request</li>
+            </ul>
+            <div class="service-note">Typical post schedule after footage is ready: 3–5 business days.</div>
             <div class="price"><span>Starting at</span> <strong>$300</strong></div>
           </div>
 
-          <div class="card">
-            <h3>Business Commercial</h3>
-            <p class="muted" style="margin: 0">
-              Full promotional video including pre-production, filming, and professional edit.
+          <div class="card reveal" data-reveal="service">
+            <h3>Commercial spot</h3>
+            <p class="muted muted--flush">
+              One polished hero video for your website, paid ads, or lobby screen—planned, shot, and edited as a single
+              story.
             </p>
+            <ul class="service-includes" aria-label="Includes">
+              <li>Pre-production call, shot list, and shoot day</li>
+              <li>Professional edit, color, and mix for one master</li>
+              <li>One structured revision round</li>
+            </ul>
+            <div class="service-note">Typical post schedule after the shoot: 5–7 business days.</div>
             <div class="price"><span>Starting at</span> <strong>$800</strong></div>
           </div>
 
-          <div class="card">
-            <h3>Full Production</h3>
-            <p class="muted" style="margin: 0">
-              Multi-day shoot, professional gear, color grade, sound mix, delivery in all formats.
+          <div class="card reveal" data-reveal="service">
+            <h3>Campaign &amp; long-form</h3>
+            <p class="muted muted--flush">
+              Bigger stories: brand campaigns, events, interviews, music videos, or multi-deliverable packages when one
+              spot is not enough.
             </p>
+            <ul class="service-includes" aria-label="Includes">
+              <li>Multi-day or multi-location filming as needed</li>
+              <li>Color grade, sound design, and multiple exports</li>
+              <li>Cutdowns and format variants quoted to match your deliverable list</li>
+            </ul>
+            <div class="service-note">Typical post schedule after final filming: 7–10 business days.</div>
             <div class="price"><span>Starting at</span> <strong>$2,000</strong></div>
           </div>
         </div>
@@ -1055,11 +1494,11 @@
     <!-- Projects -->
     <section id="projects" aria-labelledby="projects-title">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal" data-reveal="heading">
           <div class="label">PORTFOLIO</div>
           <div class="heading-row">
             <h2 id="projects-title">PAST PROJECTS</h2>
-            <div class="divider" aria-hidden="true"></div>
+            <div class="divider" aria-hidden="true" data-reveal="divider"></div>
           </div>
         </div>
 
@@ -1072,15 +1511,15 @@
     <!-- Testimonials -->
     <section id="testimonials" aria-labelledby="testimonials-title">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal" data-reveal="heading">
           <div class="label">KIND WORDS</div>
           <div class="heading-row">
             <h2 id="testimonials-title">Testimonials</h2>
           </div>
         </div>
 
-        <div class="testimonials-grid">
-          <div class="card">
+        <div class="testimonials-grid" data-reveal-group="testimonials">
+          <div class="card reveal" data-reveal="testimonial">
             <div class="quote-mark" aria-hidden="true">“</div>
             <blockquote>
               “We needed content that looked expensive without being expensive. The pacing, color, and sound were
@@ -1088,11 +1527,11 @@
             </blockquote>
             <div class="quote-footer">
               <strong>Maya</strong>
-              <span>Desert Bloom Skincare</span>
+              <span class="quote-company">Desert Bloom Skincare</span>
             </div>
           </div>
 
-          <div class="card">
+          <div class="card reveal" data-reveal="testimonial">
             <div class="quote-mark" aria-hidden="true">“</div>
             <blockquote>
               “The event recap actually felt like a short film. Clean audio, great shots, and edits that matched the
@@ -1100,11 +1539,11 @@
             </blockquote>
             <div class="quote-footer">
               <strong>Chris</strong>
-              <span>Borderland Fitness Expo</span>
+              <span class="quote-company">Borderland Fitness Expo</span>
             </div>
           </div>
 
-          <div class="card">
+          <div class="card reveal" data-reveal="testimonial">
             <div class="quote-mark" aria-hidden="true">“</div>
             <blockquote>
               “They listened, brought ideas, and kept the set moving. The final cut was exactly what we pitched to our
@@ -1112,7 +1551,7 @@
             </blockquote>
             <div class="quote-footer">
               <strong>Elena</strong>
-              <span>Mesa Street Realty</span>
+              <span class="quote-company">Mesa Street Realty</span>
             </div>
           </div>
         </div>
@@ -1122,18 +1561,18 @@
     <!-- Contact / Booking -->
     <section id="contact" aria-labelledby="contact-title">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal" data-reveal="heading">
           <div class="heading-row">
             <h2 id="contact-title">Let’s Work Together</h2>
-            <div class="divider" aria-hidden="true"></div>
+            <div class="divider" aria-hidden="true" data-reveal="divider"></div>
           </div>
-          <p class="muted" style="margin: 0">
+          <p class="muted muted--flush">
             Available for commercial work, events, social content, and film projects.
           </p>
         </div>
 
         <div class="contact-grid">
-          <div class="card">
+          <div class="card reveal" data-reveal="card">
             <!-- Formspree endpoint placeholder -->
             <form id="bookingForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
               <div class="form-grid">
@@ -1190,21 +1629,19 @@
           </div>
 
           <aside class="contact-side">
-            <div class="card">
+            <div class="card reveal" data-reveal="card">
               <div class="label">Direct</div>
               <div class="links">
                 <a class="link" href="mailto:wyabro@gmail.com">
                   <div>
-                    <div style="text-transform: uppercase; letter-spacing: 0.12em; font-weight: 650">
-                      wyabro@gmail.com
-                    </div>
-                    <small>Email</small>
+                    <div class="link-title">wyabro@gmail.com</div>
+                    <small>Email • 435-459-2916</small>
                   </div>
                   <span aria-hidden="true">↗</span>
                 </a>
                 <a class="link" href="https://instagram.com/wyrtbrun" target="_blank" rel="noreferrer">
                   <div>
-                    <div style="text-transform: uppercase; letter-spacing: 0.12em; font-weight: 650">@wyrtbrun</div>
+                    <div class="link-title">@wyrtbrun</div>
                     <small>Social</small>
                   </div>
                   <span aria-hidden="true">↗</span>
@@ -1212,11 +1649,11 @@
               </div>
             </div>
 
-            <div class="card">
+            <div class="card reveal" data-reveal="card">
               <div class="label">Availability</div>
-              <p class="muted" style="margin: 10px 0 0">
-                Currently booking: <span style="color: rgba(255, 255, 255, 0.9)">next 2–4 weeks</span>.
-                If you’re on a tight deadline, include the date and I’ll confirm options.
+              <p class="muted muted--after-label">
+                Currently booking: <span class="text-body">next 2–4 weeks</span>. If you’re on a tight deadline,
+                include the date and I’ll confirm options.
               </p>
             </div>
           </aside>
@@ -1228,7 +1665,7 @@
     <footer role="contentinfo">
       <div class="container">
         <div class="footer-inner">
-          <span>© 2025 Red Shift Studios. All rights reserved. / Crafted with passion for cinema</span>
+          <span>© 2025 Red Shift Studios. All rights reserved. / Crafted with passion for cinema / 435-459-2916</span>
         </div>
       </div>
     </footer>
@@ -1238,6 +1675,175 @@
       // If you know the channel_id (starts with UC...), set it here for reliable RSS loading:
       // Example: const YOUTUBE_CHANNEL_ID = "UCxxxxxxxxxxxxxxxxxxxxxx";
       const YOUTUBE_CHANNEL_ID = "";
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Hero: simple fade-up + staggered content
+      function setupHeroTitle() {
+        const hero = document.querySelector(".hero");
+        const titleEl = document.querySelector("[data-hero-title]");
+        if (!hero || !titleEl) return;
+
+        // Trigger animations after layout is ready
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            hero.classList.add("is-loaded");
+          });
+        });
+      }
+
+      // Scroll reveal: headings, dividers, cards (staggered)
+      function setupScrollReveal() {
+        const revealEls = Array.from(document.querySelectorAll(".reveal"));
+        const dividerEls = Array.from(document.querySelectorAll('[data-reveal="divider"]'));
+
+        // Apply tasteful staggering for groups we control in HTML
+        const services = Array.from(document.querySelectorAll('[data-reveal="service"]'));
+        services.forEach((el, idx) => el.style.setProperty("--delay", `${idx * 90}ms`));
+
+        const testimonials = Array.from(document.querySelectorAll('[data-reveal="testimonial"]'));
+        testimonials.forEach((el, idx) => el.style.setProperty("--delay", `${idx * 90}ms`));
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              entry.target.classList.add("in-view");
+              io.unobserve(entry.target);
+            }
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+        );
+
+        for (const el of revealEls) io.observe(el);
+        for (const el of dividerEls) io.observe(el);
+      }
+
+      // Hero depth: subtle parallax for floating icons
+      function setupHeroDepth() {
+        if (prefersReducedMotion) return;
+        const hero = document.querySelector(".hero");
+        const icons = Array.from(document.querySelectorAll(".floating-icons .icon"));
+        if (!hero || icons.length === 0) return;
+
+        let raf = 0;
+        let lastX = 0;
+        let lastY = 0;
+
+        function onMove(e) {
+          const rect = hero.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          lastX = x;
+          lastY = y;
+          if (raf) return;
+          raf = requestAnimationFrame(() => {
+            raf = 0;
+            icons.forEach((icon, idx) => {
+              const depth = 6 + (idx % 3) * 4;
+              const tx = Math.max(-1, Math.min(1, lastX)) * depth;
+              const ty = Math.max(-1, Math.min(1, lastY)) * depth;
+              icon.style.translate = `${tx}px ${ty}px`;
+            });
+          });
+        }
+
+        hero.addEventListener("mousemove", onMove);
+        hero.addEventListener("mouseleave", () => {
+          icons.forEach((icon) => (icon.style.translate = "0px 0px"));
+        });
+      }
+
+      // Hero background embers (subtle particles)
+      function setupEmbers() {
+        if (prefersReducedMotion) return;
+        const hero = document.querySelector(".hero");
+        const canvas = document.getElementById("embers");
+        if (!hero || !canvas) return;
+
+        const ctx = canvas.getContext("2d", { alpha: true });
+        if (!ctx) return;
+
+        let w = 0;
+        let h = 0;
+        const dpr = Math.min(2, window.devicePixelRatio || 1);
+
+        function resize() {
+          const rect = hero.getBoundingClientRect();
+          w = Math.max(1, Math.floor(rect.width));
+          h = Math.max(1, Math.floor(rect.height));
+          canvas.width = Math.floor(w * dpr);
+          canvas.height = Math.floor(h * dpr);
+          canvas.style.width = `${w}px`;
+          canvas.style.height = `${h}px`;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        const particles = [];
+        const count = 46;
+
+        function rand(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        function spawn(i) {
+          const isRed = Math.random() < 0.55;
+          particles[i] = {
+            x: rand(0, w),
+            y: rand(0, h),
+            r: rand(0.6, 1.8),
+            vy: rand(0.15, 0.6),
+            vx: rand(-0.08, 0.08),
+            a: rand(0.08, 0.22),
+            tw: rand(0.004, 0.018),
+            t: rand(0, 1000),
+            c: isRed ? "192,57,43" : "255,255,255"
+          };
+        }
+
+        let raf = 0;
+        let last = performance.now();
+
+        function tick(now) {
+          raf = requestAnimationFrame(tick);
+          const dt = Math.min(34, now - last);
+          last = now;
+
+          ctx.clearRect(0, 0, w, h);
+
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            p.t += dt;
+            const tw = Math.sin(p.t * p.tw) * 0.6 + 0.6; // 0..1-ish
+            const alpha = p.a * (0.55 + tw * 0.7);
+
+            p.x += p.vx * dt;
+            p.y -= p.vy * dt;
+
+            if (p.y < -12) {
+              p.y = h + rand(0, 80);
+              p.x = rand(0, w);
+            }
+            if (p.x < -20) p.x = w + 20;
+            if (p.x > w + 20) p.x = -20;
+
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(${p.c}, ${alpha})`;
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
+        resize();
+        for (let i = 0; i < count; i++) {
+          spawn(i);
+        }
+
+        const ro = new ResizeObserver(() => resize());
+        ro.observe(hero);
+        window.addEventListener("resize", resize, { passive: true });
+        raf = requestAnimationFrame(tick);
+      }
 
       // Ensure "Book a Project" always targets the contact form
       for (const el of document.querySelectorAll('[data-scroll-to="contact"]')) {
@@ -1277,14 +1883,14 @@
           .replaceAll("'", "&#039;");
       }
 
-      function projectItemTemplate({ title, url, thumbnail, tag, year }) {
+      function projectItemTemplate({ title, url, thumbnail, tag, year, delayMs = 0 }) {
         const safeTitle = escapeHtml(title);
         const safeUrl = escapeHtml(url);
         const safeThumb = escapeHtml(thumbnail);
         const safeTag = escapeHtml(tag);
         const safeYear = escapeHtml(year);
         return `
-          <article class="card project" role="listitem">
+          <article class="card project reveal" data-reveal="project" role="listitem" data-delay-ms="${delayMs}">
             <div class="thumb" aria-label="Project thumbnail">
               ${safeThumb ? `<img src="${safeThumb}" alt="" loading="lazy" />` : "Thumbnail"}
             </div>
@@ -1347,10 +1953,10 @@
           list.innerHTML = `
             <div class="card">
               <div class="label">PROJECTS</div>
-              <p class="muted" style="margin: 10px 0 0">
-                Couldn’t auto-load projects. You can set <strong>YOUTUBE_CHANNEL_ID</strong> in the script for the
+              <p class="muted muted--after-label">
+                Couldn’t auto-load projects. You can set <span class="inline-code">YOUTUBE_CHANNEL_ID</span> in the script for the
                 official YouTube RSS feed, or add projects manually. Channel:
-                <a href="${PROJECTS_CHANNEL_HANDLE_URL}" target="_blank" rel="noreferrer" style="color: var(--text); text-decoration: underline;">@RedBoltProductions</a>.
+                <a class="inline-link" href="${PROJECTS_CHANNEL_HANDLE_URL}" target="_blank" rel="noreferrer">@RedBoltProductions</a>.
               </p>
             </div>
           `;
@@ -1395,7 +2001,12 @@
           return { title, url, thumbnail, tag, year };
         });
 
-        list.innerHTML = items.map(projectItemTemplate).join("");
+        list.innerHTML = items
+          .map((it, idx) => projectItemTemplate({ ...it, delayMs: 60 * idx }))
+          .join("");
+        list.querySelectorAll("article.project[data-delay-ms]").forEach((el) => {
+          el.style.setProperty("--delay", `${el.getAttribute("data-delay-ms")}ms`);
+        });
       }
 
       loadProjectsFromYouTubeRss().catch(() => {
@@ -1404,13 +2015,19 @@
         list.innerHTML = `
           <div class="card">
             <div class="label">PROJECTS</div>
-            <p class="muted" style="margin: 10px 0 0">
+            <p class="muted muted--after-label">
               Couldn’t load YouTube projects automatically in this browser session. You can still link projects
               manually, or set the channel ID and try again.
             </p>
           </div>
         `;
       });
+
+      // Init animations
+      setupHeroTitle();
+      setupScrollReveal();
+      setupHeroDepth();
+      setupEmbers();
 
       // Optional: async submit status (still works if you remove this)
       const form = document.getElementById("bookingForm");
