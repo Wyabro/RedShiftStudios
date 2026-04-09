@@ -73,6 +73,18 @@
         box-sizing: border-box;
       }
 
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
       html {
         scroll-behavior: smooth;
       }
@@ -140,15 +152,14 @@
       .logo {
         display: inline-flex;
         align-items: center;
-        text-transform: uppercase;
       }
 
       .logo-text {
         font-family: var(--font-display);
         font-weight: 300;
-        font-size: clamp(12px, 1.35vw, 15px);
-        letter-spacing: 0.3em;
-        line-height: 1.2;
+        font-size: 20px;
+        letter-spacing: 0.32em;
+        line-height: 1;
         color: var(--text);
       }
 
@@ -698,6 +709,23 @@
         justify-items: center;
       }
 
+      .section-head--label-only {
+        margin-bottom: 22px;
+        gap: 0;
+      }
+
+      .contact-lead {
+        max-width: 42ch;
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.55;
+        color: var(--muted);
+      }
+
+      #contact .section-head > .contact-lead {
+        margin-bottom: 4px;
+      }
+
       .label {
         font-family: var(--font-sans);
         font-weight: 700;
@@ -746,6 +774,26 @@
         letter-spacing: 0.06em;
         font-style: italic;
         font-weight: 400;
+      }
+
+      #reel h2.heading-display {
+        text-transform: none;
+        letter-spacing: 0.12em;
+      }
+
+      #services h2.heading-display {
+        text-transform: none;
+        letter-spacing: 0.14em;
+      }
+
+      #projects h2.heading-display {
+        text-transform: none;
+        letter-spacing: 0.14em;
+      }
+
+      #contact h2.heading-display {
+        text-transform: none;
+        letter-spacing: 0.1em;
       }
 
       .divider {
@@ -828,11 +876,147 @@
         max-width: 100%;
       }
 
-      .reel-layout .embed {
+      .reel-poster {
+        position: relative;
+        aspect-ratio: 16 / 9;
         width: 100%;
         max-width: 100%;
-        border-radius: calc(var(--radius) + 4px);
-        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.65);
+        margin: 0 auto;
+        background: rgba(20, 15, 40, 0.4);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        padding: 32px 24px;
+        overflow: hidden;
+      }
+
+      .reel-poster__title {
+        margin: 0;
+        font-family: var(--font-sans);
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 0.28em;
+        color: var(--muted);
+        text-transform: uppercase;
+        font-variant: small-caps;
+        text-align: center;
+      }
+
+      .reel-poster__play {
+        position: relative;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        border: 2px solid var(--accent);
+        background: transparent;
+        padding: 0;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+      }
+
+      .reel-poster__play:hover,
+      .reel-poster__play:focus-visible {
+        background: var(--accent);
+        border-color: var(--accent);
+        box-shadow: 0 0 28px rgba(224, 64, 160, 0.45);
+        outline: none;
+      }
+
+      .reel-poster__play-icon {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 11px 0 11px 18px;
+        border-color: transparent transparent transparent var(--accent);
+        margin-left: 5px;
+        transition: border-color 220ms ease;
+      }
+
+      .reel-poster__play:hover .reel-poster__play-icon,
+      .reel-poster__play:focus-visible .reel-poster__play-icon {
+        border-left-color: #fff;
+      }
+
+      .reel-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 10050;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .reel-lightbox[hidden] {
+        display: none !important;
+      }
+
+      .reel-lightbox__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.92);
+        cursor: pointer;
+      }
+
+      .reel-lightbox__content {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 900px;
+      }
+
+      .reel-lightbox__close {
+        position: absolute;
+        top: -44px;
+        right: 0;
+        width: 40px;
+        height: 40px;
+        border: none;
+        background: none;
+        color: #fff;
+        font-size: 28px;
+        line-height: 1;
+        cursor: pointer;
+        padding: 0;
+        transition: opacity 180ms ease;
+      }
+
+      .reel-lightbox__close:hover,
+      .reel-lightbox__close:focus-visible {
+        opacity: 0.75;
+        outline: none;
+      }
+
+      .reel-lightbox__frame {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        width: 100%;
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+      }
+
+      .reel-lightbox__frame iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      @media (max-width: 640px) {
+        .reel-lightbox__close {
+          top: 8px;
+          right: 8px;
+        }
       }
 
       .embed {
@@ -1161,9 +1345,7 @@
         background: var(--surface-soft);
         border-radius: var(--radius);
         border: 1px solid var(--border);
-        display: grid;
-        place-items: center;
-        text-align: center;
+        display: block;
         transition: transform 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
         overflow: hidden;
         box-shadow: var(--shadow);
@@ -1178,52 +1360,46 @@
 
       .project-placeholder:hover,
       .project-placeholder:focus-visible {
-        transform: scale(1.02);
-        border-color: rgba(0, 229, 255, 0.4);
-        box-shadow: 0 0 28px rgba(0, 229, 255, 0.22), var(--shadow);
+        transform: translateY(-4px);
+        border-color: rgba(0, 229, 255, 0.35);
+        box-shadow: 0 0 24px rgba(0, 229, 255, 0.18), var(--shadow);
       }
 
-      .project-placeholder__hint {
-        color: var(--muted);
-        font-size: 13px;
-        font-family: var(--font-sans);
-        letter-spacing: 0.08em;
-        padding: 0 14px;
-        transition: opacity 280ms ease;
-      }
-
-      .project-placeholder__hint--solo {
-        text-transform: none;
-      }
-
-      .project-placeholder__meta {
+      .project-placeholder__label-wrap {
         position: absolute;
-        bottom: 14px;
-        left: 12px;
-        right: 12px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 16px 18px;
+        transform: translateY(10px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 320ms ease, opacity 320ms ease;
+      }
+
+      .project-placeholder--detail:hover .project-placeholder__label-wrap,
+      .project-placeholder--detail:focus-visible .project-placeholder__label-wrap {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .project-placeholder__dash {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: var(--accent);
+        margin-bottom: 8px;
+      }
+
+      .project-placeholder__label {
+        display: block;
         font-size: 11px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
         font-family: var(--font-sans);
         font-weight: 700;
         color: var(--text);
-        opacity: 0;
-        transition: opacity 280ms ease, border-color 280ms ease, padding-bottom 280ms ease;
-        pointer-events: none;
-        border-bottom: 1px solid transparent;
-        padding-bottom: 4px;
-      }
-
-      .project-placeholder--detail:hover .project-placeholder__hint,
-      .project-placeholder--detail:focus-visible .project-placeholder__hint {
-        opacity: 0;
-      }
-
-      .project-placeholder--detail:hover .project-placeholder__meta,
-      .project-placeholder--detail:focus-visible .project-placeholder__meta {
-        opacity: 1;
-        border-bottom-color: rgba(224, 64, 160, 0.85);
-        box-shadow: 0 6px 14px -6px rgba(224, 64, 160, 0.45);
+        text-align: left;
       }
 
       .testimonials-grid {
@@ -1450,10 +1626,11 @@
 
       .footer-inner {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        text-align: center;
       }
 
       .footer-inner span {
@@ -1462,6 +1639,18 @@
         font-size: 11px;
         font-family: var(--font-sans);
         font-weight: 500;
+      }
+
+      .footer-tagline {
+        margin: 0;
+        font-family: var(--font-sans);
+        font-size: 10px;
+        font-weight: 400;
+        letter-spacing: 0.06em;
+        color: var(--muted-2);
+        opacity: 0.55;
+        text-transform: none;
+        line-height: 1.5;
       }
 
       [data-parallax-heading] {
@@ -1590,13 +1779,9 @@
           transition: none !important;
           box-shadow: var(--shadow) !important;
         }
-        .project-placeholder--detail .project-placeholder__hint {
+        .project-placeholder--detail .project-placeholder__label-wrap {
+          transform: none !important;
           opacity: 1 !important;
-        }
-        .project-placeholder--detail .project-placeholder__meta {
-          opacity: 0 !important;
-          border-bottom-color: transparent !important;
-          box-shadow: none !important;
         }
       }
     </style>
@@ -1606,8 +1791,8 @@
     <header class="nav" role="banner">
       <div class="container">
         <div class="nav-inner">
-          <a class="logo" href="#top" aria-label="Home">
-            <span class="logo-text">RED SHIFT STUDIOS</span>
+          <a class="logo" href="#top" aria-label="Red Shift Studios — home">
+            <span class="logo-text">RSS</span>
           </a>
           <nav class="nav-links" aria-label="Primary navigation">
             <a href="#reel">REEL</a>
@@ -1712,13 +1897,10 @@
     </main>
 
     <!-- Client Logos -->
-    <section id="clients" aria-labelledby="clients-title">
+    <section id="clients" aria-labelledby="clients-label">
       <div class="container">
-        <div class="section-head reveal" data-reveal="heading">
-          <div class="label">TRUSTED BY LOCAL BUSINESSES</div>
-          <div class="heading-row">
-            <h2 id="clients-title" class="heading-display" data-parallax-heading>Clients</h2>
-          </div>
+        <div class="section-head section-head--label-only reveal" data-reveal="heading">
+          <div class="label" id="clients-label">PARTNERS</div>
         </div>
 
         <div class="logos-grid reveal" data-reveal="card">
@@ -1774,9 +1956,9 @@
     <section id="reel" aria-labelledby="reel-title">
       <div class="container">
         <div class="section-head reveal" data-reveal="heading">
-          <div class="label">FEATURED WORK</div>
+          <div class="label">REEL</div>
           <div class="heading-row">
-            <h2 id="reel-title" class="heading-display" data-parallax-heading>FILM REEL</h2>
+            <h2 id="reel-title" class="heading-display" data-parallax-heading>Demo Reel</h2>
             <div class="divider" aria-hidden="true" data-reveal="divider"></div>
           </div>
         </div>
@@ -1786,28 +1968,57 @@
         </div>
 
         <div class="reel-layout">
-          <div class="embed" aria-label="Embedded reel video">
-            <div class="embed-badge">DEMO REEL 2024</div>
-            <iframe
-              src="https://www.youtube.com/embed/kEbHvnY3yj8?start=1"
-              title="DEMO REEL 2024"
-              loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></iframe>
+          <div class="reel-poster reveal" data-reveal="card">
+            <p class="reel-poster__title">DEMO REEL 2024</p>
+            <button
+              type="button"
+              class="reel-poster__play"
+              id="reel-open"
+              aria-haspopup="dialog"
+              aria-controls="reel-lightbox"
+              aria-label="Play demo reel"
+            >
+              <span class="reel-poster__play-icon" aria-hidden="true"></span>
+            </button>
           </div>
         </div>
       </div>
     </section>
 
+    <div
+      id="reel-lightbox"
+      class="reel-lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="reel-lightbox-title"
+      hidden
+    >
+      <div class="reel-lightbox__backdrop" id="reel-lightbox-backdrop" aria-hidden="true"></div>
+      <div class="reel-lightbox__content">
+        <button type="button" class="reel-lightbox__close" id="reel-lightbox-close" aria-label="Close video">
+          &times;
+        </button>
+        <span id="reel-lightbox-title" class="visually-hidden">Demo reel video</span>
+        <div class="reel-lightbox__frame">
+          <iframe
+            id="reel-lightbox-iframe"
+            title="DEMO REEL 2024"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
     <!-- Services -->
     <section id="services" aria-labelledby="services-title">
       <div class="container">
         <div class="section-head reveal" data-reveal="heading">
-          <div class="label">WHAT I OFFER</div>
+          <div class="label">SERVICES</div>
           <div class="heading-row">
-            <h2 id="services-title" class="heading-display" data-parallax-heading>SERVICES</h2>
+            <h2 id="services-title" class="heading-display" data-parallax-heading>What We Do</h2>
           </div>
         </div>
 
@@ -1877,7 +2088,7 @@
         <div class="section-head reveal" data-reveal="heading">
           <div class="label">PORTFOLIO</div>
           <div class="heading-row">
-            <h2 id="projects-title" class="heading-display" data-parallax-heading>PAST PROJECTS</h2>
+            <h2 id="projects-title" class="heading-display" data-parallax-heading>The Work</h2>
             <div class="divider" aria-hidden="true" data-reveal="divider"></div>
           </div>
         </div>
@@ -1889,8 +2100,10 @@
             role="listitem"
             tabindex="0"
           >
-            <span class="project-placeholder__hint">Coming Soon</span>
-            <span class="project-placeholder__meta">Restaurant Promo · 2024</span>
+            <div class="project-placeholder__label-wrap">
+              <span class="project-placeholder__dash" aria-hidden="true"></span>
+              <span class="project-placeholder__label">Restaurant Promo · 2024</span>
+            </div>
           </div>
           <div
             class="project-placeholder project-placeholder--detail reveal"
@@ -1898,8 +2111,10 @@
             role="listitem"
             tabindex="0"
           >
-            <span class="project-placeholder__hint">Coming Soon</span>
-            <span class="project-placeholder__meta">Event Recap · 2024</span>
+            <div class="project-placeholder__label-wrap">
+              <span class="project-placeholder__dash" aria-hidden="true"></span>
+              <span class="project-placeholder__label">Event Recap · 2024</span>
+            </div>
           </div>
           <div
             class="project-placeholder project-placeholder--detail reveal"
@@ -1907,18 +2122,14 @@
             role="listitem"
             tabindex="0"
           >
-            <span class="project-placeholder__hint">Coming Soon</span>
-            <span class="project-placeholder__meta">Brand Spot · 2025</span>
+            <div class="project-placeholder__label-wrap">
+              <span class="project-placeholder__dash" aria-hidden="true"></span>
+              <span class="project-placeholder__label">Brand Spot · 2025</span>
+            </div>
           </div>
-          <div class="project-placeholder reveal" data-reveal="project" role="listitem" tabindex="0">
-            <span class="project-placeholder__hint project-placeholder__hint--solo">Coming Soon</span>
-          </div>
-          <div class="project-placeholder reveal" data-reveal="project" role="listitem" tabindex="0">
-            <span class="project-placeholder__hint project-placeholder__hint--solo">Coming Soon</span>
-          </div>
-          <div class="project-placeholder reveal" data-reveal="project" role="listitem" tabindex="0">
-            <span class="project-placeholder__hint project-placeholder__hint--solo">Coming Soon</span>
-          </div>
+          <div class="project-placeholder reveal" data-reveal="project" role="listitem" tabindex="0"></div>
+          <div class="project-placeholder reveal" data-reveal="project" role="listitem" tabindex="0"></div>
+          <div class="project-placeholder reveal" data-reveal="project" role="listitem" tabindex="0"></div>
         </div>
       </div>
     </section>
@@ -1929,7 +2140,7 @@
         <div class="section-head reveal" data-reveal="heading">
           <div class="label">KIND WORDS</div>
           <div class="heading-row">
-            <h2 id="testimonials-title" class="heading-display" data-parallax-heading>Testimonials</h2>
+            <h2 id="testimonials-title" class="heading-display" data-parallax-heading>Kind Words</h2>
           </div>
         </div>
 
@@ -1977,6 +2188,8 @@
     <section id="contact" aria-labelledby="contact-title">
       <div class="container">
         <div class="section-head reveal" data-reveal="heading">
+          <div class="label">CONTACT</div>
+          <p class="contact-lead">Got a project in mind? Let’s make something worth watching.</p>
           <div class="heading-row">
             <h2 id="contact-title" class="heading-display" data-parallax-heading>Let’s Work Together</h2>
             <div class="divider" aria-hidden="true" data-reveal="divider"></div>
@@ -2081,6 +2294,7 @@
       <div class="container">
         <div class="footer-inner">
           <span>© 2025 Red Shift Studios. All rights reserved. / Crafted with passion for cinema / 435-459-2916</span>
+          <p class="footer-tagline">Video Production · El Paso, TX · Est. 2025</p>
         </div>
       </div>
     </footer>
@@ -2375,6 +2589,42 @@
 
       loadProjectsFromYouTubeRss().catch(() => {});
 
+      function setupReelLightbox() {
+        const root = document.getElementById("reel-lightbox");
+        const openBtn = document.getElementById("reel-open");
+        const closeBtn = document.getElementById("reel-lightbox-close");
+        const backdrop = document.getElementById("reel-lightbox-backdrop");
+        const iframe = document.getElementById("reel-lightbox-iframe");
+        const REEL_SRC = "https://www.youtube.com/embed/kEbHvnY3yj8?start=10&autoplay=1";
+        if (!root || !openBtn || !iframe) return;
+
+        let lastFocus = null;
+
+        function open() {
+          lastFocus = document.activeElement;
+          root.hidden = false;
+          document.body.style.overflow = "hidden";
+          iframe.setAttribute("src", REEL_SRC);
+          closeBtn?.focus();
+        }
+
+        function close() {
+          root.hidden = true;
+          document.body.style.overflow = "";
+          iframe.removeAttribute("src");
+          if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+        }
+
+        openBtn.addEventListener("click", open);
+        closeBtn?.addEventListener("click", close);
+        backdrop?.addEventListener("click", close);
+        document.addEventListener("keydown", (e) => {
+          if (!root.hidden && e.key === "Escape") close();
+        });
+      }
+
+      setupReelLightbox();
+
       // Init animations
       setupHeroTitle();
       setupScrollReveal();
@@ -2384,6 +2634,7 @@
       // Optional: async submit status (still works if you remove this)
       const form = document.getElementById("bookingForm");
       const statusEl = document.getElementById("formStatus");
+      if (!form || !statusEl) return;
       form.addEventListener("submit", async (e) => {
         // If endpoint is still placeholder, don't actually submit.
         if (form.action.includes("YOUR_FORM_ID")) {
