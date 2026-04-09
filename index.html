@@ -298,6 +298,7 @@
 
       .hero {
         position: relative;
+        isolation: isolate;
         padding: 74px 0 52px;
         min-height: calc(100vh - var(--nav-h));
         display: grid;
@@ -395,7 +396,7 @@
 
       .hero-grid {
         position: relative;
-        z-index: 4;
+        z-index: 6;
         width: 100%;
         display: grid;
         place-items: center;
@@ -404,7 +405,7 @@
 
       .hero .container {
         position: relative;
-        z-index: 4;
+        z-index: 6;
       }
 
       .hero h1 {
@@ -616,7 +617,7 @@
 
       .scroll-indicator {
         position: absolute;
-        z-index: 5;
+        z-index: 8;
         bottom: 18px;
         left: 50%;
         transform: translateX(-50%);
@@ -2634,34 +2635,35 @@
       // Optional: async submit status (still works if you remove this)
       const form = document.getElementById("bookingForm");
       const statusEl = document.getElementById("formStatus");
-      if (!form || !statusEl) return;
-      form.addEventListener("submit", async (e) => {
-        // If endpoint is still placeholder, don't actually submit.
-        if (form.action.includes("YOUR_FORM_ID")) {
-          e.preventDefault();
-          statusEl.textContent = "Replace the Formspree endpoint to enable submissions.";
-          return;
-        }
-
-        e.preventDefault();
-        statusEl.textContent = "Sending…";
-        const data = new FormData(form);
-        try {
-          const res = await fetch(form.action, {
-            method: "POST",
-            body: data,
-            headers: { Accept: "application/json" }
-          });
-          if (res.ok) {
-            statusEl.textContent = "Sent. I’ll get back to you shortly.";
-            form.reset();
-          } else {
-            statusEl.textContent = "Something went wrong—please email me directly.";
+      if (form && statusEl) {
+        form.addEventListener("submit", async (e) => {
+          // If endpoint is still placeholder, don't actually submit.
+          if (form.action.includes("YOUR_FORM_ID")) {
+            e.preventDefault();
+            statusEl.textContent = "Replace the Formspree endpoint to enable submissions.";
+            return;
           }
-        } catch {
-          statusEl.textContent = "Network error—please email me directly.";
-        }
-      });
+
+          e.preventDefault();
+          statusEl.textContent = "Sending…";
+          const data = new FormData(form);
+          try {
+            const res = await fetch(form.action, {
+              method: "POST",
+              body: data,
+              headers: { Accept: "application/json" }
+            });
+            if (res.ok) {
+              statusEl.textContent = "Sent. I’ll get back to you shortly.";
+              form.reset();
+            } else {
+              statusEl.textContent = "Something went wrong—please email me directly.";
+            }
+          } catch {
+            statusEl.textContent = "Network error—please email me directly.";
+          }
+        });
+      }
     </script>
   </body>
 </html>
