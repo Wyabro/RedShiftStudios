@@ -95,13 +95,12 @@
         pointer-events: none;
         z-index: 9999;
         background: repeating-linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 0.4) 0px,
-          rgba(0, 0, 0, 0.4) 1px,
+          0deg,
+          rgba(0, 0, 0, 0.03) 0px,
+          rgba(0, 0, 0, 0.03) 1px,
           transparent 1px,
           transparent 4px
         );
-        opacity: 0.04;
       }
 
       a {
@@ -141,27 +140,16 @@
       .logo {
         display: inline-flex;
         align-items: center;
-        gap: 12px;
-        letter-spacing: 0.18em;
-        font-weight: 700;
         text-transform: uppercase;
-        font-family: var(--font-sans);
-      }
-
-      .logo-rss {
-        flex-shrink: 0;
-        width: 44px;
-        height: auto;
-        display: block;
-        color: var(--text);
       }
 
       .logo-text {
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        font-size: 11px;
+        font-family: var(--font-display);
+        font-weight: 300;
+        font-size: clamp(12px, 1.35vw, 15px);
+        letter-spacing: 0.3em;
+        line-height: 1.2;
         color: var(--text);
-        font-family: var(--font-sans);
       }
 
       .nav-links {
@@ -226,7 +214,7 @@
         align-items: center;
         justify-content: center;
         padding: 12px 18px;
-        border-radius: 999px;
+        border-radius: 3px;
         border: 1px solid var(--border);
         background: transparent;
         color: var(--text);
@@ -246,15 +234,15 @@
       }
 
       .hero .cta-row .cta:not(.red) {
-        border-color: rgba(0, 229, 255, 0.45);
+        border-color: rgba(0, 229, 255, 0.55);
         color: var(--accent-cyan);
-        background: rgba(0, 229, 255, 0.04);
+        background: rgba(13, 11, 26, 0.5);
       }
 
       .hero .cta-row .cta:not(.red):hover {
         border-color: var(--accent-cyan);
         box-shadow: 0 0 22px rgba(0, 229, 255, 0.28);
-        background: rgba(0, 229, 255, 0.08);
+        background: rgba(13, 11, 26, 0.62);
         color: #fff;
       }
 
@@ -357,8 +345,8 @@
         height: 120%;
         transform: translateX(-50%) perspective(420px) rotateX(68deg) scale(1.15);
         transform-origin: center top;
-        background-image: linear-gradient(rgba(140, 100, 255, 0.07) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(140, 100, 255, 0.07) 1px, transparent 1px);
+        background-image: linear-gradient(rgba(140, 100, 255, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(140, 100, 255, 0.06) 1px, transparent 1px);
         background-size: 52px 52px;
       }
 
@@ -933,12 +921,12 @@
       #services .service-block:not(:last-child)::after {
         content: "";
         position: absolute;
-        left: 0;
-        right: 0;
+        left: 50%;
         bottom: 0;
+        transform: translateX(-50%);
+        width: min(68%, 720px);
         height: 1px;
-        background: linear-gradient(90deg, rgba(224, 64, 160, 0.35), rgba(0, 229, 255, 0.35));
-        opacity: 0.65;
+        background: linear-gradient(to right, #e040a0, #00e5ff);
       }
 
       #services .service-block:last-child {
@@ -1551,7 +1539,7 @@
           scroll-behavior: auto;
         }
         body::after {
-          opacity: 0 !important;
+          background: none !important;
         }
         [data-parallax-heading] {
           transform: none !important;
@@ -1619,27 +1607,6 @@
       <div class="container">
         <div class="nav-inner">
           <a class="logo" href="#top" aria-label="Home">
-            <svg
-              class="logo-rss"
-              viewBox="0 0 44 14"
-              width="44"
-              height="14"
-              aria-hidden="true"
-              focusable="false"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <text
-                x="0"
-                y="11"
-                font-family="'Cormorant Garamond', 'Times New Roman', serif"
-                font-size="15"
-                font-weight="300"
-                letter-spacing="0.02em"
-                fill="currentColor"
-              >
-                RSS
-              </text>
-            </svg>
             <span class="logo-text">RED SHIFT STUDIOS</span>
           </a>
           <nav class="nav-links" aria-label="Primary navigation">
