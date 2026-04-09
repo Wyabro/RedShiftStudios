@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -62,7 +62,7 @@
         --accent-2: rgba(224, 64, 160, 0.25);
         --border: rgba(140, 100, 255, 0.15);
         --shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
-        --font-display: "DM Serif Display", "Times New Roman", Times, serif;
+        --font-heading: "Rajdhani", ui-sans-serif, system-ui, sans-serif;
         --font-sans: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
         --max: 1100px;
         --radius: 18px;
@@ -149,20 +149,6 @@
         gap: 18px;
       }
 
-      .logo {
-        display: inline-flex;
-        align-items: center;
-      }
-
-      .logo-text {
-        font-family: var(--font-display);
-        font-weight: 400;
-        font-size: 20px;
-        letter-spacing: 0.2em;
-        line-height: 1;
-        color: var(--text);
-      }
-
       .nav-links {
         display: flex;
         align-items: center;
@@ -170,8 +156,8 @@
       }
 
       .nav-links a {
-        font-family: var(--font-sans);
-        font-weight: 500;
+        font-family: var(--font-heading);
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.12em;
         font-size: 13px;
@@ -232,8 +218,8 @@
         text-transform: uppercase;
         letter-spacing: 0.2em;
         font-size: 11px;
-        font-weight: 700;
-        font-family: var(--font-sans);
+        font-weight: 600;
+        font-family: var(--font-heading);
         cursor: pointer;
         transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease,
           color 180ms ease;
@@ -410,14 +396,14 @@
 
       .hero h1 {
         margin: 0;
-        font-family: var(--font-display);
-        font-weight: 400;
+        font-family: var(--font-heading);
+        font-weight: 300;
         font-size: clamp(2.5rem, 6vw, 5rem);
-        letter-spacing: 0.17em;
+        letter-spacing: 0.2em;
         line-height: 1.05;
         text-transform: uppercase;
         color: #fff;
-        text-shadow: 0 0 40px rgba(0, 229, 255, 0.12);
+        text-shadow: 0 0 40px rgba(0, 229, 255, 0.08);
       }
 
       .subtitle {
@@ -777,12 +763,12 @@
       }
 
       h2.heading-display {
-        font-family: var(--font-display);
-        font-weight: 400;
-        font-size: clamp(2rem, 4vw, 3rem);
-        letter-spacing: 0.04em;
+        font-family: var(--font-heading);
+        font-weight: 300;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        letter-spacing: 0.08em;
         line-height: 1.2;
-        text-transform: none;
+        text-transform: uppercase;
         font-style: normal;
         text-shadow: 0 0 36px rgba(0, 229, 255, 0.1);
       }
@@ -1103,9 +1089,12 @@
 
       .service-block {
         position: relative;
-        border-left: 2px solid transparent;
         padding: 40px 0;
         margin: 0;
+      }
+
+      #services .service-block {
+        border-left: 2px solid transparent;
         transition: border-left-color 360ms ease, box-shadow 360ms ease;
       }
 
@@ -1137,8 +1126,8 @@
         display: none;
       }
 
-      .service-block:hover,
-      .service-block:focus-within {
+      #services .service-block:hover,
+      #services .service-block:focus-within {
         border-left-color: rgba(224, 64, 160, 0.85);
         box-shadow: inset 4px 0 18px -4px rgba(224, 64, 160, 0.25);
       }
@@ -1161,7 +1150,7 @@
 
       .service-block__title {
         margin: 0 0 14px;
-        font-family: var(--font-sans);
+        font-family: var(--font-heading);
         font-size: 20px;
         font-weight: 600;
         line-height: 1.25;
@@ -1470,8 +1459,8 @@
         border: none;
         background: none;
         color: var(--accent);
-        font-weight: 400;
-        font-family: var(--font-display);
+        font-weight: 300;
+        font-family: var(--font-heading);
         font-size: clamp(2.5rem, 5vw, 3.25rem);
         line-height: 0.85;
         text-shadow: 0 0 24px rgba(224, 64, 160, 0.35);
@@ -1859,9 +1848,6 @@
     <header class="nav" role="banner">
       <div class="container">
         <div class="nav-inner">
-          <a class="logo" href="#top" aria-label="Red Shift Studios — home">
-            <span class="logo-text">RSS</span>
-          </a>
           <nav class="nav-links" aria-label="Primary navigation">
             <a href="#reel">REEL</a>
             <a href="#projects">PROJECTS</a>
