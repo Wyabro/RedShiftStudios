@@ -46,7 +46,7 @@
         --bg: #1a1a1a;
         --panel: rgba(255, 255, 255, 0.04);
         --panel-2: rgba(255, 255, 255, 0.06);
-        --text: rgba(255, 255, 255, 0.9);
+        --text: #e8e8e8;
         --muted: rgba(255, 255, 255, 0.68);
         --muted-2: rgba(255, 255, 255, 0.55);
         --accent: #c0392b;
@@ -75,17 +75,6 @@
           radial-gradient(1000px 700px at 0% 20%, rgba(255, 255, 255, 0.055), transparent 60%), var(--bg);
         color: var(--text);
         line-height: 1.55;
-      }
-
-      /* Subtle neutral vignette around page edges */
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 999;
-        background: radial-gradient(1200px 900px at 50% 30%, transparent 58%, rgba(0, 0, 0, 0.55) 100%);
-        opacity: 0.35;
       }
 
       a {
@@ -251,51 +240,37 @@
         display: grid;
         place-items: center;
         overflow: clip;
+        background: #121212;
       }
 
-      /* Subtle static hero glow behind text (neutral) */
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: -30%;
-        background: radial-gradient(600px 300px at 50% 40%, rgba(255, 255, 255, 0.08), transparent 65%);
-        filter: blur(2px);
-        opacity: 0.16;
-        transform: translateZ(0);
-        pointer-events: none;
-      }
-
-      /* Faint scanlines over hero (very subtle) */
-      .hero::after {
-        content: "";
+      /* YouTube iframe as full-bleed background (cover) */
+      .hero-bg-video {
         position: absolute;
         inset: 0;
-        pointer-events: none;
-        z-index: 3;
-        background: repeating-linear-gradient(
-          to bottom,
-          rgba(255, 255, 255, 0.022) 0px,
-          rgba(255, 255, 255, 0.022) 1px,
-          rgba(0, 0, 0, 0) 3px,
-          rgba(0, 0, 0, 0) 7px
-        );
-        opacity: 0.1;
-        mix-blend-mode: overlay;
-      }
-
-      .hero-grid {
-        position: relative;
-        z-index: 2;
-      }
-
-      /* Ember particles canvas */
-      #embers {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
         z-index: 0;
-        opacity: 0.65;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .hero-bg-video iframe {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 177.78vh;
+        min-width: 100%;
+        min-height: 100%;
+        height: 56.25vw;
+        border: 0;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: rgba(0, 0, 0, 0.65);
+        pointer-events: none;
       }
 
       /* Hero load-in */
@@ -332,15 +307,21 @@
 
       .hero-grid {
         position: relative;
+        z-index: 3;
         width: 100%;
         display: grid;
         place-items: center;
         text-align: center;
       }
 
+      .hero .container {
+        position: relative;
+        z-index: 3;
+      }
+
       .hero h1 {
         margin: 0;
-        font-size: clamp(44px, 6vw, 78px);
+        font-size: clamp(38px, 5.2vw, 68px);
         letter-spacing: 0.06em;
         line-height: 1.02;
       }
@@ -421,33 +402,24 @@
         pointer-events: none;
         position: absolute;
         inset: 0;
-        opacity: 0.55;
-        z-index: 1;
+        z-index: 2;
       }
 
       .icon-pos-1 {
-        top: 16%;
-        left: 16%;
+        top: 14%;
+        left: 12%;
       }
       .icon-pos-2 {
-        top: 16%;
-        right: 16%;
+        top: 14%;
+        right: 12%;
       }
       .icon-pos-3 {
-        top: 42%;
-        left: 10%;
+        bottom: 18%;
+        left: 14%;
       }
       .icon-pos-4 {
-        top: 42%;
-        right: 10%;
-      }
-      .icon-pos-5 {
-        bottom: 20%;
-        left: 18%;
-      }
-      .icon-pos-6 {
-        bottom: 20%;
-        right: 18%;
+        bottom: 18%;
+        right: 14%;
       }
 
       .icon {
@@ -455,82 +427,56 @@
         display: grid;
         place-items: center;
         transform: translate3d(0, 0, 0);
-        animation: none;
-        will-change: transform, opacity;
+        will-change: transform;
+      }
+
+      .icon-drift {
+        display: grid;
+        place-items: center;
+        animation: iconFloat var(--floatDur, 52s) ease-in-out infinite;
+        animation-delay: var(--floatDelay, 0s);
+      }
+
+      @keyframes iconFloat {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0);
+        }
+        50% {
+          transform: translate3d(var(--fx, 4px), var(--fy, -5px), 0);
+        }
       }
 
       .icon svg {
-        width: 34px;
-        height: 34px;
-        opacity: 0.5;
-        filter: drop-shadow(0 12px 26px rgba(0, 0, 0, 0.8));
+        width: 22px;
+        height: 22px;
+        opacity: 0.18;
+        filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5));
       }
 
-      /* Per-icon glow */
-      .icon::before {
-        content: "";
-        position: absolute;
-        width: 84px;
-        height: 84px;
-        border-radius: 999px;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 62%);
-        filter: blur(2px);
-        opacity: 0.6;
-        transform: translateZ(0);
-      }
-
-      /* Gentle ambient icon drift (calm) */
       .icon-1 {
-        --fx: 10px;
-        --fy: -12px;
-        --floatDur: 16s;
-        --floatDelay: -2s;
-      }
-      .icon-2 {
-        --fx: -12px;
-        --fy: -10px;
-        --floatDur: 18s;
-        --floatDelay: -6s;
-      }
-      .icon-3 {
-        --fx: 12px;
-        --fy: 10px;
-        --floatDur: 20s;
-        --floatDelay: -10s;
-      }
-      .icon-4 {
-        --fx: -10px;
-        --fy: 12px;
-        --floatDur: 17s;
+        --fx: 5px;
+        --fy: -6px;
+        --floatDur: 56s;
         --floatDelay: -4s;
       }
-      .icon-5 {
-        --fx: 9px;
-        --fy: 11px;
-        --floatDur: 22s;
-        --floatDelay: -8s;
+      .icon-2 {
+        --fx: -6px;
+        --fy: -5px;
+        --floatDur: 64s;
+        --floatDelay: -18s;
       }
-      .icon-6 {
-        --fx: -9px;
-        --fy: 10px;
-        --floatDur: 19s;
+      .icon-3 {
+        --fx: 6px;
+        --fy: 5px;
+        --floatDur: 60s;
+        --floatDelay: -28s;
+      }
+      .icon-4 {
+        --fx: -5px;
+        --fy: 6px;
+        --floatDur: 68s;
         --floatDelay: -12s;
-      }
-
-      .icon::before {
-        animation: iconGlowPulse 8.5s ease-in-out infinite;
-      }
-
-      @keyframes iconGlowPulse {
-        0%,
-        100% {
-          opacity: 0.35;
-          transform: scale(0.94);
-        }
-        50% {
-          opacity: 0.55;
-          transform: scale(1.06);
-        }
       }
 
       /* Scroll reveal system */
@@ -571,10 +517,9 @@
         stroke: rgba(255, 255, 255, 0.82);
       }
 
-      /* (Removed) old floating icon drift keyframes */
-
       .scroll-indicator {
         position: absolute;
+        z-index: 4;
         bottom: 18px;
         left: 50%;
         transform: translateX(-50%);
@@ -614,7 +559,7 @@
       }
 
       section {
-        padding: 84px 0;
+        padding: 108px 0;
       }
 
       .logos-grid {
@@ -730,6 +675,7 @@
         letter-spacing: 0.28em;
         font-size: 12px;
         color: var(--muted);
+        opacity: 0.5;
       }
 
       .heading-row {
@@ -755,7 +701,6 @@
         width: 92px;
         height: 2px;
         background: var(--accent);
-        box-shadow: 0 0 0 6px rgba(192, 57, 43, 0.08);
       }
 
       .muted {
@@ -882,118 +827,144 @@
         margin: 0 auto;
       }
 
-      .projects {
+      .projects-grid {
         display: grid;
-        gap: 14px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 22px;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+      }
+
+      .projects-grid--fallback {
+        grid-template-columns: 1fr;
         justify-items: center;
       }
 
-      .project {
-        display: grid;
-        grid-template-columns: 180px 1fr auto;
-        gap: 16px;
-        align-items: center;
+      .projects-grid--fallback > .card {
+        max-width: 720px;
         width: 100%;
-        max-width: 1000px;
       }
 
-      .thumb {
-        border-radius: 14px;
-        overflow: hidden;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        height: 110px;
-        display: grid;
-        place-items: center;
-        color: rgba(255, 255, 255, 0.55);
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        font-size: 11px;
+      .project-tile {
         position: relative;
-      }
-
-      .thumb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
         display: block;
-        position: relative;
-        z-index: 1;
+        aspect-ratio: 16 / 9;
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 16px 50px rgba(0, 0, 0, 0.45);
+        text-decoration: none;
+        color: inherit;
+        transform: translateZ(0);
+        transition: transform 420ms ease, box-shadow 420ms ease;
       }
 
-      .thumb::after {
-        content: "";
+      .project-tile:focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.35);
+        outline-offset: 3px;
+      }
+
+      .project-tile:hover,
+      .project-tile:focus-visible {
+        transform: scale(1.03);
+        box-shadow: 0 22px 60px rgba(0, 0, 0, 0.55);
+      }
+
+      .project-tile__img,
+      .project-tile__placeholder {
         position: absolute;
         inset: 0;
-        background: radial-gradient(400px 180px at 60% 20%, rgba(255, 255, 255, 0.14), transparent 55%);
-        opacity: 0.9;
+        width: 100%;
+        height: 100%;
       }
 
-      .project-main {
-        display: grid;
-        gap: 6px;
-        min-width: 0;
+      .project-tile__img {
+        object-fit: cover;
       }
 
-      .project-title {
+      .project-tile__placeholder {
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      }
+
+      .project-tile__shade {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 42%, rgba(0, 0, 0, 0.22) 100%);
+        transition: background 420ms ease;
+        pointer-events: none;
+      }
+
+      .project-tile:hover .project-tile__shade,
+      .project-tile:focus-visible .project-tile__shade {
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.52) 0%, rgba(0, 0, 0, 0.22) 48%, rgba(0, 0, 0, 0.12) 100%);
+      }
+
+      .project-tile__body {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
         display: flex;
-        gap: 12px;
-        align-items: center;
-        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 18px 16px 16px;
+        pointer-events: none;
       }
 
-      .project-title h3 {
+      .project-tile__title {
         margin: 0;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        line-height: 1.35;
+        text-transform: uppercase;
+        font-weight: 650;
+        color: rgba(255, 255, 255, 0.88);
+        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.65);
+        transition: color 320ms ease;
       }
 
-      .tag {
-        display: inline-flex;
+      .project-tile:hover .project-tile__title,
+      .project-tile:focus-visible .project-tile__title {
+        color: rgba(255, 255, 255, 0.98);
+      }
+
+      .project-tile__meta {
+        display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        gap: 8px;
-        padding: 5px 10px;
+        gap: 10px;
+        margin-top: 10px;
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity 380ms ease, transform 380ms ease;
+      }
+
+      .project-tile:hover .project-tile__meta,
+      .project-tile:focus-visible .project-tile__meta {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .project-tile__tag {
+        display: inline-flex;
+        padding: 4px 10px;
         border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background: rgba(255, 255, 255, 0.04);
-        color: rgba(255, 255, 255, 0.72);
-        letter-spacing: 0.18em;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(0, 0, 0, 0.4);
+        color: rgba(255, 255, 255, 0.78);
+        letter-spacing: 0.16em;
         font-size: 10px;
         text-transform: uppercase;
-        white-space: nowrap;
       }
 
-      .year {
-        color: var(--accent);
-        font-weight: 650;
+      .project-tile__year {
+        color: rgba(255, 255, 255, 0.62);
         letter-spacing: 0.12em;
-      }
-
-      .project-desc {
-        color: var(--muted);
-        font-size: 14px;
-        max-width: 72ch;
-      }
-
-      .ext {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 44px;
-        height: 44px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
-      }
-
-      .ext:hover {
-        transform: translateY(-1px);
-        border-color: rgba(192, 57, 43, 0.65);
-        background: rgba(192, 57, 43, 0.12);
-      }
-
-      .ext svg {
-        width: 18px;
-        height: 18px;
+        font-size: 10px;
+        text-transform: uppercase;
+        font-weight: 650;
       }
 
       .testimonials-grid {
@@ -1193,14 +1164,14 @@
         .contact-grid {
           grid-template-columns: 1fr;
         }
-        .project {
-          grid-template-columns: 140px 1fr;
-        }
-        .ext {
-          justify-self: start;
-        }
         .logos-grid {
           grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (max-width: 720px) {
+        .projects-grid {
+          grid-template-columns: 1fr;
         }
       }
 
@@ -1212,7 +1183,7 @@
           padding: 56px 0 42px;
         }
         section {
-          padding: 64px 0;
+          padding: 76px 0;
         }
         .form-grid {
           grid-template-columns: 1fr;
@@ -1229,7 +1200,7 @@
         html {
           scroll-behavior: auto;
         }
-        .icon,
+        .icon-drift,
         .scroll-indicator .line::after {
           animation: none !important;
         }
@@ -1237,9 +1208,6 @@
           transition: none !important;
         }
         .nav .cta.red {
-          animation: none !important;
-        }
-        .hero::before {
           animation: none !important;
         }
         .hero .hero-title,
@@ -1251,12 +1219,25 @@
           transition: none !important;
         }
         .icon {
-          animation: none !important;
           translate: 0 0 !important;
-          rotate: 0deg !important;
         }
-        body::before {
-          opacity: 0 !important;
+        .hero-bg-video {
+          display: none;
+        }
+        .project-tile,
+        .project-tile:hover,
+        .project-tile:focus-visible {
+          transition: none !important;
+          transform: none !important;
+        }
+        .project-tile:hover .project-tile__shade,
+        .project-tile:focus-visible .project-tile__shade {
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 42%, rgba(0, 0, 0, 0.22) 100%);
+        }
+        .project-tile:hover .project-tile__meta,
+        .project-tile:focus-visible .project-tile__meta {
+          opacity: 1;
+          transform: none;
         }
       }
     </style>
@@ -1285,64 +1266,60 @@
 
     <!-- Hero -->
     <main id="top" class="hero" role="main">
-      <canvas id="embers" aria-hidden="true"></canvas>
+      <div class="hero-bg-video" aria-hidden="true">
+        <iframe
+          src="https://www.youtube.com/embed/kEbHvnY3yj8?autoplay=1&mute=1&loop=1&playlist=kEbHvnY3yj8&controls=0&modestbranding=1&playsinline=1&rel=0&start=1&iv_load_policy=3&disablekb=1"
+          title="Decorative background video"
+          tabindex="-1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          loading="eager"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+      <div class="hero-overlay" aria-hidden="true"></div>
       <div class="floating-icons" aria-hidden="true">
-        <!-- Film reel -->
         <div class="icon icon-1 icon-pos-1">
-          <svg viewBox="0 0 24 24" fill="none">
-            <circle class="accent" cx="12" cy="12" r="8" stroke-width="1.7" />
-            <circle cx="12" cy="12" r="2.1" stroke-width="1.7" />
-            <circle cx="12" cy="6.7" r="1.1" stroke-width="1.7" />
-            <circle cx="16.8" cy="12" r="1.1" stroke-width="1.7" />
-            <circle cx="12" cy="17.3" r="1.1" stroke-width="1.7" />
-            <circle cx="7.2" cy="12" r="1.1" stroke-width="1.7" />
-          </svg>
+          <span class="icon-drift">
+            <svg viewBox="0 0 24 24" fill="none">
+              <circle class="accent" cx="12" cy="12" r="8" stroke-width="1.7" />
+              <circle cx="12" cy="12" r="2.1" stroke-width="1.7" />
+              <circle cx="12" cy="6.7" r="1.1" stroke-width="1.7" />
+              <circle cx="16.8" cy="12" r="1.1" stroke-width="1.7" />
+              <circle cx="12" cy="17.3" r="1.1" stroke-width="1.7" />
+              <circle cx="7.2" cy="12" r="1.1" stroke-width="1.7" />
+            </svg>
+          </span>
         </div>
 
-        <!-- Camera -->
         <div class="icon icon-2 icon-pos-2">
-          <svg viewBox="0 0 24 24" fill="none">
-            <rect x="4" y="7" width="16" height="12" rx="3" stroke-width="1.7" />
-            <circle class="accent" cx="12" cy="13" r="3.3" stroke-width="1.7" />
-            <path d="M8 7l1.7-2H14l2 2" stroke-width="1.7" />
-          </svg>
+          <span class="icon-drift">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="4" y="7" width="16" height="12" rx="3" stroke-width="1.7" />
+              <circle class="accent" cx="12" cy="13" r="3.3" stroke-width="1.7" />
+              <path d="M8 7l1.7-2H14l2 2" stroke-width="1.7" />
+            </svg>
+          </span>
         </div>
 
-        <!-- Clapperboard -->
         <div class="icon icon-3 icon-pos-3">
-          <svg viewBox="0 0 24 24" fill="none">
-            <rect x="5" y="9" width="14" height="10" rx="2.5" stroke-width="1.7" />
-            <path d="M6.5 9l2.8-4.2M11 9l2.8-4.2M15.5 9l2.1-3.2" stroke-width="1.7" />
-            <path d="M6.3 14h11.4" stroke-width="1.7" />
-          </svg>
+          <span class="icon-drift">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="5" y="9" width="14" height="10" rx="2.5" stroke-width="1.7" />
+              <path d="M6.5 9l2.8-4.2M11 9l2.8-4.2M15.5 9l2.1-3.2" stroke-width="1.7" />
+              <path d="M6.3 14h11.4" stroke-width="1.7" />
+            </svg>
+          </span>
         </div>
 
-        <!-- Microphone -->
         <div class="icon icon-4 icon-pos-4">
-          <svg viewBox="0 0 24 24" fill="none">
-            <rect x="9" y="4" width="6" height="10" rx="3" stroke-width="1.7" />
-            <path d="M7 11v1a5 5 0 0010 0v-1" stroke-width="1.7" />
-            <path d="M12 17v3" stroke-width="1.7" />
-            <path d="M9.2 20h5.6" stroke-width="1.7" />
-          </svg>
-        </div>
-
-        <!-- Headphones -->
-        <div class="icon icon-5 icon-pos-5">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M5 13a7 7 0 0114 0" stroke-width="1.7" />
-            <rect x="4" y="13" width="4" height="7" rx="2" stroke-width="1.7" />
-            <rect x="16" y="13" width="4" height="7" rx="2" stroke-width="1.7" />
-          </svg>
-        </div>
-
-        <!-- Video camera -->
-        <div class="icon icon-6 icon-pos-6">
-          <svg viewBox="0 0 24 24" fill="none">
-            <rect x="4" y="9" width="10" height="8" rx="2.2" stroke-width="1.7" />
-            <path d="M14 11l6-3v8l-6-3v-2z" stroke-width="1.7" />
-            <circle class="fill" cx="8" cy="13" r="1.1" />
-          </svg>
+          <span class="icon-drift">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="9" y="4" width="6" height="10" rx="3" stroke-width="1.7" />
+              <path d="M7 11v1a5 5 0 0010 0v-1" stroke-width="1.7" />
+              <path d="M12 17v3" stroke-width="1.7" />
+              <path d="M9.2 20h5.6" stroke-width="1.7" />
+            </svg>
+          </span>
         </div>
       </div>
 
@@ -1502,7 +1479,7 @@
           </div>
         </div>
 
-        <div class="projects" id="projectsList" role="list">
+        <div class="projects-grid" id="projectsList" role="list">
           <!-- Populated from @RedBoltProductions via RSS in JS (see script). -->
         </div>
       </div>
@@ -1678,6 +1655,8 @@
 
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+      let revealObserver = null;
+
       // Hero: simple fade-up + staggered content
       function setupHeroTitle() {
         const hero = document.querySelector(".hero");
@@ -1704,19 +1683,24 @@
         const testimonials = Array.from(document.querySelectorAll('[data-reveal="testimonial"]'));
         testimonials.forEach((el, idx) => el.style.setProperty("--delay", `${idx * 90}ms`));
 
-        const io = new IntersectionObserver(
+        revealObserver = new IntersectionObserver(
           (entries) => {
             for (const entry of entries) {
               if (!entry.isIntersecting) continue;
               entry.target.classList.add("in-view");
-              io.unobserve(entry.target);
+              revealObserver.unobserve(entry.target);
             }
           },
           { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
         );
 
-        for (const el of revealEls) io.observe(el);
-        for (const el of dividerEls) io.observe(el);
+        for (const el of revealEls) revealObserver.observe(el);
+        for (const el of dividerEls) revealObserver.observe(el);
+      }
+
+      function observeRevealsIn(root) {
+        if (!revealObserver || !root) return;
+        root.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
       }
 
       // Hero depth: subtle parallax for floating icons
@@ -1752,97 +1736,6 @@
         hero.addEventListener("mouseleave", () => {
           icons.forEach((icon) => (icon.style.translate = "0px 0px"));
         });
-      }
-
-      // Hero background embers (subtle particles)
-      function setupEmbers() {
-        if (prefersReducedMotion) return;
-        const hero = document.querySelector(".hero");
-        const canvas = document.getElementById("embers");
-        if (!hero || !canvas) return;
-
-        const ctx = canvas.getContext("2d", { alpha: true });
-        if (!ctx) return;
-
-        let w = 0;
-        let h = 0;
-        const dpr = Math.min(2, window.devicePixelRatio || 1);
-
-        function resize() {
-          const rect = hero.getBoundingClientRect();
-          w = Math.max(1, Math.floor(rect.width));
-          h = Math.max(1, Math.floor(rect.height));
-          canvas.width = Math.floor(w * dpr);
-          canvas.height = Math.floor(h * dpr);
-          canvas.style.width = `${w}px`;
-          canvas.style.height = `${h}px`;
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        }
-
-        const particles = [];
-        const count = 46;
-
-        function rand(min, max) {
-          return Math.random() * (max - min) + min;
-        }
-
-        function spawn(i) {
-          const isRed = Math.random() < 0.55;
-          particles[i] = {
-            x: rand(0, w),
-            y: rand(0, h),
-            r: rand(0.6, 1.8),
-            vy: rand(0.15, 0.6),
-            vx: rand(-0.08, 0.08),
-            a: rand(0.08, 0.22),
-            tw: rand(0.004, 0.018),
-            t: rand(0, 1000),
-            c: isRed ? "192,57,43" : "255,255,255"
-          };
-        }
-
-        let raf = 0;
-        let last = performance.now();
-
-        function tick(now) {
-          raf = requestAnimationFrame(tick);
-          const dt = Math.min(34, now - last);
-          last = now;
-
-          ctx.clearRect(0, 0, w, h);
-
-          for (let i = 0; i < particles.length; i++) {
-            const p = particles[i];
-            p.t += dt;
-            const tw = Math.sin(p.t * p.tw) * 0.6 + 0.6; // 0..1-ish
-            const alpha = p.a * (0.55 + tw * 0.7);
-
-            p.x += p.vx * dt;
-            p.y -= p.vy * dt;
-
-            if (p.y < -12) {
-              p.y = h + rand(0, 80);
-              p.x = rand(0, w);
-            }
-            if (p.x < -20) p.x = w + 20;
-            if (p.x > w + 20) p.x = -20;
-
-            ctx.beginPath();
-            ctx.fillStyle = `rgba(${p.c}, ${alpha})`;
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fill();
-          }
-        }
-
-        resize();
-        for (let i = 0; i < count; i++) {
-          spawn(i);
-        }
-
-        const ro = new ResizeObserver(() => resize());
-        ro.observe(hero);
-        window.addEventListener("resize", resize, { passive: true });
-        raf = requestAnimationFrame(tick);
       }
 
       // Ensure "Book a Project" always targets the contact form
@@ -1889,26 +1782,31 @@
         const safeThumb = escapeHtml(thumbnail);
         const safeTag = escapeHtml(tag);
         const safeYear = escapeHtml(year);
+        const thumbBlock = safeThumb
+          ? `<img class="project-tile__img" src="${safeThumb}" alt="" loading="lazy" />`
+          : `<div class="project-tile__placeholder" aria-hidden="true"></div>`;
+        const yearBlock = safeYear ? `<span class="project-tile__year">${safeYear}</span>` : "";
         return `
-          <article class="card project reveal" data-reveal="project" role="listitem" data-delay-ms="${delayMs}">
-            <div class="thumb" aria-label="Project thumbnail">
-              ${safeThumb ? `<img src="${safeThumb}" alt="" loading="lazy" />` : "Thumbnail"}
-            </div>
-            <div class="project-main">
-              <div class="project-title">
-                <h3>${safeTitle}</h3>
-                <span class="tag">${safeTag}</span>
-                ${safeYear ? `<span class="year">${safeYear}</span>` : ""}
+          <a
+            class="project-tile reveal"
+            data-reveal="project"
+            role="listitem"
+            data-delay-ms="${delayMs}"
+            href="${safeUrl}"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="${safeTitle} — open video"
+          >
+            ${thumbBlock}
+            <div class="project-tile__shade" aria-hidden="true"></div>
+            <div class="project-tile__body">
+              <h3 class="project-tile__title">${safeTitle}</h3>
+              <div class="project-tile__meta">
+                <span class="project-tile__tag">${safeTag}</span>
+                ${yearBlock}
               </div>
             </div>
-            <a class="ext" href="${safeUrl}" target="_blank" rel="noreferrer" aria-label="Open project link">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M14 5h5v5" stroke-width="1.8" />
-                <path d="M10 14L19 5" stroke-width="1.8" />
-                <path d="M19 14v5H5V5h5" stroke-width="1.8" />
-              </svg>
-            </a>
-          </article>
+          </a>
         `;
       }
 
@@ -1950,6 +1848,7 @@
         }
 
         if (!xml) {
+          list.className = "projects-grid projects-grid--fallback";
           list.innerHTML = `
             <div class="card">
               <div class="label">PROJECTS</div>
@@ -2001,17 +1900,20 @@
           return { title, url, thumbnail, tag, year };
         });
 
+        list.className = "projects-grid";
         list.innerHTML = items
           .map((it, idx) => projectItemTemplate({ ...it, delayMs: 60 * idx }))
           .join("");
-        list.querySelectorAll("article.project[data-delay-ms]").forEach((el) => {
+        list.querySelectorAll(".project-tile[data-delay-ms]").forEach((el) => {
           el.style.setProperty("--delay", `${el.getAttribute("data-delay-ms")}ms`);
         });
+        observeRevealsIn(list);
       }
 
       loadProjectsFromYouTubeRss().catch(() => {
         const list = document.getElementById("projectsList");
         if (!list) return;
+        list.className = "projects-grid projects-grid--fallback";
         list.innerHTML = `
           <div class="card">
             <div class="label">PROJECTS</div>
@@ -2027,7 +1929,6 @@
       setupHeroTitle();
       setupScrollReveal();
       setupHeroDepth();
-      setupEmbers();
 
       // Optional: async submit status (still works if you remove this)
       const form = document.getElementById("bookingForm");
