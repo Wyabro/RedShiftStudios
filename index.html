@@ -49,18 +49,26 @@
 
     <style>
       :root {
-        --bg: #0d0b1a;
-        --surface: rgba(20, 15, 40, 0.6);
-        --surface-soft: rgba(20, 15, 40, 0.5);
-        --panel: rgba(20, 15, 40, 0.45);
-        --panel-2: rgba(20, 15, 40, 0.55);
+        /* Scroll-driven (defaults = top of page; JS updates on body) */
+        --accent-primary: #00e5ff;
+        --accent-secondary: #e040a0;
+        --bg-base: #0d0b1a;
+        --bg-card: rgba(20, 15, 40, 0.4);
+        --border-accent: rgba(0, 229, 255, 0.15);
+        --glow-color: rgba(0, 229, 255, 0.08);
+
+        --bg: var(--bg-base);
+        --surface: var(--bg-card);
+        --surface-soft: var(--bg-card);
+        --panel: var(--bg-card);
+        --panel-2: var(--bg-card);
         --text: #e0dde8;
         --muted: #8a829e;
         --muted-2: #6d6580;
-        --accent: #e040a0;
-        --accent-cyan: #00e5ff;
-        --accent-2: rgba(224, 64, 160, 0.25);
-        --border: rgba(140, 100, 255, 0.15);
+        --accent: var(--accent-secondary);
+        --accent-cyan: var(--accent-primary);
+        --accent-2: color-mix(in srgb, var(--accent-secondary) 25%, transparent);
+        --border: var(--border-accent);
         --shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
         --font-sans: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
         --max: 1100px;
@@ -75,12 +83,12 @@
       }
 
       ::selection {
-        background: rgba(224, 64, 160, 0.3);
+        background: color-mix(in srgb, var(--accent-secondary) 30%, transparent);
         color: #fff;
       }
 
       ::-moz-selection {
-        background: rgba(224, 64, 160, 0.3);
+        background: color-mix(in srgb, var(--accent-secondary) 30%, transparent);
         color: #fff;
       }
 
@@ -105,8 +113,13 @@
         font-family: var(--font-sans);
         font-weight: 400;
         font-size: 16px;
-        background: radial-gradient(1000px 800px at 80% -10%, rgba(224, 64, 160, 0.08), transparent 55%),
-          radial-gradient(900px 700px at 0% 30%, rgba(0, 229, 255, 0.05), transparent 50%), var(--bg);
+        background: radial-gradient(
+            1000px 800px at 80% -10%,
+            color-mix(in srgb, var(--accent-secondary) 8%, transparent),
+            transparent 55%
+          ),
+          radial-gradient(900px 700px at 0% 30%, color-mix(in srgb, var(--accent-primary) 5%, transparent), transparent 50%),
+          var(--bg-base);
         color: var(--text);
         line-height: 1.7;
       }
@@ -145,13 +158,13 @@
         position: sticky;
         top: 0;
         z-index: 40;
-        background: rgba(13, 11, 26, 0.72);
-        border-bottom: 1px solid var(--border);
+        background: color-mix(in srgb, var(--bg-base) 72%, transparent);
+        border-bottom: 1px solid var(--border-accent);
       }
 
       @supports (backdrop-filter: blur(10px)) {
         .nav {
-          background: rgba(13, 11, 26, 0.55);
+          background: color-mix(in srgb, var(--bg-base) 55%, transparent);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
         }
@@ -208,8 +221,8 @@
       }
 
       .nav-links a:hover {
-        color: var(--accent-cyan);
-        background: rgba(0, 229, 255, 0.06);
+        color: var(--accent-primary);
+        background: color-mix(in srgb, var(--accent-primary) 6%, transparent);
       }
 
       /* Nav underline slide-in */
@@ -220,7 +233,7 @@
         right: 10px;
         bottom: 6px;
         height: 1px;
-        background: linear-gradient(90deg, rgba(224, 64, 160, 0.5), rgba(0, 229, 255, 0.5));
+        background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
         transform: scaleX(0);
         transform-origin: left;
         opacity: 1;
@@ -270,29 +283,29 @@
       }
 
       .hero .cta-row .cta:not(.red) {
-        border-color: rgba(0, 229, 255, 0.55);
-        color: var(--accent-cyan);
+        border-color: color-mix(in srgb, var(--accent-primary) 55%, transparent);
+        color: var(--accent-primary);
         background: rgba(13, 11, 26, 0.5);
       }
 
       .hero .cta-row .cta:not(.red):hover {
-        border-color: var(--accent-cyan);
-        box-shadow: 0 0 22px rgba(0, 229, 255, 0.28);
+        border-color: var(--accent-primary);
+        box-shadow: 0 0 22px var(--glow-color), 0 0 36px var(--glow-color);
         background: rgba(13, 11, 26, 0.62);
         color: #fff;
       }
 
       .cta.red {
-        background: linear-gradient(135deg, rgba(224, 64, 160, 0.95), rgba(180, 40, 130, 0.88));
-        border-color: rgba(224, 64, 160, 0.85);
+        background: var(--accent-secondary);
+        border-color: color-mix(in srgb, var(--accent-secondary) 85%, #000);
         color: #fff;
-        box-shadow: 0 0 24px rgba(224, 64, 160, 0.35);
+        box-shadow: 0 0 24px var(--glow-color), 0 0 40px var(--glow-color);
       }
 
       .cta.red:hover {
-        border-color: var(--accent-cyan);
-        background: linear-gradient(135deg, rgba(0, 229, 255, 0.35), rgba(224, 64, 160, 0.75));
-        box-shadow: 0 0 28px rgba(0, 229, 255, 0.35), 0 0 20px rgba(224, 64, 160, 0.25);
+        border-color: var(--accent-primary);
+        background: color-mix(in srgb, var(--accent-secondary) 88%, #fff);
+        box-shadow: 0 0 28px var(--glow-color), 0 0 48px var(--glow-color);
         color: #fff;
       }
 
@@ -306,10 +319,10 @@
       @keyframes ctaPulse {
         0%,
         100% {
-          box-shadow: 0 0 20px rgba(224, 64, 160, 0.28);
+          box-shadow: 0 0 20px var(--glow-color);
         }
         50% {
-          box-shadow: 0 0 28px rgba(224, 64, 160, 0.42);
+          box-shadow: 0 0 28px var(--glow-color), 0 0 40px var(--glow-color);
         }
       }
 
@@ -382,8 +395,8 @@
         height: 120%;
         transform: translateX(-50%) perspective(420px) rotateX(68deg) scale(1.15);
         transform-origin: center top;
-        background-image: linear-gradient(rgba(140, 100, 255, 0.06) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(140, 100, 255, 0.06) 1px, transparent 1px);
+        background-image: linear-gradient(color-mix(in srgb, var(--border-accent) 40%, transparent) 1px, transparent 1px),
+          linear-gradient(90deg, color-mix(in srgb, var(--border-accent) 40%, transparent) 1px, transparent 1px);
         background-size: 52px 52px;
       }
 
@@ -442,7 +455,7 @@
         line-height: 1.05;
         text-transform: uppercase;
         color: #fff;
-        text-shadow: 0 0 40px rgba(0, 229, 255, 0.1);
+        text-shadow: 0 0 40px var(--glow-color);
       }
 
       .subtitle {
@@ -575,7 +588,7 @@
         width: 22px;
         height: 22px;
         opacity: 0.1;
-        filter: drop-shadow(0 8px 20px rgba(0, 229, 255, 0.15));
+        filter: drop-shadow(0 8px 20px var(--glow-color));
       }
 
       .icon-1 {
@@ -622,7 +635,7 @@
         margin: 0 auto;
         border: none;
         padding: 0;
-        background: linear-gradient(90deg, rgba(224, 64, 160, 1), rgba(0, 229, 255, 1));
+        background: linear-gradient(to right, var(--accent-secondary), var(--accent-primary));
         opacity: 0.4;
       }
 
@@ -640,16 +653,16 @@
       .icon rect,
       .icon line,
       .icon polyline {
-        stroke: rgba(0, 229, 255, 0.55);
+        stroke: color-mix(in srgb, var(--accent-primary) 55%, transparent);
       }
 
       .icon .fill {
-        fill: rgba(140, 100, 255, 0.45);
+        fill: color-mix(in srgb, var(--accent-secondary) 35%, transparent);
         stroke: none;
       }
 
       .icon .accent {
-        stroke: rgba(0, 229, 255, 0.5);
+        stroke: color-mix(in srgb, var(--accent-primary) 50%, transparent);
       }
 
       .scroll-indicator {
@@ -672,7 +685,13 @@
       .scroll-indicator .line {
         width: 44px;
         height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(224, 64, 160, 0.5), rgba(0, 229, 255, 0.5), transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          color-mix(in srgb, var(--accent-secondary) 50%, transparent),
+          color-mix(in srgb, var(--accent-primary) 50%, transparent),
+          transparent
+        );
         position: relative;
         overflow: hidden;
       }
@@ -795,7 +814,8 @@
         text-transform: uppercase;
         letter-spacing: 0.25em;
         font-size: 11px;
-        color: #8a829e;
+        color: var(--accent-primary);
+        opacity: 0.62;
       }
 
       .heading-row {
@@ -873,7 +893,7 @@
         max-width: var(--section-max);
         margin: 0 auto;
         aspect-ratio: 16 / 9;
-        border: 1px solid rgba(140, 100, 255, 0.1);
+        border: 1px solid color-mix(in srgb, var(--border-accent) 65%, transparent);
         border-radius: 2px;
         overflow: hidden;
       }
@@ -923,7 +943,7 @@
 
       #services .service-item:hover,
       #services .service-item:focus-within {
-        border-left-color: var(--accent);
+        border-left-color: var(--accent-secondary);
       }
 
       .service-item__row {
@@ -1042,7 +1062,7 @@
         aspect-ratio: 16 / 9;
         background: rgba(20, 15, 40, 0.4);
         border-radius: var(--radius-tight);
-        border: 1px solid rgba(140, 100, 255, 0.08);
+        border: 1px solid color-mix(in srgb, var(--border-accent) 55%, transparent);
         display: block;
         transition: transform 0.3s ease, border-color 0.3s ease;
         overflow: hidden;
@@ -1059,13 +1079,14 @@
       .project-card:hover,
       .project-card:focus-visible {
         transform: translateY(-3px);
-        border-color: rgba(0, 229, 255, 0.15);
+        border-color: var(--border-accent);
+        box-shadow: 0 0 24px var(--glow-color);
       }
 
       .project-card__media {
         position: absolute;
         inset: 0;
-        background: #0d0b1a;
+        background: var(--bg-base);
       }
 
       .project-card__thumb {
@@ -1097,8 +1118,8 @@
       }
 
       .testimonial-card {
-        background: rgba(20, 15, 40, 0.4);
-        border: 1px solid rgba(140, 100, 255, 0.08);
+        background: var(--bg-card);
+        border: 1px solid color-mix(in srgb, var(--border-accent) 55%, transparent);
         border-radius: var(--radius-tight);
         padding: 40px 32px;
       }
@@ -1115,7 +1136,7 @@
         font-size: 48px;
         font-weight: 300;
         line-height: 1;
-        color: #e040a0;
+        color: var(--accent-secondary);
         font-family: var(--font-sans);
       }
 
@@ -1132,7 +1153,7 @@
       .testimonial-card__attr {
         margin-top: 24px;
         padding-top: 16px;
-        border-top: 1px solid rgba(140, 100, 255, 0.08);
+        border-top: 1px solid color-mix(in srgb, var(--border-accent) 55%, transparent);
       }
 
       .testimonial-card__name {
@@ -1188,8 +1209,8 @@
         width: 100%;
         padding: 12px 16px;
         border-radius: var(--radius-tight);
-        border: 1px solid rgba(140, 100, 255, 0.1);
-        background: rgba(20, 15, 40, 0.4);
+        border: 1px solid color-mix(in srgb, var(--border-accent) 65%, transparent);
+        background: var(--bg-card);
         color: #e0dde8;
         font-family: var(--font-sans);
         font-size: 14px;
@@ -1214,8 +1235,8 @@
       #bookingForm input:focus,
       #bookingForm select:focus,
       #bookingForm textarea:focus {
-        border-color: rgba(0, 229, 255, 0.3);
-        box-shadow: 0 0 12px rgba(0, 229, 255, 0.08);
+        border-color: var(--accent-primary);
+        box-shadow: 0 0 12px var(--glow-color);
       }
 
       .form-actions {
@@ -1228,7 +1249,7 @@
 
       #bookingForm .form-actions .cta.red {
         margin: 0;
-        background: var(--accent);
+        background: var(--accent-secondary);
         color: #fff;
         font-weight: 600;
         font-size: 12px;
@@ -1245,8 +1266,8 @@
 
       #bookingForm .form-actions .cta.red:hover,
       #bookingForm .form-actions .cta.red:focus-visible {
-        background: #f06bb8;
-        box-shadow: 0 0 20px rgba(224, 64, 160, 0.3);
+        background: color-mix(in srgb, var(--accent-secondary) 88%, #fff);
+        box-shadow: 0 0 20px var(--glow-color), 0 0 36px var(--glow-color);
         outline: none;
         transform: none;
         border: none;
@@ -1259,8 +1280,8 @@
       }
 
       .contact-info-card {
-        background: rgba(20, 15, 40, 0.4);
-        border: 1px solid rgba(140, 100, 255, 0.08);
+        background: var(--bg-card);
+        border: 1px solid color-mix(in srgb, var(--border-accent) 55%, transparent);
         border-radius: var(--radius-tight);
         padding: 40px 32px;
       }
@@ -1273,7 +1294,7 @@
       }
 
       .contact-info-card a {
-        color: var(--accent-cyan);
+        color: var(--accent-primary);
         text-decoration: none;
         transition: opacity 0.2s ease;
       }
@@ -1972,6 +1993,81 @@
 
     <script>
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      (function setupScrollRedShift() {
+        const TOP = {
+          accentPrimary: "#00e5ff",
+          accentSecondary: "#e040a0",
+          bgBase: "#0d0b1a",
+          bgCard: [20, 15, 40, 0.4],
+          borderAccent: [0, 229, 255, 0.15],
+          glow: [0, 229, 255, 0.08],
+        };
+        const BOT = {
+          accentPrimary: "#dc143c",
+          accentSecondary: "#ff2a2a",
+          bgBase: "#120a0a",
+          bgCard: [40, 12, 12, 0.4],
+          borderAccent: [220, 20, 60, 0.15],
+          glow: [220, 20, 60, 0.08],
+        };
+
+        function hexToRgb(hex) {
+          const h = hex.replace("#", "");
+          return {
+            r: parseInt(h.slice(0, 2), 16),
+            g: parseInt(h.slice(2, 4), 16),
+            b: parseInt(h.slice(4, 6), 16),
+          };
+        }
+
+        function lerp(a, b, t) {
+          return a + (b - a) * t;
+        }
+
+        function lerpHex(hexA, hexB, t) {
+          const A = hexToRgb(hexA);
+          const B = hexToRgb(hexB);
+          return (
+            "#" +
+            [lerp(A.r, B.r, t), lerp(A.g, B.g, t), lerp(A.b, B.b, t)]
+              .map((x) => Math.round(x).toString(16).padStart(2, "0"))
+              .join("")
+          );
+        }
+
+        function lerpRgba(a, b, t) {
+          const r = Math.round(lerp(a[0], b[0], t));
+          const g = Math.round(lerp(a[1], b[1], t));
+          const bl = Math.round(lerp(a[2], b[2], t));
+          return `rgba(${r}, ${g}, ${bl}, ${a[3]})`;
+        }
+
+        let ticking = false;
+        function updateScrollTheme() {
+          ticking = false;
+          const maxY = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+          const progress = Math.min(1, Math.max(0, window.scrollY / maxY));
+          const root = document.documentElement;
+          root.style.setProperty("--accent-primary", lerpHex(TOP.accentPrimary, BOT.accentPrimary, progress));
+          root.style.setProperty("--accent-secondary", lerpHex(TOP.accentSecondary, BOT.accentSecondary, progress));
+          root.style.setProperty("--bg-base", lerpHex(TOP.bgBase, BOT.bgBase, progress));
+          root.style.setProperty("--bg-card", lerpRgba(TOP.bgCard, BOT.bgCard, progress));
+          root.style.setProperty("--border-accent", lerpRgba(TOP.borderAccent, BOT.borderAccent, progress));
+          root.style.setProperty("--glow-color", lerpRgba(TOP.glow, BOT.glow, progress));
+        }
+
+        function onScrollOrResize() {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(updateScrollTheme);
+          }
+        }
+
+        window.addEventListener("scroll", onScrollOrResize, { passive: true });
+        window.addEventListener("resize", onScrollOrResize, { passive: true });
+        updateScrollTheme();
+      })();
 
       let revealObserver = null;
 
