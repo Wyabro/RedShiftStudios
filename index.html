@@ -49,13 +49,15 @@
 
     <style>
       :root {
-        /* Scroll-driven (defaults = top of page; JS updates on body) */
-        --accent-primary: #00e5ff;
-        --accent-secondary: #e040a0;
-        --bg-base: #0d0b1a;
-        --bg-card: rgba(20, 15, 40, 0.4);
-        --border-accent: rgba(0, 229, 255, 0.15);
-        --glow-color: rgba(0, 229, 255, 0.08);
+        /* Scroll-driven (defaults = top of page; JS updates on :root) */
+        --accent-primary: #00b8b8;
+        --accent-secondary: #4a4458;
+        --accent-cta: #00b8b8;
+        --bg-base: #1a2332;
+        --bg-card: rgba(230, 228, 224, 0.06);
+        --border-accent: rgba(0, 184, 184, 0.15);
+        --glow-color: rgba(0, 184, 184, 0.08);
+        --form-input-bg: rgba(230, 228, 224, 0.04);
 
         --bg: var(--bg-base);
         --surface: var(--bg-card);
@@ -63,7 +65,7 @@
         --panel: var(--bg-card);
         --panel-2: var(--bg-card);
         --text: #e0dde8;
-        --muted: #8a829e;
+        --muted: #7a8494;
         --muted-2: #6d6580;
         --accent: var(--accent-secondary);
         --accent-cyan: var(--accent-primary);
@@ -285,26 +287,26 @@
       .hero .cta-row .cta:not(.red) {
         border-color: color-mix(in srgb, var(--accent-primary) 55%, transparent);
         color: var(--accent-primary);
-        background: rgba(13, 11, 26, 0.5);
+        background: color-mix(in srgb, var(--bg-base) 50%, transparent);
       }
 
       .hero .cta-row .cta:not(.red):hover {
         border-color: var(--accent-primary);
         box-shadow: 0 0 22px var(--glow-color), 0 0 36px var(--glow-color);
-        background: rgba(13, 11, 26, 0.62);
+        background: color-mix(in srgb, var(--bg-base) 62%, transparent);
         color: #fff;
       }
 
       .cta.red {
-        background: var(--accent-secondary);
-        border-color: color-mix(in srgb, var(--accent-secondary) 85%, #000);
+        background: var(--accent-cta);
+        border-color: color-mix(in srgb, var(--accent-cta) 85%, #000);
         color: #fff;
         box-shadow: 0 0 24px var(--glow-color), 0 0 40px var(--glow-color);
       }
 
       .cta.red:hover {
         border-color: var(--accent-primary);
-        background: color-mix(in srgb, var(--accent-secondary) 88%, #fff);
+        background: color-mix(in srgb, var(--accent-cta) 88%, #fff);
         box-shadow: 0 0 28px var(--glow-color), 0 0 48px var(--glow-color);
         color: #fff;
       }
@@ -342,7 +344,7 @@
         display: grid;
         place-items: center;
         overflow: clip;
-        background: #0d0b1a;
+        background: var(--bg-base);
       }
 
       /* YouTube iframe as full-bleed background (cover) */
@@ -795,7 +797,7 @@
         margin: 0 auto 16px;
         font-size: 15px;
         line-height: 1.7;
-        color: #8a829e;
+        color: var(--muted);
         text-align: center;
       }
 
@@ -815,7 +817,7 @@
         letter-spacing: 0.25em;
         font-size: 11px;
         color: var(--accent-primary);
-        opacity: 0.62;
+        opacity: 0.7;
       }
 
       .heading-row {
@@ -992,7 +994,7 @@
         font-size: 13px;
         font-weight: 400;
         font-family: var(--font-sans);
-        color: #8a829e;
+        color: var(--muted);
         letter-spacing: 0.02em;
       }
 
@@ -1040,8 +1042,8 @@
       .projects-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-        max-width: var(--section-max);
+        gap: 12px;
+        max-width: 1100px;
         margin: 0 auto;
         padding: 0;
         list-style: none;
@@ -1086,6 +1088,7 @@
       .project-card__media {
         position: absolute;
         inset: 0;
+        overflow: hidden;
         background: var(--bg-base);
       }
 
@@ -1101,10 +1104,12 @@
 
       .project-card__iframe {
         position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
+        top: -10%;
+        left: -10%;
+        width: 120%;
+        height: 120%;
+        border: none;
+        pointer-events: none;
         z-index: 2;
       }
 
@@ -1168,7 +1173,7 @@
         margin: 4px 0 0;
         font-size: 12px;
         font-weight: 400;
-        color: #8a829e;
+        color: var(--muted);
         font-family: var(--font-sans);
       }
 
@@ -1195,7 +1200,7 @@
       #bookingForm label {
         display: grid;
         gap: 6px;
-        color: #8a829e;
+        color: var(--muted);
         text-transform: uppercase;
         letter-spacing: 0.15em;
         font-size: 11px;
@@ -1210,7 +1215,7 @@
         padding: 12px 16px;
         border-radius: var(--radius-tight);
         border: 1px solid color-mix(in srgb, var(--border-accent) 65%, transparent);
-        background: var(--bg-card);
+        background: var(--form-input-bg);
         color: #e0dde8;
         font-family: var(--font-sans);
         font-size: 14px;
@@ -1249,7 +1254,7 @@
 
       #bookingForm .form-actions .cta.red {
         margin: 0;
-        background: var(--accent-secondary);
+        background: var(--accent-cta);
         color: #fff;
         font-weight: 600;
         font-size: 12px;
@@ -1266,7 +1271,7 @@
 
       #bookingForm .form-actions .cta.red:hover,
       #bookingForm .form-actions .cta.red:focus-visible {
-        background: color-mix(in srgb, var(--accent-secondary) 88%, #fff);
+        background: color-mix(in srgb, var(--accent-cta) 88%, #fff);
         box-shadow: 0 0 20px var(--glow-color), 0 0 36px var(--glow-color);
         outline: none;
         transform: none;
@@ -1323,14 +1328,14 @@
         font-weight: 500;
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        color: #8a829e;
+        color: var(--muted);
       }
 
       .contact-info-card__note {
         margin: 0;
         font-size: 13px;
         line-height: 1.65;
-        color: #8a829e;
+        color: var(--muted);
       }
 
       footer {
@@ -1996,20 +2001,26 @@
 
       (function setupScrollRedShift() {
         const TOP = {
-          accentPrimary: "#00e5ff",
-          accentSecondary: "#e040a0",
-          bgBase: "#0d0b1a",
-          bgCard: [20, 15, 40, 0.4],
-          borderAccent: [0, 229, 255, 0.15],
-          glow: [0, 229, 255, 0.08],
+          accentPrimary: "#00b8b8",
+          accentSecondary: "#4a4458",
+          accentCta: "#00b8b8",
+          bgBase: "#1a2332",
+          bgCard: [230, 228, 224, 0.06],
+          borderAccent: [0, 184, 184, 0.15],
+          glow: [0, 184, 184, 0.08],
+          formInputBg: [230, 228, 224, 0.04],
+          muted: "#7a8494",
         };
         const BOT = {
           accentPrimary: "#dc143c",
           accentSecondary: "#ff2a2a",
+          accentCta: "#dc143c",
           bgBase: "#120a0a",
           bgCard: [40, 12, 12, 0.4],
           borderAccent: [220, 20, 60, 0.15],
           glow: [220, 20, 60, 0.08],
+          formInputBg: [40, 12, 12, 0.4],
+          muted: "#8a829e",
         };
 
         function hexToRgb(hex) {
@@ -2040,7 +2051,9 @@
           const r = Math.round(lerp(a[0], b[0], t));
           const g = Math.round(lerp(a[1], b[1], t));
           const bl = Math.round(lerp(a[2], b[2], t));
-          return `rgba(${r}, ${g}, ${bl}, ${a[3]})`;
+          const al = lerp(a[3], b[3], t);
+          const alphaStr = Number(al.toFixed(4)).toString();
+          return `rgba(${r}, ${g}, ${bl}, ${alphaStr})`;
         }
 
         let ticking = false;
@@ -2051,10 +2064,13 @@
           const root = document.documentElement;
           root.style.setProperty("--accent-primary", lerpHex(TOP.accentPrimary, BOT.accentPrimary, progress));
           root.style.setProperty("--accent-secondary", lerpHex(TOP.accentSecondary, BOT.accentSecondary, progress));
+          root.style.setProperty("--accent-cta", lerpHex(TOP.accentCta, BOT.accentCta, progress));
           root.style.setProperty("--bg-base", lerpHex(TOP.bgBase, BOT.bgBase, progress));
           root.style.setProperty("--bg-card", lerpRgba(TOP.bgCard, BOT.bgCard, progress));
           root.style.setProperty("--border-accent", lerpRgba(TOP.borderAccent, BOT.borderAccent, progress));
           root.style.setProperty("--glow-color", lerpRgba(TOP.glow, BOT.glow, progress));
+          root.style.setProperty("--form-input-bg", lerpRgba(TOP.formInputBg, BOT.formInputBg, progress));
+          root.style.setProperty("--muted", lerpHex(TOP.muted, BOT.muted, progress));
         }
 
         function onScrollOrResize() {
@@ -2167,7 +2183,7 @@
             iframe = document.createElement("iframe");
             iframe.className = "project-card__iframe";
             iframe.setAttribute("title", "Video preview");
-            iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=0&loop=1&playlist=${id}&controls=0&showinfo=0&rel=0&modestbranding=1`;
+            iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=0&loop=1&playlist=${id}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&playsinline=1`;
             iframe.setAttribute(
               "allow",
               "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
