@@ -720,49 +720,28 @@
       .scroll-indicator {
         position: absolute;
         z-index: 8;
-        bottom: 18px;
+        bottom: 30px;
         left: 50%;
         transform: translateX(-50%);
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--muted);
-        text-transform: uppercase;
-        letter-spacing: 0.28em;
-        font-size: 10px;
+        font-size: 12px;
+        font-weight: 400;
         font-family: var(--font-sans);
-        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: #666666;
+        opacity: 0.5;
+        text-decoration: none;
+        white-space: nowrap;
+        animation: scrollHintBounce 2s ease-in-out infinite;
       }
 
-      .scroll-indicator .line {
-        width: 44px;
-        height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          color-mix(in srgb, var(--accent-secondary) 50%, transparent),
-          color-mix(in srgb, var(--accent-primary) 50%, transparent),
-          transparent
-        );
-        position: relative;
-        overflow: hidden;
-      }
-
-      .scroll-indicator .line::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
-        transform: translateX(-100%);
-        animation: scan 1.6s ease-in-out infinite;
-      }
-
-      @keyframes scan {
-        0% {
-          transform: translateX(-120%);
-        }
+      @keyframes scrollHintBounce {
+        0%,
         100% {
-          transform: translateX(120%);
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(6px);
         }
       }
 
@@ -1149,7 +1128,7 @@
         height: 100%;
         object-fit: cover;
         z-index: 1;
-        transition: opacity 0.2s ease;
+        transition: opacity 0.3s ease;
       }
 
       .project-card__iframe {
@@ -1482,7 +1461,7 @@
           transition: none !important;
         }
         .icon-drift,
-        .scroll-indicator .line::after {
+        .scroll-indicator {
           animation: none !important;
         }
         .cta {
@@ -1630,11 +1609,7 @@
         </div>
       </div>
 
-      <a class="scroll-indicator" href="#reel" aria-label="Scroll to reel">
-        <span>Scroll</span>
-        <span class="line" aria-hidden="true"></span>
-        <span>Down</span>
-      </a>
+      <a class="scroll-indicator" href="#reel" aria-label="Scroll to reel">Scroll down</a>
     </main>
 
     <div class="section-divider" aria-hidden="true"></div>
@@ -2244,28 +2219,52 @@
           if (!id || !media || !thumb) return;
 
           let iframe = null;
+          let loadHandler = null;
+          let thumbRevealed = false;
 
-          function enter() {
-            if (iframe) return;
-            iframe = document.createElement("iframe");
-            iframe.className = "project-card__iframe";
-            iframe.setAttribute("title", "Video preview");
-            iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=0&loop=1&playlist=${id}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&playsinline=1`;
-            iframe.setAttribute(
-              "allow",
-              "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            );
-            iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
-            media.appendChild(iframe);
+          function revealThumbAfterLoad() {
+            if (thumbRevealed) return;
+            thumbRevealed = true;
+            thumb.style.transition = "opacity 0.3s ease";
             thumb.style.opacity = "0";
           }
 
+          function enter() {
+            if (iframe) return;
+            thumbRevealed = false;
+            thumb.style.transition = "";
+            thumb.style.opacity = "1";
+
+            iframe = document.createElement("iframe");
+            iframe.className = "project-card__iframe";
+            iframe.setAttribute("title", "Video preview");
+            iframe.setAttribute("frameborder", "0");
+            iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=0&loop=1&playlist=${id}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&playsinline=1`;
+            iframe.setAttribute(
+              "allow",
+              "autoplay; encrypted-media; accelerometer; clipboard-write; gyroscope; picture-in-picture; web-share"
+            );
+            iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+            iframe.style.cssText =
+              "pointer-events:none;position:absolute;top:-10%;left:-10%;width:120%;height:120%;border:none;";
+            loadHandler = () => revealThumbAfterLoad();
+            iframe.addEventListener("load", loadHandler);
+            media.appendChild(iframe);
+          }
+
           function leave() {
+            thumbRevealed = false;
             if (iframe) {
+              if (loadHandler) iframe.removeEventListener("load", loadHandler);
+              loadHandler = null;
               iframe.remove();
               iframe = null;
             }
+            thumb.style.transition = "none";
             thumb.style.opacity = "1";
+            requestAnimationFrame(() => {
+              thumb.style.transition = "";
+            });
           }
 
           card.addEventListener("mouseenter", enter);
