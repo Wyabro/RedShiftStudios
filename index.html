@@ -1065,21 +1065,38 @@
         z-index: 2;
       }
 
-      .project-card__title {
+      .project-card__label-wrap {
         position: absolute;
         left: 0;
-        right: 0;
         bottom: 0;
-        margin: 0;
         padding: 20px;
-        z-index: 3;
+        z-index: 4;
         pointer-events: none;
+        text-align: left;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .project-card:hover .project-card__label-wrap,
+      .project-card:focus-visible .project-card__label-wrap {
+        opacity: 1;
+      }
+
+      .project-card__dash {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: var(--accent);
+        margin-bottom: 10px;
+      }
+
+      .project-card__title {
+        margin: 0;
         font-family: var(--font-sans);
         font-size: 13px;
         font-weight: 500;
         line-height: 1.35;
         color: #fff;
-        text-align: left;
         text-shadow: 0 2px 12px rgba(0, 0, 0, 0.75);
       }
 
@@ -1721,20 +1738,7 @@
           <div class="heading-row">
             <h2 id="projects-title" class="heading-display">PAST PROJECTS</h2>
           </div>
-          <!-- Video IDs: placeholders for playlist PLcSoNuHrCMMuNZo8dcPjBnDZCjV9hT5Ic — swap for real IDs from YouTube -->
           <div class="projects-grid" role="list">
-            <div class="project-card" data-video-id="dQw4w9WgXcQ" role="listitem" tabindex="0">
-              <div class="project-card__media">
-                <img
-                  class="project-card__thumb"
-                  alt=""
-                  src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg"
-                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg'"
-                  loading="lazy"
-                />
-              </div>
-              <p class="project-card__title">Project 01</p>
-            </div>
             <div class="project-card" data-video-id="kEbHvnY3yj8" role="listitem" tabindex="0">
               <div class="project-card__media">
                 <img
@@ -1745,55 +1749,115 @@
                   loading="lazy"
                 />
               </div>
-              <p class="project-card__title">Project 02</p>
+              <div class="project-card__label-wrap">
+                <span class="project-card__dash" aria-hidden="true"></span>
+                <p class="project-card__title">Project 01</p>
+              </div>
             </div>
-            <div class="project-card" data-video-id="ScMzIvxBSi4" role="listitem" tabindex="0">
+            <div class="project-card" data-video-id="-bHfbiLHWqw" role="listitem" tabindex="0">
               <div class="project-card__media">
                 <img
                   class="project-card__thumb"
                   alt=""
-                  src="https://img.youtube.com/vi/ScMzIvxBSi4/maxresdefault.jpg"
-                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/ScMzIvxBSi4/hqdefault.jpg'"
+                  src="https://img.youtube.com/vi/-bHfbiLHWqw/maxresdefault.jpg"
+                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/-bHfbiLHWqw/hqdefault.jpg'"
                   loading="lazy"
                 />
               </div>
-              <p class="project-card__title">Project 03</p>
+              <div class="project-card__label-wrap">
+                <span class="project-card__dash" aria-hidden="true"></span>
+                <p class="project-card__title">Project 02</p>
+              </div>
             </div>
-            <div class="project-card" data-video-id="LXb3EKWsInQ" role="listitem" tabindex="0">
+            <div class="project-card" data-video-id="u45kyOsiijA" role="listitem" tabindex="0">
               <div class="project-card__media">
                 <img
                   class="project-card__thumb"
                   alt=""
-                  src="https://img.youtube.com/vi/LXb3EKWsInQ/maxresdefault.jpg"
-                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/LXb3EKWsInQ/hqdefault.jpg'"
+                  src="https://img.youtube.com/vi/u45kyOsiijA/maxresdefault.jpg"
+                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/u45kyOsiijA/hqdefault.jpg'"
                   loading="lazy"
                 />
               </div>
-              <p class="project-card__title">Project 04</p>
+              <div class="project-card__label-wrap">
+                <span class="project-card__dash" aria-hidden="true"></span>
+                <p class="project-card__title">Project 03</p>
+              </div>
             </div>
-            <div class="project-card" data-video-id="9bZkp7q19f0" role="listitem" tabindex="0">
+            <div class="project-card" data-video-id="j0o1ctD0Wyc" role="listitem" tabindex="0">
               <div class="project-card__media">
                 <img
                   class="project-card__thumb"
                   alt=""
-                  src="https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg"
-                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/9bZkp7q19f0/hqdefault.jpg'"
+                  src="https://img.youtube.com/vi/j0o1ctD0Wyc/maxresdefault.jpg"
+                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/j0o1ctD0Wyc/hqdefault.jpg'"
                   loading="lazy"
                 />
               </div>
-              <p class="project-card__title">Project 05</p>
+              <div class="project-card__label-wrap">
+                <span class="project-card__dash" aria-hidden="true"></span>
+                <p class="project-card__title">Project 04</p>
+              </div>
             </div>
-            <div class="project-card" data-video-id="JGwWNGJdvx8" role="listitem" tabindex="0">
+            <div class="project-card" data-video-id="zEcK1CTMu1k" role="listitem" tabindex="0">
               <div class="project-card__media">
                 <img
                   class="project-card__thumb"
                   alt=""
-                  src="https://img.youtube.com/vi/JGwWNGJdvx8/maxresdefault.jpg"
-                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/JGwWNGJdvx8/hqdefault.jpg'"
+                  src="https://img.youtube.com/vi/zEcK1CTMu1k/maxresdefault.jpg"
+                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/zEcK1CTMu1k/hqdefault.jpg'"
                   loading="lazy"
                 />
               </div>
-              <p class="project-card__title">Project 06</p>
+              <div class="project-card__label-wrap">
+                <span class="project-card__dash" aria-hidden="true"></span>
+                <p class="project-card__title">Project 05</p>
+              </div>
+            </div>
+            <div class="project-card" data-video-id="EWG6MnxDyvw" role="listitem" tabindex="0">
+              <div class="project-card__media">
+                <img
+                  class="project-card__thumb"
+                  alt=""
+                  src="https://img.youtube.com/vi/EWG6MnxDyvw/maxresdefault.jpg"
+                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/EWG6MnxDyvw/hqdefault.jpg'"
+                  loading="lazy"
+                />
+              </div>
+              <div class="project-card__label-wrap">
+                <span class="project-card__dash" aria-hidden="true"></span>
+                <p class="project-card__title">Project 06</p>
+              </div>
+            </div>
+            <div class="project-card" data-video-id="KrsGu87QaPs" role="listitem" tabindex="0">
+              <div class="project-card__media">
+                <img
+                  class="project-card__thumb"
+                  alt=""
+                  src="https://img.youtube.com/vi/KrsGu87QaPs/maxresdefault.jpg"
+                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/KrsGu87QaPs/hqdefault.jpg'"
+                  loading="lazy"
+                />
+              </div>
+              <div class="project-card__label-wrap">
+                <span class="project-card__dash" aria-hidden="true"></span>
+                <p class="project-card__title">Project 07</p>
+              </div>
+            </div>
+            <div class="project-card" data-video-id="Rdr03EyNX6s" role="listitem" tabindex="0">
+              <div class="project-card__media">
+                <img
+                  class="project-card__thumb"
+                  alt=""
+                  src="https://img.youtube.com/vi/Rdr03EyNX6s/maxresdefault.jpg"
+                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/Rdr03EyNX6s/hqdefault.jpg'"
+                  loading="lazy"
+                />
+              </div>
+              <div class="project-card__label-wrap">
+                <span class="project-card__dash" aria-hidden="true"></span>
+                <p class="project-card__title">Project 08</p>
+              </div>
             </div>
           </div>
         </div>
