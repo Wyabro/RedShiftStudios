@@ -1184,7 +1184,7 @@
       .projects-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: 8px;
         max-width: 1100px;
         margin: 0 auto;
         padding: 0;
@@ -1221,6 +1221,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        display: block;
         transform: scale(1);
         transform-origin: center;
         transition: transform 0.5s ease;
@@ -1232,7 +1233,7 @@
         position: absolute;
         inset: 0;
         z-index: 2;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 50%);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 50%);
         opacity: 1;
         transition: opacity 0.5s ease;
       }
@@ -1258,31 +1259,26 @@
         line-height: 1.25;
       }
 
-      .project-year {
-        font-size: 12px;
-        opacity: 0.5;
-        color: #fff;
-      }
-
       .project-card:hover .project-thumb,
       .project-card:focus-visible .project-thumb {
-        transform: scale(1.05);
+        transform: scale(1.03);
       }
 
       .project-card:hover::after,
       .project-card:focus-visible::after {
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 50%);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 50%);
       }
 
       .project-card:hover .project-meta,
       .project-card:focus-visible .project-meta {
-        transform: translateY(-3px);
+        transform: translateY(-2px);
+        transition-duration: 0.3s;
       }
 
       .project-card:hover,
       .project-card:focus-visible {
         border-color: var(--glow-color);
-        box-shadow: 0 0 20px var(--glow-color);
+        box-shadow: 0 0 15px var(--glow-color);
       }
 
       @media (prefers-reduced-motion: no-preference) {
@@ -1957,7 +1953,7 @@
           <div class="reel-stage">
             <div class="reel-embed">
               <iframe
-                src="https://www.youtube.com/embed/kEbHvnY3yj8?start=10&rel=0&modestbranding=1"
+                src="https://www.youtube.com/embed/kEbHvnY3yj8?start=10&rel=0&modestbranding=1&iv_load_policy=3&disablekb=0&fs=1&playsinline=1&color=white"
                 title="Film reel"
                 loading="lazy"
                 referrerpolicy="strict-origin-when-cross-origin"
@@ -1969,13 +1965,6 @@
         </div>
       </div>
     </section>
-
-    <div style="text-align:center; padding: 80px 20px; max-width: 600px; margin: 0 auto;">
-      <p style="font-size: 18px; font-weight: 400; line-height: 1.6; color: var(--text-muted, #666);">
-        One-man studio. Big-studio results.<br />
-        <span style="font-size: 14px; opacity: 0.6;">El Paso, TX</span>
-      </p>
-    </div>
 
     <!-- Services -->
     <section id="services" aria-labelledby="services-title">
@@ -2063,7 +2052,7 @@
               href="https://www.youtube.com/watch?v=kEbHvnY3yj8"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Forrest the Gump (2024) — watch on YouTube (opens in new tab)"
+              aria-label="Forrest the Gump — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -2075,7 +2064,6 @@
               />
               <div class="project-meta" aria-hidden="true">
                 <p class="project-title">Forrest the Gump</p>
-                <span class="project-year">2024</span>
               </div>
             </a>
             <a
@@ -2084,7 +2072,7 @@
               href="https://www.youtube.com/watch?v=-bHfbiLHWqw"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="The Last Call (2024) — watch on YouTube (opens in new tab)"
+              aria-label="The Last Call — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -2095,7 +2083,6 @@
               />
               <div class="project-meta" aria-hidden="true">
                 <p class="project-title">The Last Call</p>
-                <span class="project-year">2024</span>
               </div>
             </a>
             <a
@@ -2104,7 +2091,7 @@
               href="https://www.youtube.com/watch?v=u45kyOsiijA"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="The Mine (2024) — watch on YouTube (opens in new tab)"
+              aria-label="The Mine — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -2116,7 +2103,6 @@
               />
               <div class="project-meta" aria-hidden="true">
                 <p class="project-title">The Mine</p>
-                <span class="project-year">2024</span>
               </div>
             </a>
             <a
@@ -2125,7 +2111,7 @@
               href="https://www.youtube.com/watch?v=j0o1ctD0Wyc"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="The Man Who Shot First (2024) — watch on YouTube (opens in new tab)"
+              aria-label="The Man Who Shot First — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -2137,7 +2123,6 @@
               />
               <div class="project-meta" aria-hidden="true">
                 <p class="project-title">The Man Who Shot First</p>
-                <span class="project-year">2024</span>
               </div>
             </a>
             <a
@@ -2146,7 +2131,7 @@
               href="https://www.youtube.com/watch?v=zEcK1CTMu1k"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Knight Quest (2024) — watch on YouTube (opens in new tab)"
+              aria-label="Knight Quest — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -2158,7 +2143,6 @@
               />
               <div class="project-meta" aria-hidden="true">
                 <p class="project-title">Knight Quest</p>
-                <span class="project-year">2024</span>
               </div>
             </a>
             <a
@@ -2167,7 +2151,7 @@
               href="https://www.youtube.com/watch?v=EWG6MnxDyvw"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Utah Monolith (2024) — watch on YouTube (opens in new tab)"
+              aria-label="Utah Monolith — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -2179,7 +2163,6 @@
               />
               <div class="project-meta" aria-hidden="true">
                 <p class="project-title">Utah Monolith</p>
-                <span class="project-year">2024</span>
               </div>
             </a>
             <a
@@ -2188,7 +2171,7 @@
               href="https://www.youtube.com/watch?v=KrsGu87QaPs"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Smile and Sing Along (2024) — watch on YouTube (opens in new tab)"
+              aria-label="Smile and Sing Along — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -2200,7 +2183,6 @@
               />
               <div class="project-meta" aria-hidden="true">
                 <p class="project-title">Smile and Sing Along</p>
-                <span class="project-year">2024</span>
               </div>
             </a>
             <a
@@ -2209,7 +2191,7 @@
               href="https://www.youtube.com/watch?v=Rdr03EyNX6s"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Project 08 (2024) — watch on YouTube (opens in new tab)"
+              aria-label="Project 08 — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -2221,7 +2203,6 @@
               />
               <div class="project-meta" aria-hidden="true">
                 <p class="project-title">Project 08</p>
-                <span class="project-year">2024</span>
               </div>
             </a>
           </div>
