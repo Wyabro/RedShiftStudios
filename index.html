@@ -508,7 +508,7 @@
         min-height: 100vh;
         display: grid;
         place-items: center;
-        overflow: clip;
+        overflow: hidden;
         background: #0f0f0f;
       }
 
@@ -525,10 +525,10 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 177.78vh;
-        min-width: 100%;
-        min-height: 100%;
-        height: 56.25vw;
+        width: 120vw;
+        height: 120vh;
+        min-width: 120%;
+        min-height: 120%;
         border: 0;
         transform: translate(-50%, -50%);
         pointer-events: none;
@@ -542,30 +542,7 @@
         pointer-events: none;
       }
 
-      .hero-perspective-grid {
-        position: absolute;
-        inset: 0;
-        z-index: 2;
-        pointer-events: none;
-        overflow: hidden;
-        opacity: 0.65;
-        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.85) 45%, transparent 88%);
-        -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.85) 45%, transparent 88%);
-      }
-
-      .hero-perspective-grid::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        top: 42%;
-        width: 200%;
-        height: 120%;
-        transform: translateX(-50%) perspective(420px) rotateX(68deg) scale(1.15);
-        transform-origin: center top;
-        background-image: linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-        background-size: 52px 52px;
-      }
+      /* Removed: hero perspective grid overlay */
 
       /* Hero load-in */
       .hero .hero-title,
@@ -1207,7 +1184,7 @@
       .projects-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        gap: 10px;
         max-width: 1100px;
         margin: 0 auto;
         padding: 0;
@@ -1226,6 +1203,7 @@
 
       .project-card {
         position: relative;
+        display: block;
         aspect-ratio: 16 / 9;
         overflow: hidden;
         border-radius: 2px;
@@ -1233,6 +1211,8 @@
         background: var(--bg-base);
         cursor: pointer;
         outline-offset: 4px;
+        text-decoration: none;
+        color: inherit;
       }
 
       .project-thumb {
@@ -1241,55 +1221,158 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: opacity 0.3s ease;
-        z-index: 2;
-      }
-
-      .project-player-wrap {
-        position: absolute;
-        top: -10%;
-        left: -10%;
-        width: 120%;
-        height: 120%;
+        transform: scale(1);
+        transform-origin: center;
+        transition: transform 0.5s ease;
         z-index: 1;
-        overflow: hidden;
-        pointer-events: none;
       }
 
-      .project-player {
+      .project-card::after {
+        content: "";
         position: absolute;
         inset: 0;
-        width: 100%;
-        height: 100%;
+        z-index: 2;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 50%);
+        opacity: 1;
+        transition: opacity 0.5s ease;
       }
 
-      .project-player-wrap iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-        pointer-events: none;
-      }
-
-      .project-overlay {
+      .project-meta {
         position: absolute;
-        top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
+        bottom: 0;
         z-index: 3;
-        background: transparent;
-        pointer-events: auto;
+        padding: 20px;
+        display: grid;
+        gap: 4px;
+        transform: translateY(0);
+        transition: transform 0.5s ease;
+      }
+
+      .project-title {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        color: #fff;
+        line-height: 1.25;
+      }
+
+      .project-year {
+        font-size: 12px;
+        opacity: 0.5;
+        color: #fff;
       }
 
       .project-card:hover .project-thumb,
-      .project-card:focus-within .project-thumb {
-        opacity: 0;
+      .project-card:focus-visible .project-thumb {
+        transform: scale(1.05);
+      }
+
+      .project-card:hover::after,
+      .project-card:focus-visible::after {
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 50%);
+      }
+
+      .project-card:hover .project-meta,
+      .project-card:focus-visible .project-meta {
+        transform: translateY(-3px);
       }
 
       .project-card:hover,
-      .project-card:focus-within {
+      .project-card:focus-visible {
         border-color: var(--glow-color);
         box-shadow: 0 0 20px var(--glow-color);
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .section-chapter.reveal.in-view h2.heading-display {
+          animation: ambientFloatY 4s ease-in-out infinite;
+          animation-delay: 0.6s;
+        }
+
+        .section-divider {
+          animation: ambientDividerPulse 3s ease-in-out infinite;
+        }
+
+        .testimonial-card {
+          animation: ambientFloatY 4s ease-in-out infinite;
+        }
+        .testimonials-row .testimonial-card:nth-child(1) {
+          animation-delay: 0s;
+        }
+        .testimonials-row .testimonial-card:nth-child(2) {
+          animation-delay: 1.3s;
+        }
+        .testimonials-row .testimonial-card:nth-child(3) {
+          animation-delay: 2.6s;
+        }
+
+        .client-logo__mark {
+          animation: ambientDriftX 6s ease-in-out infinite;
+        }
+        .logos-grid .client-logo:nth-child(1) .client-logo__mark {
+          animation-delay: 0s;
+        }
+        .logos-grid .client-logo:nth-child(2) .client-logo__mark {
+          animation-delay: 0.6s;
+        }
+        .logos-grid .client-logo:nth-child(3) .client-logo__mark {
+          animation-delay: 1.2s;
+        }
+        .logos-grid .client-logo:nth-child(4) .client-logo__mark {
+          animation-delay: 1.8s;
+        }
+        .logos-grid .client-logo:nth-child(5) .client-logo__mark {
+          animation-delay: 2.4s;
+        }
+        .logos-grid .client-logo:nth-child(6) .client-logo__mark {
+          animation-delay: 3s;
+        }
+
+        .contact-lead {
+          animation: ambientGlowPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes ambientFloatY {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-4px);
+          }
+        }
+
+        @keyframes ambientDividerPulse {
+          0%,
+          100% {
+            opacity: 0.3;
+          }
+          50% {
+            opacity: 0.6;
+          }
+        }
+
+        @keyframes ambientDriftX {
+          0%,
+          100% {
+            transform: translateX(0);
+          }
+          50% {
+            transform: translateX(3px);
+          }
+        }
+
+        @keyframes ambientGlowPulse {
+          0%,
+          100% {
+            text-shadow: 0 0 0px transparent;
+          }
+          50% {
+            text-shadow: 0 0 20px var(--glow-color);
+          }
+        }
       }
 
       .testimonials-row {
@@ -1644,13 +1727,22 @@
         }
         .project-thumb,
         .project-card:hover .project-thumb,
-        .project-card:focus-within .project-thumb {
+        .project-card:focus-visible .project-thumb {
           transition: none !important;
-          opacity: 1 !important;
+          transform: none !important;
+        }
+
+        .project-card::after,
+        .project-card:hover::after,
+        .project-card:focus-visible::after,
+        .project-meta,
+        .project-card:hover .project-meta,
+        .project-card:focus-visible .project-meta {
+          transition: none !important;
         }
 
         .project-card:hover,
-        .project-card:focus-within {
+        .project-card:focus-visible {
           box-shadow: none !important;
         }
       }
@@ -1725,7 +1817,6 @@
         ></iframe>
       </div>
       <div class="hero-overlay" aria-hidden="true"></div>
-      <div class="hero-perspective-grid" aria-hidden="true"></div>
       <div class="floating-icons" aria-hidden="true">
         <div class="icon icon-1 icon-pos-1">
           <span class="icon-drift">
@@ -1966,12 +2057,13 @@
             <h2 id="projects-title" class="heading-display">PAST PROJECTS</h2>
           </div>
           <div class="projects-grid" role="list">
-            <div
+            <a
               class="project-card"
               role="listitem"
-              data-video-id="kEbHvnY3yj8"
-              tabindex="0"
-              aria-label="Project video: hover for muted preview, click to open on YouTube"
+              href="https://www.youtube.com/watch?v=kEbHvnY3yj8"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Forrest the Gump (2024) — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -1981,17 +2073,18 @@
                 loading="lazy"
                 decoding="async"
               />
-              <div class="project-player-wrap">
-                <div id="player-kEbHvnY3yj8" class="project-player"></div>
+              <div class="project-meta" aria-hidden="true">
+                <p class="project-title">Forrest the Gump</p>
+                <span class="project-year">2024</span>
               </div>
-              <div class="project-overlay" aria-hidden="true"></div>
-            </div>
-            <div
+            </a>
+            <a
               class="project-card"
               role="listitem"
-              data-video-id="-bHfbiLHWqw"
-              tabindex="0"
-              aria-label="Project video: hover for muted preview, click to open on YouTube"
+              href="https://www.youtube.com/watch?v=-bHfbiLHWqw"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="The Last Call (2024) — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -2000,17 +2093,18 @@
                 loading="lazy"
                 decoding="async"
               />
-              <div class="project-player-wrap">
-                <div id="player--bHfbiLHWqw" class="project-player"></div>
+              <div class="project-meta" aria-hidden="true">
+                <p class="project-title">The Last Call</p>
+                <span class="project-year">2024</span>
               </div>
-              <div class="project-overlay" aria-hidden="true"></div>
-            </div>
-            <div
+            </a>
+            <a
               class="project-card"
               role="listitem"
-              data-video-id="u45kyOsiijA"
-              tabindex="0"
-              aria-label="Project video: hover for muted preview, click to open on YouTube"
+              href="https://www.youtube.com/watch?v=u45kyOsiijA"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="The Mine (2024) — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -2020,17 +2114,18 @@
                 loading="lazy"
                 decoding="async"
               />
-              <div class="project-player-wrap">
-                <div id="player-u45kyOsiijA" class="project-player"></div>
+              <div class="project-meta" aria-hidden="true">
+                <p class="project-title">The Mine</p>
+                <span class="project-year">2024</span>
               </div>
-              <div class="project-overlay" aria-hidden="true"></div>
-            </div>
-            <div
+            </a>
+            <a
               class="project-card"
               role="listitem"
-              data-video-id="j0o1ctD0Wyc"
-              tabindex="0"
-              aria-label="Project video: hover for muted preview, click to open on YouTube"
+              href="https://www.youtube.com/watch?v=j0o1ctD0Wyc"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="The Man Who Shot First (2024) — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -2040,17 +2135,18 @@
                 loading="lazy"
                 decoding="async"
               />
-              <div class="project-player-wrap">
-                <div id="player-j0o1ctD0Wyc" class="project-player"></div>
+              <div class="project-meta" aria-hidden="true">
+                <p class="project-title">The Man Who Shot First</p>
+                <span class="project-year">2024</span>
               </div>
-              <div class="project-overlay" aria-hidden="true"></div>
-            </div>
-            <div
+            </a>
+            <a
               class="project-card"
               role="listitem"
-              data-video-id="zEcK1CTMu1k"
-              tabindex="0"
-              aria-label="Project video: hover for muted preview, click to open on YouTube"
+              href="https://www.youtube.com/watch?v=zEcK1CTMu1k"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Knight Quest (2024) — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -2060,17 +2156,18 @@
                 loading="lazy"
                 decoding="async"
               />
-              <div class="project-player-wrap">
-                <div id="player-zEcK1CTMu1k" class="project-player"></div>
+              <div class="project-meta" aria-hidden="true">
+                <p class="project-title">Knight Quest</p>
+                <span class="project-year">2024</span>
               </div>
-              <div class="project-overlay" aria-hidden="true"></div>
-            </div>
-            <div
+            </a>
+            <a
               class="project-card"
               role="listitem"
-              data-video-id="EWG6MnxDyvw"
-              tabindex="0"
-              aria-label="Project video: hover for muted preview, click to open on YouTube"
+              href="https://www.youtube.com/watch?v=EWG6MnxDyvw"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Utah Monolith (2024) — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -2080,17 +2177,18 @@
                 loading="lazy"
                 decoding="async"
               />
-              <div class="project-player-wrap">
-                <div id="player-EWG6MnxDyvw" class="project-player"></div>
+              <div class="project-meta" aria-hidden="true">
+                <p class="project-title">Utah Monolith</p>
+                <span class="project-year">2024</span>
               </div>
-              <div class="project-overlay" aria-hidden="true"></div>
-            </div>
-            <div
+            </a>
+            <a
               class="project-card"
               role="listitem"
-              data-video-id="KrsGu87QaPs"
-              tabindex="0"
-              aria-label="Project video: hover for muted preview, click to open on YouTube"
+              href="https://www.youtube.com/watch?v=KrsGu87QaPs"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Smile and Sing Along (2024) — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -2100,17 +2198,18 @@
                 loading="lazy"
                 decoding="async"
               />
-              <div class="project-player-wrap">
-                <div id="player-KrsGu87QaPs" class="project-player"></div>
+              <div class="project-meta" aria-hidden="true">
+                <p class="project-title">Smile and Sing Along</p>
+                <span class="project-year">2024</span>
               </div>
-              <div class="project-overlay" aria-hidden="true"></div>
-            </div>
-            <div
+            </a>
+            <a
               class="project-card"
               role="listitem"
-              data-video-id="Rdr03EyNX6s"
-              tabindex="0"
-              aria-label="Project video: hover for muted preview, click to open on YouTube"
+              href="https://www.youtube.com/watch?v=Rdr03EyNX6s"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Project 08 (2024) — watch on YouTube (opens in new tab)"
             >
               <img
                 class="project-thumb"
@@ -2120,11 +2219,11 @@
                 loading="lazy"
                 decoding="async"
               />
-              <div class="project-player-wrap">
-                <div id="player-Rdr03EyNX6s" class="project-player"></div>
+              <div class="project-meta" aria-hidden="true">
+                <p class="project-title">Project 08</p>
+                <span class="project-year">2024</span>
               </div>
-              <div class="project-overlay" aria-hidden="true"></div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -2283,101 +2382,6 @@
 
     <script>
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      const projectYt = {
-        players: {},
-        ready: {},
-        created: false,
-      };
-
-      function initProjectYouTubePlayers() {
-        if (projectYt.created || typeof YT === "undefined" || !YT.Player) return;
-        const cards = document.querySelectorAll("#projects .project-card[data-video-id]");
-        if (!cards.length) return;
-        projectYt.created = true;
-        cards.forEach((card) => {
-          const id = card.dataset.videoId;
-          if (!id || projectYt.players[id]) return;
-          projectYt.players[id] = new YT.Player("player-" + id, {
-            videoId: id,
-            playerVars: {
-              autoplay: 0,
-              controls: 0,
-              modestbranding: 1,
-              rel: 0,
-              showinfo: 0,
-              iv_load_policy: 3,
-              disablekb: 1,
-              fs: 0,
-              playsinline: 1,
-              mute: 1,
-              loop: 1,
-              playlist: id,
-            },
-            events: {
-              onReady: function () {
-                projectYt.ready[id] = true;
-                try {
-                  projectYt.players[id].pauseVideo();
-                  projectYt.players[id].seekTo(0, true);
-                } catch (e) {
-                  /* ignore */
-                }
-              },
-            },
-          });
-        });
-      }
-
-      window.onYouTubeIframeAPIReady = function () {
-        initProjectYouTubePlayers();
-      };
-
-      let projectYtCardsBound = false;
-      function setupProjectYouTubeCards() {
-        if (projectYtCardsBound) return;
-        const cards = document.querySelectorAll("#projects .project-card[data-video-id]");
-        if (!cards.length) return;
-        projectYtCardsBound = true;
-        cards.forEach((card) => {
-          const id = card.dataset.videoId;
-          if (!id) return;
-
-          card.addEventListener("mouseenter", function () {
-            if (prefersReducedMotion) return;
-            const p = projectYt.players[id];
-            if (!projectYt.ready[id] || !p) return;
-            try {
-              p.seekTo(0, true);
-              p.playVideo();
-            } catch (e) {
-              /* ignore */
-            }
-          });
-
-          card.addEventListener("mouseleave", function () {
-            const p = projectYt.players[id];
-            if (!projectYt.ready[id] || !p) return;
-            try {
-              p.pauseVideo();
-              p.seekTo(0, true);
-            } catch (e) {
-              /* ignore */
-            }
-          });
-
-          card.addEventListener("click", function () {
-            window.open("https://www.youtube.com/watch?v=" + encodeURIComponent(id), "_blank", "noopener,noreferrer");
-          });
-
-          card.addEventListener("keydown", function (e) {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              window.open("https://www.youtube.com/watch?v=" + encodeURIComponent(id), "_blank", "noopener,noreferrer");
-            }
-          });
-        });
-      }
 
       (function setupScrollRedShift() {
         /* Monochrome (hero bottom) → crimson (#projects); hero itself is CSS-locked */
@@ -2565,9 +2569,6 @@
         });
       }
 
-      initProjectYouTubePlayers();
-      setupProjectYouTubeCards();
-
       // Init animations
       setupHeroTitle();
       setupScrollReveal();
@@ -2608,6 +2609,5 @@
         });
       })();
     </script>
-    <script src="https://www.youtube.com/iframe_api"></script>
   </body>
 </html>
