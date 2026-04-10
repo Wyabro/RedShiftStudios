@@ -845,217 +845,23 @@
         text-align: center;
       }
 
-      .reel-poster {
+      .reel-embed {
         position: relative;
-        isolation: isolate;
-        aspect-ratio: 16 / 9;
         width: 100%;
         max-width: var(--section-max);
         margin: 0 auto;
-        background: rgba(20, 15, 40, 0.5);
+        aspect-ratio: 16 / 9;
         border: 1px solid rgba(140, 100, 255, 0.1);
-        border-radius: var(--radius-tight);
-        box-shadow: none;
+        border-radius: 2px;
         overflow: hidden;
-        cursor: pointer;
-        transition: border-color 0.3s ease;
       }
 
-      .reel-poster:hover,
-      .reel-poster:focus-within {
-        border-color: rgba(224, 64, 160, 0.3);
-      }
-
-      .reel-poster__inner {
-        position: absolute;
-        inset: 0;
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-        padding: 24px 20px;
-        box-sizing: border-box;
-        pointer-events: none;
-      }
-
-      .reel-poster__play {
-        position: relative;
-        z-index: 3;
-        flex-shrink: 0;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        border: 1px solid var(--accent);
-        background: transparent;
-        color: var(--accent);
-        padding: 0;
-        cursor: pointer;
-        display: grid;
-        place-items: center;
-        transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-        -webkit-tap-highlight-color: transparent;
-        pointer-events: auto;
-      }
-
-      .reel-poster:hover .reel-poster__play,
-      .reel-poster:focus-within .reel-poster__play,
-      .reel-poster__play:hover,
-      .reel-poster__play:focus-visible {
-        background: var(--accent);
-        border-color: var(--accent);
-        color: #fff;
-        outline: none;
-      }
-
-      .reel-poster__cta {
-        margin: 0;
-        font-family: var(--font-sans);
-        font-weight: 500;
-        font-size: 11px;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: #8a829e;
-        pointer-events: none;
-      }
-
-      .reel-poster__play-icon {
-        display: block;
-        width: 18px;
-        height: 22px;
-        margin-left: 3px;
-      }
-
-      .reel-poster__play-icon svg {
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-
-      .reel-lightbox {
-        position: fixed;
-        inset: 0;
-        z-index: 200000;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        padding: 24px;
-        box-sizing: border-box;
-      }
-
-      .reel-lightbox.is-open {
-        display: flex;
-      }
-
-      .reel-lightbox__backdrop {
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.92);
-        cursor: pointer;
-      }
-
-      .reel-lightbox__content {
-        position: relative;
-        z-index: 1;
-        width: 100%;
-        max-width: 900px;
-      }
-
-      .reel-lightbox__close {
-        position: absolute;
-        top: -44px;
-        right: 0;
-        width: 40px;
-        height: 40px;
-        border: none;
-        background: none;
-        color: #fff;
-        font-size: 28px;
-        line-height: 1;
-        cursor: pointer;
-        padding: 0;
-        transition: opacity 180ms ease;
-      }
-
-      .reel-lightbox__close:hover,
-      .reel-lightbox__close:focus-visible {
-        opacity: 0.75;
-        outline: none;
-      }
-
-      .reel-lightbox__frame {
-        position: relative;
-        aspect-ratio: 16 / 9;
-        width: 100%;
-        border-radius: var(--radius);
-        overflow: hidden;
-        border: 1px solid var(--border);
-        box-shadow: var(--shadow);
-      }
-
-      .reel-lightbox__frame iframe {
+      .reel-embed iframe {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
         border: 0;
-      }
-
-      @media (max-width: 640px) {
-        .reel-lightbox__close {
-          top: 8px;
-          right: 8px;
-        }
-      }
-
-      .embed {
-        position: relative;
-        border-radius: var(--radius);
-        overflow: hidden;
-        background: var(--surface-soft);
-        border: 1px solid var(--border);
-        box-shadow: var(--shadow);
-        aspect-ratio: 16 / 9;
-      }
-
-      @supports (backdrop-filter: blur(10px)) {
-        .embed {
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-        }
-      }
-
-      .embed iframe {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-      }
-
-      .embed-badge {
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        z-index: 3;
-        padding: 8px 10px;
-        border-radius: 999px;
-        background: rgba(13, 11, 26, 0.65);
-        border: 1px solid var(--border);
-        color: var(--text);
-        text-transform: uppercase;
-        letter-spacing: 0.22em;
-        font-size: 10px;
-        font-family: var(--font-sans);
-        font-weight: 700;
-      }
-
-      @supports (backdrop-filter: blur(8px)) {
-        .embed-badge {
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-        }
       }
 
       .card {
@@ -1209,197 +1015,72 @@
         width: 100%;
       }
 
-      .project-tile {
+      .project-card {
         position: relative;
-        display: block;
         aspect-ratio: 16 / 9;
-        border-radius: var(--radius-tight);
-        overflow: hidden;
-        border: 1px solid rgba(140, 100, 255, 0.08);
         background: rgba(20, 15, 40, 0.4);
-        box-shadow: none;
-        text-decoration: none;
-        color: inherit;
-        transform: translateZ(0);
+        border-radius: var(--radius-tight);
+        border: 1px solid rgba(140, 100, 255, 0.08);
+        display: block;
         transition: transform 0.3s ease, border-color 0.3s ease;
+        overflow: hidden;
+        box-shadow: none;
       }
 
       @supports (backdrop-filter: blur(10px)) {
-        .project-tile {
+        .project-card {
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
         }
       }
 
-      .project-tile:focus-visible {
-        outline: 2px solid rgba(0, 229, 255, 0.45);
-        outline-offset: 3px;
-      }
-
-      .project-tile:hover,
-      .project-tile:focus-visible {
+      .project-card:hover,
+      .project-card:focus-visible {
         transform: translateY(-3px);
         border-color: rgba(0, 229, 255, 0.15);
       }
 
-      .project-tile__img,
-      .project-tile__placeholder {
+      .project-card__media {
+        position: absolute;
+        inset: 0;
+        background: #0d0b1a;
+      }
+
+      .project-card__thumb {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
-      }
-
-      .project-tile__img {
         object-fit: cover;
-      }
-
-      .project-tile__placeholder {
-        background: linear-gradient(145deg, rgba(140, 100, 255, 0.08), rgba(20, 15, 40, 0.4));
-      }
-
-      .project-tile__shade {
-        position: absolute;
-        inset: 0;
         z-index: 1;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 42%, rgba(0, 0, 0, 0.22) 100%);
-        transition: background 420ms ease;
-        pointer-events: none;
+        transition: opacity 0.2s ease;
       }
 
-      .project-tile:hover .project-tile__shade,
-      .project-tile:focus-visible .project-tile__shade {
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.52) 0%, rgba(0, 0, 0, 0.22) 48%, rgba(0, 0, 0, 0.12) 100%);
-      }
-
-      .project-tile__body {
+      .project-card__iframe {
         position: absolute;
         inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
         z-index: 2;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 18px 16px 16px;
-        pointer-events: none;
       }
 
-      .project-tile__title {
-        margin: 0;
-        font-size: 13px;
-        letter-spacing: 0.1em;
-        line-height: 1.35;
-        text-transform: uppercase;
-        font-weight: 700;
-        font-family: var(--font-sans);
-        color: var(--text);
-        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.65);
-        transition: color 320ms ease;
-      }
-
-      .project-tile:hover .project-tile__title,
-      .project-tile:focus-visible .project-tile__title {
-        color: rgba(255, 255, 255, 0.98);
-      }
-
-      .project-tile__meta {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 10px;
-        margin-top: 10px;
-        opacity: 0;
-        transform: translateY(8px);
-        transition: opacity 380ms ease, transform 380ms ease;
-      }
-
-      .project-tile:hover .project-tile__meta,
-      .project-tile:focus-visible .project-tile__meta {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .project-tile__tag {
-        display: inline-flex;
-        padding: 4px 10px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        background: rgba(0, 0, 0, 0.4);
-        color: rgba(255, 255, 255, 0.78);
-        letter-spacing: 0.16em;
-        font-size: 10px;
-        text-transform: uppercase;
-      }
-
-      .project-tile__year {
-        color: var(--muted);
-        letter-spacing: 0.12em;
-        font-size: 10px;
-        text-transform: uppercase;
-        font-weight: 700;
-        font-family: var(--font-sans);
-      }
-
-      .project-placeholder {
-        position: relative;
-        aspect-ratio: 16 / 9;
-        background: rgba(20, 15, 40, 0.4);
-        border-radius: var(--radius-tight);
-        border: 1px solid rgba(140, 100, 255, 0.08);
-        display: block;
-        transition: transform 0.3s ease, border-color 0.3s ease;
-        overflow: hidden;
-        box-shadow: none;
-      }
-
-      @supports (backdrop-filter: blur(10px)) {
-        .project-placeholder {
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-        }
-      }
-
-      .project-placeholder:hover,
-      .project-placeholder:focus-visible {
-        transform: translateY(-3px);
-        border-color: rgba(0, 229, 255, 0.15);
-      }
-
-      .project-placeholder__label-wrap {
+      .project-card__title {
         position: absolute;
         left: 0;
         right: 0;
         bottom: 0;
+        margin: 0;
         padding: 20px;
-        transform: translateY(8px);
-        opacity: 0;
+        z-index: 3;
         pointer-events: none;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        text-align: left;
-      }
-
-      .project-placeholder--detail:hover .project-placeholder__label-wrap,
-      .project-placeholder--detail:focus-visible .project-placeholder__label-wrap {
-        transform: translateY(0);
-        opacity: 1;
-      }
-
-      .project-placeholder__dash {
-        display: block;
-        width: 20px;
-        height: 2px;
-        background: var(--accent);
-        margin-bottom: 10px;
-      }
-
-      .project-placeholder__label {
-        display: block;
-        font-size: 13px;
-        letter-spacing: 0.04em;
-        text-transform: none;
         font-family: var(--font-sans);
+        font-size: 13px;
         font-weight: 500;
+        line-height: 1.35;
         color: #fff;
         text-align: left;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.75);
       }
 
       .testimonials-row {
@@ -1744,30 +1425,11 @@
         .hero-bg-video {
           display: none;
         }
-        .project-tile,
-        .project-tile:hover,
-        .project-tile:focus-visible {
+        .project-card,
+        .project-card:hover,
+        .project-card:focus-visible {
           transition: none !important;
           transform: none !important;
-        }
-        .project-tile:hover .project-tile__shade,
-        .project-tile:focus-visible .project-tile__shade {
-          background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 42%, rgba(0, 0, 0, 0.22) 100%);
-        }
-        .project-tile:hover .project-tile__meta,
-        .project-tile:focus-visible .project-tile__meta {
-          opacity: 1;
-          transform: none;
-        }
-        .project-placeholder,
-        .project-placeholder:hover,
-        .project-placeholder:focus-visible {
-          transform: none !important;
-          transition: none !important;
-        }
-        .project-placeholder--detail .project-placeholder__label-wrap {
-          transform: none !important;
-          opacity: 1 !important;
         }
       }
     </style>
@@ -1960,27 +1622,18 @@
         <div class="section-chapter reveal">
           <div class="label">REEL</div>
           <div class="heading-row">
-            <h2 id="reel-title" class="heading-display">DEMO REEL</h2>
+            <h2 id="reel-title" class="heading-display">FILM REEL</h2>
           </div>
           <div class="reel-stage">
-            <div class="reel-poster">
-              <div class="reel-poster__inner">
-                <button
-                  type="button"
-                  class="reel-poster__play"
-                  id="reel-open"
-                  aria-haspopup="dialog"
-                  aria-controls="reel-lightbox"
-                  aria-label="Play demo reel"
-                >
-                  <span class="reel-poster__play-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M2 2L22 14L2 26V2Z" fill="currentColor" />
-                    </svg>
-                  </span>
-                </button>
-                <p class="reel-poster__cta">WATCH REEL</p>
-              </div>
+            <div class="reel-embed">
+              <iframe
+                src="https://www.youtube.com/embed/kEbHvnY3yj8?start=10&rel=0&modestbranding=1"
+                title="Film reel"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
             </div>
           </div>
         </div>
@@ -1995,7 +1648,7 @@
         <div class="section-chapter reveal">
           <div class="label">SERVICES</div>
           <div class="heading-row">
-            <h2 id="services-title" class="heading-display">WHAT WE DO</h2>
+            <h2 id="services-title" class="heading-display">WHAT WE OFFER</h2>
           </div>
           <div class="services-stack">
             <article class="service-item">
@@ -2066,30 +1719,82 @@
         <div class="section-chapter reveal">
           <div class="label">PORTFOLIO</div>
           <div class="heading-row">
-            <h2 id="projects-title" class="heading-display">THE WORK</h2>
+            <h2 id="projects-title" class="heading-display">PAST PROJECTS</h2>
           </div>
-          <div class="projects-grid" id="projectsList" role="list">
-            <div class="project-placeholder project-placeholder--detail" role="listitem" tabindex="0">
-              <div class="project-placeholder__label-wrap">
-                <span class="project-placeholder__dash" aria-hidden="true"></span>
-                <span class="project-placeholder__label">Restaurant Promo · 2024</span>
+          <!-- Video IDs: placeholders for playlist PLcSoNuHrCMMuNZo8dcPjBnDZCjV9hT5Ic — swap for real IDs from YouTube -->
+          <div class="projects-grid" role="list">
+            <div class="project-card" data-video-id="dQw4w9WgXcQ" role="listitem" tabindex="0">
+              <div class="project-card__media">
+                <img
+                  class="project-card__thumb"
+                  alt=""
+                  src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg"
+                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg'"
+                  loading="lazy"
+                />
               </div>
+              <p class="project-card__title">Project 01</p>
             </div>
-            <div class="project-placeholder project-placeholder--detail" role="listitem" tabindex="0">
-              <div class="project-placeholder__label-wrap">
-                <span class="project-placeholder__dash" aria-hidden="true"></span>
-                <span class="project-placeholder__label">Event Recap · 2024</span>
+            <div class="project-card" data-video-id="kEbHvnY3yj8" role="listitem" tabindex="0">
+              <div class="project-card__media">
+                <img
+                  class="project-card__thumb"
+                  alt=""
+                  src="https://img.youtube.com/vi/kEbHvnY3yj8/maxresdefault.jpg"
+                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/kEbHvnY3yj8/hqdefault.jpg'"
+                  loading="lazy"
+                />
               </div>
+              <p class="project-card__title">Project 02</p>
             </div>
-            <div class="project-placeholder project-placeholder--detail" role="listitem" tabindex="0">
-              <div class="project-placeholder__label-wrap">
-                <span class="project-placeholder__dash" aria-hidden="true"></span>
-                <span class="project-placeholder__label">Brand Spot · 2025</span>
+            <div class="project-card" data-video-id="ScMzIvxBSi4" role="listitem" tabindex="0">
+              <div class="project-card__media">
+                <img
+                  class="project-card__thumb"
+                  alt=""
+                  src="https://img.youtube.com/vi/ScMzIvxBSi4/maxresdefault.jpg"
+                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/ScMzIvxBSi4/hqdefault.jpg'"
+                  loading="lazy"
+                />
               </div>
+              <p class="project-card__title">Project 03</p>
             </div>
-            <div class="project-placeholder" role="listitem" tabindex="0"></div>
-            <div class="project-placeholder" role="listitem" tabindex="0"></div>
-            <div class="project-placeholder" role="listitem" tabindex="0"></div>
+            <div class="project-card" data-video-id="LXb3EKWsInQ" role="listitem" tabindex="0">
+              <div class="project-card__media">
+                <img
+                  class="project-card__thumb"
+                  alt=""
+                  src="https://img.youtube.com/vi/LXb3EKWsInQ/maxresdefault.jpg"
+                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/LXb3EKWsInQ/hqdefault.jpg'"
+                  loading="lazy"
+                />
+              </div>
+              <p class="project-card__title">Project 04</p>
+            </div>
+            <div class="project-card" data-video-id="9bZkp7q19f0" role="listitem" tabindex="0">
+              <div class="project-card__media">
+                <img
+                  class="project-card__thumb"
+                  alt=""
+                  src="https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg"
+                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/9bZkp7q19f0/hqdefault.jpg'"
+                  loading="lazy"
+                />
+              </div>
+              <p class="project-card__title">Project 05</p>
+            </div>
+            <div class="project-card" data-video-id="JGwWNGJdvx8" role="listitem" tabindex="0">
+              <div class="project-card__media">
+                <img
+                  class="project-card__thumb"
+                  alt=""
+                  src="https://img.youtube.com/vi/JGwWNGJdvx8/maxresdefault.jpg"
+                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/JGwWNGJdvx8/hqdefault.jpg'"
+                  loading="lazy"
+                />
+              </div>
+              <p class="project-card__title">Project 06</p>
+            </div>
           </div>
         </div>
       </div>
@@ -2103,7 +1808,7 @@
         <div class="section-chapter reveal">
           <div class="label">KIND WORDS</div>
           <div class="heading-row">
-            <h2 id="testimonials-title" class="heading-display">KIND WORDS</h2>
+            <h2 id="testimonials-title" class="heading-display">TESTIMONIALS</h2>
           </div>
           <div class="testimonials-row">
             <article class="testimonial-card">
@@ -2151,11 +1856,11 @@
       <div class="container">
         <div class="section-chapter reveal">
           <div class="label">CONTACT</div>
-          <p class="contact-lead">Got a project in mind? Let's make something worth watching.</p>
+          <p class="contact-lead">Got a project in mind? Let's make something!</p>
           <div class="heading-row">
             <h2 id="contact-title" class="heading-display">LET'S WORK TOGETHER</h2>
           </div>
-          <p class="contact-sub">Available for commercial work, events, social content, and film projects.</p>
+          <p class="contact-sub">Available for commercial work, events, social media content, film projects and more.</p>
           <div class="contact-layout">
             <div class="contact-layout__form">
               <!-- Formspree endpoint placeholder -->
@@ -2246,39 +1951,7 @@
       </div>
     </footer>
 
-    <div
-      id="reel-lightbox"
-      class="reel-lightbox"
-      role="dialog"
-      aria-modal="true"
-      aria-hidden="true"
-      aria-labelledby="reel-lightbox-title"
-    >
-      <div class="reel-lightbox__backdrop" id="reel-lightbox-backdrop" aria-hidden="true"></div>
-      <div class="reel-lightbox__content">
-        <button type="button" class="reel-lightbox__close" id="reel-lightbox-close" aria-label="Close video">
-          &times;
-        </button>
-        <span id="reel-lightbox-title" class="visually-hidden">Demo reel video</span>
-        <div class="reel-lightbox__frame">
-          <iframe
-            id="reel-lightbox-iframe"
-            title="DEMO REEL 2024"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
-      </div>
-    </div>
-
     <script>
-      const PROJECTS_CHANNEL_HANDLE_URL = "https://www.youtube.com/@RedBoltProductions";
-      // If you know the channel_id (starts with UC...), set it here for reliable RSS loading:
-      // Example: const YOUTUBE_CHANNEL_ID = "UCxxxxxxxxxxxxxxxxxxxxxx";
-      const YOUTUBE_CHANNEL_ID = "";
-
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       let revealObserver = null;
@@ -2364,210 +2037,49 @@
         });
       }
 
-      function categorizeTitle(title) {
-        const t = String(title || "").toLowerCase();
-        if (t.includes("commercial") || t.includes("promo") || t.includes("ad") || t.includes("brand")) return "Commercial";
-        if (t.includes("music") || t.includes("mv") || t.includes("music video")) return "Music Video";
-        if (t.includes("short film") || t.includes("shortfilm") || t.includes("short-film") || t.includes("film"))
-          return "Short Film";
-        if (t.includes("event") || t.includes("conference") || t.includes("wedding") || t.includes("recap"))
-          return "Event";
-        return "Project";
-      }
+      function setupProjectCardHoverPreview() {
+        if (prefersReducedMotion) return;
+        document.querySelectorAll(".project-card[data-video-id]").forEach((card) => {
+          const id = card.getAttribute("data-video-id");
+          const media = card.querySelector(".project-card__media");
+          const thumb = card.querySelector(".project-card__thumb");
+          if (!id || !media || !thumb) return;
 
-      function yearFromPublished(published) {
-        const d = new Date(published);
-        return Number.isFinite(d.getTime()) ? String(d.getFullYear()) : "";
-      }
+          let iframe = null;
 
-      function escapeHtml(s) {
-        return String(s)
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;")
-          .replaceAll("'", "&#039;");
-      }
-
-      function projectItemTemplate({ title, url, thumbnail, tag, year }) {
-        const safeTitle = escapeHtml(title);
-        const safeUrl = escapeHtml(url);
-        const safeThumb = escapeHtml(thumbnail);
-        const safeTag = escapeHtml(tag);
-        const safeYear = escapeHtml(year);
-        const thumbBlock = safeThumb
-          ? `<img class="project-tile__img" src="${safeThumb}" alt="" loading="lazy" />`
-          : `<div class="project-tile__placeholder" aria-hidden="true"></div>`;
-        const yearBlock = safeYear ? `<span class="project-tile__year">${safeYear}</span>` : "";
-        return `
-          <a
-            class="project-tile"
-            role="listitem"
-            href="${safeUrl}"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="${safeTitle} — open video"
-          >
-            ${thumbBlock}
-            <div class="project-tile__shade" aria-hidden="true"></div>
-            <div class="project-tile__body">
-              <h3 class="project-tile__title">${safeTitle}</h3>
-              <div class="project-tile__meta">
-                <span class="project-tile__tag">${safeTag}</span>
-                ${yearBlock}
-              </div>
-            </div>
-          </a>
-        `;
-      }
-
-      async function loadProjectsFromYouTubeRss() {
-        const list = document.getElementById("projectsList");
-        if (!list) return;
-
-        function videoIdFromUrl(url) {
-          try {
-            const u = new URL(url);
-            const v = u.searchParams.get("v");
-            if (v) return v;
-            const parts = u.pathname.split("/").filter(Boolean);
-            const idx = parts.indexOf("shorts");
-            if (idx >= 0 && parts[idx + 1]) return parts[idx + 1];
-            return "";
-          } catch {
-            return "";
-          }
-        }
-
-        async function tryFetchXml(url) {
-          const res = await fetch(url, { cache: "no-store" });
-          if (!res.ok) return "";
-          return await res.text();
-        }
-
-        // 1) Prefer official YouTube RSS if channel_id is provided.
-        let xml = "";
-        if (YOUTUBE_CHANNEL_ID) {
-          const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${encodeURIComponent(YOUTUBE_CHANNEL_ID)}`;
-          xml = await tryFetchXml(feedUrl);
-        }
-
-        // 2) Fallback: RSSHub (often works from a handle/user). This is best-effort.
-        if (!xml) {
-          const rssHubUrl = "https://rsshub.app/youtube/user/RedBoltProductions";
-          xml = await tryFetchXml(rssHubUrl);
-        }
-
-        if (!xml) {
-          return;
-        }
-
-        const doc = new DOMParser().parseFromString(xml, "text/xml");
-
-        // YouTube official: <entry>. RSSHub/others: <item>.
-        const entries = Array.from(doc.getElementsByTagName("entry"));
-        const rssItems = Array.from(doc.getElementsByTagName("item"));
-
-        const items = (entries.length ? entries : rssItems).slice(0, 10).map((node) => {
-          const isEntry = node.nodeName.toLowerCase() === "entry";
-
-          const title = (node.getElementsByTagName("title")[0]?.textContent || "Untitled").trim();
-          const linkEl = node.getElementsByTagName("link")[0];
-          const url =
-            (isEntry ? linkEl?.getAttribute("href") : linkEl?.textContent) ||
-            node.getElementsByTagName("guid")[0]?.textContent ||
-            "https://www.youtube.com/";
-
-          const published =
-            (isEntry
-              ? node.getElementsByTagName("published")[0]?.textContent
-              : node.getElementsByTagName("pubDate")[0]?.textContent) || "";
-
-          const mediaThumb =
-            node.getElementsByTagName("media:thumbnail")[0]?.getAttribute("url") ||
-            node.getElementsByTagName("thumbnail")[0]?.textContent ||
-            "";
-
-          const year = yearFromPublished(published);
-          const tag = categorizeTitle(title);
-
-          let thumbnail = mediaThumb;
-          if (!thumbnail) {
-            const id = videoIdFromUrl(url);
-            if (id) thumbnail = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+          function enter() {
+            if (iframe) return;
+            iframe = document.createElement("iframe");
+            iframe.className = "project-card__iframe";
+            iframe.setAttribute("title", "Video preview");
+            iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&showinfo=0&rel=0&modestbranding=1`;
+            iframe.setAttribute(
+              "allow",
+              "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            );
+            iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+            media.appendChild(iframe);
+            thumb.style.opacity = "0";
           }
 
-          return { title, url, thumbnail, tag, year };
-        });
+          function leave() {
+            if (iframe) {
+              iframe.remove();
+              iframe = null;
+            }
+            thumb.style.opacity = "1";
+          }
 
-        if (!items.length) {
-          return;
-        }
-
-        list.className = "projects-grid";
-        list.innerHTML = items.map((it) => projectItemTemplate(it)).join("");
-      }
-
-      loadProjectsFromYouTubeRss().catch(() => {});
-
-      function setupReelLightbox() {
-        const root = document.getElementById("reel-lightbox");
-        const closeBtn = document.getElementById("reel-lightbox-close");
-        const backdrop = document.getElementById("reel-lightbox-backdrop");
-        const content = root?.querySelector(".reel-lightbox__content");
-        const iframe = document.getElementById("reel-lightbox-iframe");
-        const REEL_SRC = "https://www.youtube.com/embed/kEbHvnY3yj8?start=10&autoplay=1&rel=0";
-        if (!root || !iframe) return;
-
-        let lastFocus = null;
-
-        function isOpen() {
-          return root.classList.contains("is-open");
-        }
-
-        function open(e) {
-          e?.preventDefault();
-          e?.stopPropagation();
-          lastFocus = document.activeElement;
-          root.classList.add("is-open");
-          root.setAttribute("aria-hidden", "false");
-          document.body.style.overflow = "hidden";
-          iframe.setAttribute("src", REEL_SRC);
-          closeBtn?.focus();
-        }
-
-        function close() {
-          if (!isOpen()) return;
-          root.classList.remove("is-open");
-          root.setAttribute("aria-hidden", "true");
-          document.body.style.overflow = "";
-          iframe.removeAttribute("src");
-          if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
-        }
-
-        document.body.addEventListener("click", (ev) => {
-          if (isOpen()) return;
-          const t = ev.target;
-          if (!t || !t.closest) return;
-          if (t.closest("#reel-open") || t.closest(".reel-poster")) open(ev);
-        });
-        content?.addEventListener("click", (ev) => ev.stopPropagation());
-        closeBtn?.addEventListener("click", (e) => {
-          e.stopPropagation();
-          close();
-        });
-        backdrop?.addEventListener("click", close);
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape" && isOpen()) close();
+          card.addEventListener("mouseenter", enter);
+          card.addEventListener("mouseleave", leave);
         });
       }
-
-      setupReelLightbox();
 
       // Init animations
       setupHeroTitle();
       setupScrollReveal();
       setupHeroDepth();
+      setupProjectCardHoverPreview();
 
       // Optional: async submit status (still works if you remove this)
       const form = document.getElementById("bookingForm");
